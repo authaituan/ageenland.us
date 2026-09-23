@@ -1,0 +1,47 @@
+<!doctype html>
+<html lang="vi">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>GreenLand - Cảnh Quan & Chăm Sóc Sân Vườn Cao Cấp</title>
+    
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,600;0,700;0,800;1,600&family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+    
+    <!-- Tailwind CSS JIT Compiler Script -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+      tailwind.config = {
+        theme: {
+          extend: {
+            colors: {
+              primary: {
+                900: '#081C15',
+                800: '#0D2B1D',
+                700: '#1B4332',
+                600: '#2D6A4F',
+                500: '#40916C',
+                400: '#52B788',
+                300: '#74C69D',
+              },
+              accent: {
+                green: '#20E070',
+                gold: '#E5A93B',
+              }
+            },
+            fontFamily: {
+              sans: ['Plus Jakarta Sans', 'sans-serif'],
+              serif: ['Playfair Display', 'Georgia', 'serif'],
+            }
+          }
+        }
+      }
+    </script>
+  </head>
+  <body class="bg-[#07150E] text-slate-100 font-sans antialiased overflow-x-hidden">
+    <div id="root"></div>
+    <script type="module" src="/src/main.jsx"></script>
+  </body>
+</html>
