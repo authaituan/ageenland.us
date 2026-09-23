@@ -1,14 +1,23 @@
 import React, { useState } from 'react';
 import { ArrowRight, ShieldCheck, Sparkles, CheckCircle2, PhoneCall } from 'lucide-react';
+import { useSite } from '../site/SiteContext';
+import { api } from '../lib/api';
 
 export default function Hero({ onOpenCalculator, onSelectService }) {
+  const { settings, services } = useSite();
+  const h = settings.hero;
   const [quickPhone, setQuickPhone] = useState('');
+  const [quickServiceId, setQuickServiceId] = useState('');
   const [submitted, setSubmitted] = useState(false);
 
   const handleQuickRequest = (e) => {
     e.preventDefault();
     if (!quickPhone) return;
     setSubmitted(true);
+    // Lưu lại số điện thoại khách đăng ký (trước đây bị bỏ qua)
+    const svc = services.find((s) => s.id === quickServiceId) || services[0];
+    api('/leads', { method: 'POST', body: { phone: quickPhone, serviceLabel: svc ? svc.heroLabel : '' } })
+      .catch((err) => console.warn('Không lưu được đăng ký nhanh:', err.message));
     setTimeout(() => {
       onOpenCalculator();
       setSubmitted(false);
@@ -20,7 +29,7 @@ export default function Hero({ onOpenCalculator, onSelectService }) {
       {/* Background Image Overlay */}
       <div 
         className="absolute inset-0 bg-cover bg-center opacity-35 mix-blend-luminosity"
-        style={{ backgroundImage: `url('/images/hero.png')` }}
+        style={{ backgroundImage: `url('${h.background_image}')` }}
       />
       <div className="absolute inset-0 bg-gradient-to-r from-[#07150E] via-[#081C15]/95 to-[#07150E]/80" />
       <div className="absolute inset-0 bg-gradient-to-b from-transparent via-[#07150E]/50 to-[#07150E]" />
@@ -37,33 +46,27 @@ export default function Hero({ onOpenCalculator, onSelectService }) {
             <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-white/10 border border-emerald-500/30 backdrop-blur-md">
               <Sparkles className="w-4 h-4 text-[#20E070]" />
               <span className="text-xs font-semibold tracking-wide uppercase text-emerald-300">
-                Dịch Vụ Cảnh Quan & Chăm Sóc Sân Vườn Cao Cấp
+                {h.badge}
               </span>
             </div>
 
             <h1 className="text-3xl sm:text-5xl lg:text-6xl font-serif font-bold text-white leading-tight">
-              Kiến Tạo Không Gian <br />
-              <span className="text-gradient">Xanh Sang Trọng</span> & Đẳng Cấp
+              {h.title_line1} <br />
+              <span className="text-gradient">{h.title_highlight}</span> {h.title_line2}
             </h1>
 
             <p className="text-sm sm:text-base lg:text-lg text-slate-300 max-w-2xl leading-relaxed">
-              GreenLand mang đến giải pháp chăm sóc thảm cỏ, trồng cây nghệ thuật và thiết kế cảnh quan trọn gói. Đội ngũ kỹ sư & nghệ nhân kinh nghiệm giúp nâng tầm không gian sống của bạn.
+              {h.description}
             </p>
 
             {/* Value Props Pills */}
             <div className="flex flex-wrap gap-4 pt-2">
-              <div className="flex items-center gap-2 text-slate-200 text-xs sm:text-sm">
-                <CheckCircle2 className="w-4 h-4 text-[#20E070] shrink-0" />
-                <span>Thi công chuẩn kỹ thuật</span>
-              </div>
-              <div className="flex items-center gap-2 text-slate-200 text-xs sm:text-sm">
-                <CheckCircle2 className="w-4 h-4 text-[#20E070] shrink-0" />
-                <span>Báo giá tự động 60s</span>
-              </div>
-              <div className="flex items-center gap-2 text-slate-200 text-xs sm:text-sm">
-                <CheckCircle2 className="w-4 h-4 text-[#20E070] shrink-0" />
-                <span>Bảo hành cây & thảm cỏ</span>
-              </div>
+              {h.value_props.map((prop, idx) => (
+                <div key={idx} className="flex items-center gap-2 text-slate-200 text-xs sm:text-sm">
+                  <CheckCircle2 className="w-4 h-4 text-[#20E070] shrink-0" />
+                  <span>{prop}</span>
+                </div>
+              ))}
             </div>
 
             {/* Action Buttons */}
@@ -72,7 +75,7 @@ export default function Hero({ onOpenCalculator, onSelectService }) {
                 onClick={onOpenCalculator}
                 className="btn-emerald text-sm sm:text-base py-3.5 px-8 shadow-xl shadow-emerald-500/25"
               >
-                <span>Ước Tính Chi Phí Ngay</span>
+                <span>{h.cta_primary}</span>
                 <ArrowRight className="w-5 h-5" />
               </button>
 
@@ -80,24 +83,18 @@ export default function Hero({ onOpenCalculator, onSelectService }) {
                 href="#services" 
                 className="btn-outline-glass text-sm sm:text-base py-3.5 px-7"
               >
-                <span>Xem Các Dịch Vụ</span>
+                <span>{h.cta_secondary}</span>
               </a>
             </div>
 
             {/* Key Stats Bar */}
             <div className="grid grid-cols-3 gap-4 pt-8 border-t border-white/10 max-w-xl">
-              <div>
-                <div className="text-xl sm:text-3xl font-bold font-serif text-[#20E070]">45,000+</div>
-                <div className="text-[11px] sm:text-xs text-slate-400 mt-1">m² Cảnh quan đã thi công</div>
-              </div>
-              <div>
-                <div className="text-xl sm:text-3xl font-bold font-serif text-[#20E070]">99.4%</div>
-                <div className="text-[11px] sm:text-xs text-slate-400 mt-1">Khách hàng hài lòng</div>
-              </div>
-              <div>
-                <div className="text-xl sm:text-3xl font-bold font-serif text-[#20E070]">15 Phút</div>
-                <div className="text-[11px] sm:text-xs text-slate-400 mt-1">Phản hồi khảo sát tận nơi</div>
-              </div>
+              {h.stats.map((stat, idx) => (
+                <div key={idx}>
+                  <div className="text-xl sm:text-3xl font-bold font-serif text-[#20E070]">{stat.value}</div>
+                  <div className="text-[11px] sm:text-xs text-slate-400 mt-1">{stat.label}</div>
+                </div>
+              ))}
             </div>
           </div>
 
@@ -109,36 +106,34 @@ export default function Hero({ onOpenCalculator, onSelectService }) {
                   <PhoneCall className="w-5 h-5" />
                 </div>
                 <div>
-                  <h3 className="text-lg sm:text-xl font-bold text-white font-serif leading-tight">Đăng Ký Khảo Sát Miễn Phí</h3>
-                  <p className="text-xs text-slate-300 mt-0.5">Kỹ sư cảnh quan tới đo đạc & tư vấn tại nhà</p>
+                  <h3 className="text-lg sm:text-xl font-bold text-white font-serif leading-tight">{h.form_title}</h3>
+                  <p className="text-xs text-slate-300 mt-0.5">{h.form_subtitle}</p>
                 </div>
               </div>
 
               <form onSubmit={handleQuickRequest} className="space-y-4">
                 <div>
                   <label className="block text-xs font-semibold text-slate-200 uppercase tracking-wider mb-2">
-                    Dịch vụ bạn quan tâm
+                    {h.form_service_label}
                   </label>
                   <select 
-                    onChange={(e) => onSelectService(e.target.value)}
+                    value={quickServiceId || services[0]?.id || ''}
+                    onChange={(e) => { setQuickServiceId(e.target.value); onSelectService(e.target.value); }}
                     className="w-full bg-[#07150E] border border-white/20 rounded-xl px-4 py-3 text-white text-sm focus:border-[#20E070] focus:outline-none shadow-inner"
                   >
-                    <option value="lawn-mowing">🌿 Cắt cỏ & Bảo dưỡng thảm cỏ</option>
-                    <option value="tree-planting">🌳 Trồng cây & Cắt tỉa tạo hình</option>
-                    <option value="landscape-design">✨ Thiết kế & Xử lý sân vườn trọn gói</option>
-                    <option value="leaf-cleanup">🧹 Thu dọn lá & Vệ sinh mùa</option>
-                    <option value="mulching-soil">🌱 Phủ mùn & Cải tạo đất</option>
-                    <option value="irrigation-system">💧 Hệ thống tưới tự động thông minh</option>
+                    {services.map((svc) => (
+                      <option key={svc.id} value={svc.id}>{svc.heroEmoji ? `${svc.heroEmoji} ${svc.heroLabel}` : svc.heroLabel}</option>
+                    ))}
                   </select>
                 </div>
 
                 <div>
                   <label className="block text-xs font-semibold text-slate-200 uppercase tracking-wider mb-2">
-                    Số điện thoại nhận tư vấn
+                    {h.form_phone_label}
                   </label>
                   <input 
                     type="tel"
-                    placeholder="Ví dụ: 0988 123 456"
+                    placeholder={h.form_phone_placeholder}
                     value={quickPhone}
                     onChange={(e) => setQuickPhone(e.target.value)}
                     required
@@ -150,16 +145,16 @@ export default function Hero({ onOpenCalculator, onSelectService }) {
                   type="submit" 
                   className="w-full btn-emerald py-3.5 px-4 justify-center font-bold text-[#07150E] text-sm mt-3 shadow-lg shadow-emerald-500/25"
                 >
-                  {submitted ? 'Đang Chuyển Đến Công Cụ Báo Giá...' : 'Gửi Yêu Cầu & Tính Giá Ngay'}
+                  {submitted ? h.form_submitting : h.form_submit}
                 </button>
               </form>
 
               <div className="mt-6 pt-4 border-t border-white/10 flex items-center justify-between text-xs text-slate-300">
                 <span className="flex items-center gap-1.5">
                   <ShieldCheck className="w-4 h-4 text-[#20E070]" />
-                  Bảo mật thông tin 100%
+                  {h.trust_left}
                 </span>
-                <span className="text-[#20E070] font-semibold">Tư vấn 24/7</span>
+                <span className="text-[#20E070] font-semibold">{h.trust_right}</span>
               </div>
             </div>
           </div>

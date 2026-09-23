@@ -1,7 +1,11 @@
 import React, { useState } from 'react';
 import { MapPin, Phone, Mail, Clock, Send, CheckCircle2, AlertCircle } from 'lucide-react';
+import { useSite } from '../site/SiteContext';
+import { api } from '../lib/api';
 
 export default function ContactSection() {
+  const { settings } = useSite();
+  const t = settings.contact;
   const [name, setName] = useState('');
   const [phone, setPhone] = useState('');
   const [email, setEmail] = useState('');
@@ -14,7 +18,7 @@ export default function ContactSection() {
   const handleSendContact = async (e) => {
     e.preventDefault();
     if (!name || !phone || !message) {
-      setError('Vui lòng nhập Họ tên, Số điện thoại và Lời nhắn.');
+      setError(t.error_required);
       return;
     }
 
@@ -23,12 +27,7 @@ export default function ContactSection() {
     setSuccess(null);
 
     try {
-      const res = await fetch('http://localhost:5000/api/contact', {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ name, phone, email, message })
-      });
-      const data = await res.json();
+      const data = await api('/contact', { method: 'POST', body: { name, phone, email, message } });
       setLoading(false);
 
       if (data.success) {
@@ -42,7 +41,7 @@ export default function ContactSection() {
       }
     } catch (err) {
       setLoading(false);
-      setError('Không thể kết nối Backend API!');
+      setError(err.status ? err.message : t.error_network);
     }
   };
 
@@ -52,15 +51,15 @@ export default function ContactSection() {
         {/* Section Header */}
         <div className="text-center max-w-3xl mx-auto space-y-4">
           <div className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-emerald-500/10 border border-emerald-500/20 text-[#20E070] text-xs font-semibold uppercase tracking-wider">
-            Liên Hệ Với Chúng Tôi
+            {t.badge}
           </div>
 
           <h2 className="text-3xl sm:text-4xl lg:text-5xl font-serif font-bold text-white">
-            Tư Vấn & Khảo Sát <span className="text-gradient">Cảnh Quan Miễn Phí</span>
+            {t.title} <span className="text-gradient">{t.title_highlight}</span>
           </h2>
 
           <p className="text-slate-300 text-base sm:text-lg">
-            Đội ngũ kỹ sư GreenLand sẵn sàng đến tận nơi khảo sát, đo đạc diện tích sân vườn và tư vấn phương án chăm sóc tối ưu.
+            {t.description}
           </p>
         </div>
 
@@ -68,7 +67,7 @@ export default function ContactSection() {
           {/* Left Column: Contact Cards & Info */}
           <div className="lg:col-span-5 space-y-6">
             <div className="glass-panel p-6 sm:p-8 space-y-6 border border-white/10">
-              <h3 className="text-xl font-bold font-serif text-white">Thông Tin Văn Phòng & Trụ Sở</h3>
+              <h3 className="text-xl font-bold font-serif text-white">{t.office_title}</h3>
               
               <div className="space-y-4 text-sm text-slate-300">
                 <div className="flex items-start gap-4">
@@ -76,8 +75,8 @@ export default function ContactSection() {
                     <MapPin className="w-5 h-5" />
                   </div>
                   <div>
-                    <strong className="block text-white text-sm">Địa chỉ trụ sở chính:</strong>
-                    <span>Khu Đô Thị Ecopark, Phường Phụng Công, Văn Giang, Hà Nội / TP.HCM</span>
+                    <strong className="block text-white text-sm">{t.address_label}</strong>
+                    <span>{t.address}</span>
                   </div>
                 </div>
 
@@ -86,9 +85,9 @@ export default function ContactSection() {
                     <Phone className="w-5 h-5" />
                   </div>
                   <div>
-                    <strong className="block text-white text-sm">Hotline & Zalo tư vấn 24/7:</strong>
-                    <a href="tel:0988123456" className="text-[#20E070] font-bold text-base hover:underline">
-                      0988 123 456 / (024) 6688 9900
+                    <strong className="block text-white text-sm">{t.hotline_label}</strong>
+                    <a href={`tel:${t.hotline_tel}`} className="text-[#20E070] font-bold text-base hover:underline">
+                      {t.hotline_text}
                     </a>
                   </div>
                 </div>
@@ -98,8 +97,8 @@ export default function ContactSection() {
                     <Mail className="w-5 h-5" />
                   </div>
                   <div>
-                    <strong className="block text-white text-sm">Email liên hệ báo giá:</strong>
-                    <span>contact@agreenland.vn</span>
+                    <strong className="block text-white text-sm">{t.email_label}</strong>
+                    <span>{t.email}</span>
                   </div>
                 </div>
 
@@ -108,8 +107,8 @@ export default function ContactSection() {
                     <Clock className="w-5 h-5" />
                   </div>
                   <div>
-                    <strong className="block text-white text-sm">Thời gian làm việc:</strong>
-                    <span>Thứ 2 - Chủ Nhật (7:30 - 18:30)</span>
+                    <strong className="block text-white text-sm">{t.hours_label}</strong>
+                    <span>{t.hours}</span>
                   </div>
                 </div>
               </div>
@@ -118,7 +117,7 @@ export default function ContactSection() {
 
           {/* Right Column: Interactive Form */}
           <div className="lg:col-span-7 glass-panel p-6 sm:p-8 space-y-6 border border-white/10">
-            <h3 className="text-xl font-bold font-serif text-white">Gửi Lời Nhắn Nhanh</h3>
+            <h3 className="text-xl font-bold font-serif text-white">{t.form_title}</h3>
 
             {success && (
               <div className="bg-emerald-500/20 border border-emerald-500/50 p-4 rounded-xl text-emerald-300 text-sm flex items-center gap-3">
@@ -137,10 +136,10 @@ export default function ContactSection() {
             <form onSubmit={handleSendContact} className="space-y-4">
               <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
                 <div>
-                  <label className="block text-xs font-semibold text-slate-300 uppercase tracking-wider mb-2">Họ và tên *</label>
+                  <label className="block text-xs font-semibold text-slate-300 uppercase tracking-wider mb-2">{t.name_label}</label>
                   <input 
                     type="text" 
-                    placeholder="Nguyễn Văn A" 
+                    placeholder={t.name_placeholder} 
                     value={name}
                     onChange={(e) => setName(e.target.value)}
                     required
@@ -148,10 +147,10 @@ export default function ContactSection() {
                   />
                 </div>
                 <div>
-                  <label className="block text-xs font-semibold text-slate-300 uppercase tracking-wider mb-2">Số điện thoại *</label>
+                  <label className="block text-xs font-semibold text-slate-300 uppercase tracking-wider mb-2">{t.phone_label}</label>
                   <input 
                     type="tel" 
-                    placeholder="0988 123 456" 
+                    placeholder={t.phone_placeholder} 
                     value={phone}
                     onChange={(e) => setPhone(e.target.value)}
                     required
@@ -161,10 +160,10 @@ export default function ContactSection() {
               </div>
 
               <div>
-                <label className="block text-xs font-semibold text-slate-300 uppercase tracking-wider mb-2">Email</label>
+                <label className="block text-xs font-semibold text-slate-300 uppercase tracking-wider mb-2">{t.email_field_label}</label>
                 <input 
                   type="email" 
-                  placeholder="name@example.com" 
+                  placeholder={t.email_placeholder} 
                   value={email}
                   onChange={(e) => setEmail(e.target.value)}
                   className="w-full bg-[#07150E] border border-white/15 rounded-xl px-4 py-3 text-white text-sm focus:border-[#20E070] focus:outline-none"
@@ -172,10 +171,10 @@ export default function ContactSection() {
               </div>
 
               <div>
-                <label className="block text-xs font-semibold text-slate-300 uppercase tracking-wider mb-2">Lời nhắn / Nhu cầu sân vườn *</label>
+                <label className="block text-xs font-semibold text-slate-300 uppercase tracking-wider mb-2">{t.message_label}</label>
                 <textarea 
                   rows="4" 
-                  placeholder="Mô tả qua hiện trạng sân vườn và nhu cầu bảo dưỡng, cắt cỏ hoặc trồng cây..."
+                  placeholder={t.message_placeholder}
                   value={message}
                   onChange={(e) => setMessage(e.target.value)}
                   required
@@ -189,7 +188,7 @@ export default function ContactSection() {
                 className="btn-emerald py-3.5 px-8 w-full justify-center text-base font-bold text-[#07150E]"
               >
                 <Send className="w-4 h-4" />
-                <span>{loading ? 'Đang Gửi...' : 'Gửi Tin Nhắn Cho GreenLand'}</span>
+                <span>{loading ? t.submitting : t.submit}</span>
               </button>
             </form>
           </div>

@@ -1,5 +1,7 @@
-import React, { useState, useEffect } from 'react';
+import React from 'react';
 import { Scissors, Trees, Sparkles, Wind, Shovel, Droplets, ArrowRight, Check, Calculator } from 'lucide-react';
+import { useSite } from '../site/SiteContext';
+import { fmt } from '../lib/api';
 
 const ICON_MAP = {
   Scissors: Scissors,
@@ -11,23 +13,8 @@ const ICON_MAP = {
 };
 
 export default function ServicesSection({ onSelectServiceForCalculator }) {
-  const [services, setServices] = useState([]);
-  const [loading, setLoading] = useState(true);
-
-  useEffect(() => {
-    fetch('http://localhost:5000/api/services')
-      .then(res => res.json())
-      .then(data => {
-        if (data.success) {
-          setServices(data.data);
-        }
-        setLoading(false);
-      })
-      .catch(err => {
-        console.warn('API error, using fallback services data:', err);
-        setLoading(false);
-      });
-  }, []);
+  const { settings, services } = useSite();
+  const t = settings.services_section;
 
   return (
     <section id="services" className="py-24 bg-[#07150E] relative overflow-hidden">
@@ -38,15 +25,15 @@ export default function ServicesSection({ onSelectServiceForCalculator }) {
         {/* Section Header */}
         <div className="text-center max-w-3xl mx-auto mb-16 space-y-4">
           <div className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-emerald-500/10 border border-emerald-500/20 text-[#20E070] text-xs font-semibold uppercase tracking-wider">
-            Dịch Vụ Cảnh Quan Chuyên Nghiệp
+            {t.badge}
           </div>
           
           <h2 className="text-3xl sm:text-4xl lg:text-5xl font-serif font-bold text-white">
-            Giải Pháp Toàn Diện Cho <span className="text-gradient">Sân Vườn Hoàn Hảo</span>
+            {t.title} <span className="text-gradient">{t.title_highlight}</span>
           </h2>
 
           <p className="text-slate-300 text-base sm:text-lg">
-            Từ việc bảo dưỡng cắt cỏ định kỳ đến quy hoạch tổng thể cảnh quan biệt thự, GreenLand đáp ứng mọi tiêu chuẩn khắt khe nhất.
+            {t.description}
           </p>
         </div>
 
@@ -75,7 +62,7 @@ export default function ServicesSection({ onSelectServiceForCalculator }) {
                     </div>
 
                     <div className="absolute bottom-3 right-4 bg-[#081C15]/90 px-3 py-1 rounded-full border border-emerald-500/30 text-xs font-semibold text-[#20E070]">
-                      Từ {item.pricePerM2.toLocaleString('vi-VN')}đ / m²
+                      {fmt(t.price_format, { price: item.pricePerM2.toLocaleString('vi-VN') })}
                     </div>
                   </div>
 
@@ -113,7 +100,7 @@ export default function ServicesSection({ onSelectServiceForCalculator }) {
                     className="w-full py-3 px-4 rounded-xl bg-white/5 hover:bg-[#20E070] hover:text-[#07150E] text-slate-200 font-semibold text-sm border border-white/10 hover:border-[#20E070] transition-all flex items-center justify-center gap-2 group/btn"
                   >
                     <Calculator className="w-4 h-4 text-[#20E070] group-hover/btn:text-[#07150E]" />
-                    <span>Tính Phí Dịch Vụ Này</span>
+                    <span>{t.card_button}</span>
                     <ArrowRight className="w-4 h-4 ml-1 group-hover/btn:translate-x-1 transition-transform" />
                   </button>
                 </div>

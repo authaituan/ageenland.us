@@ -1,7 +1,10 @@
 import React, { useState, useEffect } from 'react';
-import { Leaf, Menu, X, Calculator, Database } from 'lucide-react';
+import { Leaf, Menu, X, Calculator } from 'lucide-react';
+import { useSite } from '../site/SiteContext';
 
-export default function Navbar({ onOpenCalculator, onOpenAdmin }) {
+export default function Navbar({ onOpenCalculator }) {
+  const { settings } = useSite();
+  const { brand, nav } = settings;
   const [scrolled, setScrolled] = useState(false);
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
 
@@ -31,44 +34,35 @@ export default function Navbar({ onOpenCalculator, onOpenAdmin }) {
           </div>
           <div>
             <span className="font-serif text-xl sm:text-2xl font-bold tracking-tight text-white block leading-none">
-              Green<span className="text-[#20E070]">Land</span>
+              {brand.name_part1}<span className="text-[#20E070]">{brand.name_part2}</span>
             </span>
             <span className="text-[9px] sm:text-[10px] tracking-widest uppercase text-emerald-300 font-semibold block mt-1">
-              Cảnh Quan & Sân Vườn
+              {brand.tagline}
             </span>
           </div>
         </a>
 
         {/* Desktop Navigation */}
         <nav className="hidden lg:flex items-center gap-7 text-sm font-medium text-slate-200">
-          <a href="#about" className="hover:text-[#20E070] transition-colors">Về Chúng Tôi</a>
-          <a href="#services" className="hover:text-[#20E070] transition-colors">Dịch Vụ</a>
+          <a href="#about" className="hover:text-[#20E070] transition-colors">{nav.about}</a>
+          <a href="#services" className="hover:text-[#20E070] transition-colors">{nav.services}</a>
           <a href="#calculator" className="hover:text-[#20E070] transition-colors flex items-center gap-1.5 text-[#20E070] font-semibold">
             <Calculator className="w-4 h-4" />
-            <span>Tính Phí Online</span>
+            <span>{nav.calculator}</span>
           </a>
-          <a href="#portfolio" className="hover:text-[#20E070] transition-colors">Dự Án</a>
-          <a href="#testimonials" className="hover:text-[#20E070] transition-colors">Đánh Giá</a>
-          <a href="#contact" className="hover:text-[#20E070] transition-colors">Liên Hệ</a>
+          <a href="#portfolio" className="hover:text-[#20E070] transition-colors">{nav.portfolio}</a>
+          <a href="#testimonials" className="hover:text-[#20E070] transition-colors">{nav.testimonials}</a>
+          <a href="#contact" className="hover:text-[#20E070] transition-colors">{nav.contact}</a>
         </nav>
 
         {/* Action Buttons */}
         <div className="hidden sm:flex items-center gap-3">
           <button 
-            onClick={onOpenAdmin} 
-            className="flex items-center gap-1.5 text-xs text-slate-300 hover:text-white px-3 py-2 rounded-xl border border-white/15 hover:border-white/40 bg-white/5 transition-all"
-            title="Xem quản lý báo giá SQLite"
-          >
-            <Database className="w-3.5 h-3.5 text-[#20E070]" />
-            <span>Quản Lý API</span>
-          </button>
-          
-          <button 
             onClick={onOpenCalculator} 
             className="btn-emerald py-2.5 px-5 text-sm"
           >
             <Calculator className="w-4 h-4" />
-            <span>Nhận Báo Giá Ngay</span>
+            <span>{nav.cta}</span>
           </button>
         </div>
 
@@ -84,12 +78,12 @@ export default function Navbar({ onOpenCalculator, onOpenAdmin }) {
       {/* Mobile Menu Overlay */}
       {mobileMenuOpen && (
         <div className="lg:hidden bg-[#0D2B1D] border-b border-white/10 px-6 py-6 mt-3 space-y-4 animate-fadeIn">
-          <a href="#about" onClick={() => setMobileMenuOpen(false)} className="block py-2 text-slate-200 hover:text-[#20E070]">Về Chúng Tôi</a>
-          <a href="#services" onClick={() => setMobileMenuOpen(false)} className="block py-2 text-slate-200 hover:text-[#20E070]">Dịch Vụ Cắt Cỏ & Cảnh Quan</a>
-          <a href="#calculator" onClick={() => setMobileMenuOpen(false)} className="block py-2 text-[#20E070] font-semibold">Tính Chi Phí Tự Động</a>
-          <a href="#portfolio" onClick={() => setMobileMenuOpen(false)} className="block py-2 text-slate-200 hover:text-[#20E070]">Dự Án Thực Tế</a>
-          <a href="#testimonials" onClick={() => setMobileMenuOpen(false)} className="block py-2 text-slate-200 hover:text-[#20E070]">Khách Hàng Đánh Giá</a>
-          <a href="#contact" onClick={() => setMobileMenuOpen(false)} className="block py-2 text-slate-200 hover:text-[#20E070]">Liên Hệ</a>
+          <a href="#about" onClick={() => setMobileMenuOpen(false)} className="block py-2 text-slate-200 hover:text-[#20E070]">{nav.mobile_about}</a>
+          <a href="#services" onClick={() => setMobileMenuOpen(false)} className="block py-2 text-slate-200 hover:text-[#20E070]">{nav.mobile_services}</a>
+          <a href="#calculator" onClick={() => setMobileMenuOpen(false)} className="block py-2 text-[#20E070] font-semibold">{nav.mobile_calculator}</a>
+          <a href="#portfolio" onClick={() => setMobileMenuOpen(false)} className="block py-2 text-slate-200 hover:text-[#20E070]">{nav.mobile_portfolio}</a>
+          <a href="#testimonials" onClick={() => setMobileMenuOpen(false)} className="block py-2 text-slate-200 hover:text-[#20E070]">{nav.mobile_testimonials}</a>
+          <a href="#contact" onClick={() => setMobileMenuOpen(false)} className="block py-2 text-slate-200 hover:text-[#20E070]">{nav.mobile_contact}</a>
           
           <div className="pt-4 border-t border-white/10 flex flex-col gap-3">
             <button 
@@ -97,15 +91,9 @@ export default function Navbar({ onOpenCalculator, onOpenAdmin }) {
               className="btn-emerald w-full justify-center py-3"
             >
               <Calculator className="w-4 h-4" />
-              <span>Báo Giá Nhanh</span>
+              <span>{nav.mobile_cta}</span>
             </button>
-            
-            <button 
-              onClick={() => { setMobileMenuOpen(false); onOpenAdmin(); }} 
-              className="text-xs text-slate-300 text-center py-2.5 border border-white/15 rounded-xl bg-white/5"
-            >
-              Bảng Điều Khiển Quản Lý (SQLite)
-            </button>
+
           </div>
         </div>
       )}

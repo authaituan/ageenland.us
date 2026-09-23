@@ -5,7 +5,12 @@
   "type": "module",
   "scripts": {
     "dev": "vite",
+    "dev:all": "node scripts/dev-all.cjs",
+    "server": "node server/index.cjs",
     "build": "vite build",
+    "start": "node server/index.cjs --production",
+    "admin:create": "node server/scripts/create-admin.cjs",
+    "admin:check": "node server/scripts/check-admin.cjs",
     "lint": "oxlint",
     "preview": "vite preview"
   },
@@ -14,6 +19,7 @@
     "cors": "^2.8.6",
     "express": "^5.2.1",
     "lucide-react": "^1.47.0",
+    "multer": "^2.4.0",
     "react": "^19.2.8",
     "react-dom": "^19.2.8",
     "sqlite3": "^6.0.1"

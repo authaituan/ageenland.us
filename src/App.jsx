@@ -6,11 +6,9 @@ import CostCalculator from './components/CostCalculator';
 import Portfolio from './components/Portfolio';
 import Testimonials from './components/Testimonials';
 import ContactSection from './components/ContactSection';
-import AdminModal from './components/AdminModal';
 import Footer from './components/Footer';
 
 export default function App() {
-  const [adminModalOpen, setAdminModalOpen] = useState(false);
   const [selectedServiceId, setSelectedServiceId] = useState(null);
 
   const handleOpenCalculator = () => {
@@ -30,7 +28,6 @@ export default function App() {
       {/* Top Navbar */}
       <Navbar 
         onOpenCalculator={handleOpenCalculator}
-        onOpenAdmin={() => setAdminModalOpen(true)}
       />
 
       {/* Main Content Sections */}
@@ -58,11 +55,6 @@ export default function App() {
       {/* Footer */}
       <Footer />
 
-      {/* SQLite Admin / Quotes List Modal */}
-      <AdminModal 
-        isOpen={adminModalOpen}
-        onClose={() => setAdminModalOpen(false)}
-      />
     </div>
   );
 }
