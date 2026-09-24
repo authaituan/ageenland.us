@@ -62,7 +62,7 @@
       "badge": "Công Cụ Báo Giá Tức Thì",
       "title": "Ước Tính Chi Phí",
       "title_highlight": "Chăm Sóc Sân Vườn",
-      "description": "Kéo chọn diện tích sân vườn ($m^2$) và loại dịch vụ để nhận ước tính minh bạch ngay lập tức.",
+      "description": "Kéo chọn diện tích sân vườn (m²) và loại dịch vụ để nhận ước tính minh bạch ngay lập tức.",
       "step1_title": "1. Chọn Dịch Vụ & Diện Tích",
       "service_label": "Loại dịch vụ thực hiện:",
       "area_label": "Diện tích khuôn viên:",
@@ -263,7 +263,7 @@
       "calcName": "Hệ thống tưới tự động thông minh",
       "heroEmoji": "💧",
       "heroLabel": "Hệ thống tưới tự động thông minh",
-      "footerLabel": "Tới Tự Động Thông Minh"
+      "footerLabel": "Tưới Tự Động Thông Minh"
     }
   ],
   "frequencyOptions": [
@@ -276,7 +276,7 @@
     {
       "id": 1,
       "category": "Biệt Thự Ecopark",
-      "title": "Thi Thiết Kế Sân Vườn Đồi Cỏ & Hồ Cá",
+      "title": "Thiết Kế Sân Vườn Đồi Cỏ & Hồ Cá",
       "description": "Diện tích 450 m² • Đèn LED nghệ thuật & Thảm cỏ nhung Nhật",
       "image": "/images/landscape_design.png",
       "imageAlt": "Dự án biệt thự"
