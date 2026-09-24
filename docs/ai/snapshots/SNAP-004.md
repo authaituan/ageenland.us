@@ -1,5 +1,5 @@
 # SNAP-004 — Đóng gói Tailwind v3 qua PostCSS, bỏ CDN
-- Ngày: 2026-09-24 · Người làm: Antigravity (Gemini 3.6 Flash) · Commit: `292fe90`
+- Ngày: 2026-09-24 · Người làm: Antigravity (Gemini 3.6 Flash) · Commit: `a704f8e`
 - Lệnh RULES §3: lint ✅ 0 lỗi (8 cảnh báo) · build ✅ · check-cms-schema ✅ 143 trường + 4 danh sách
 - Kiểm thử E2E: `npm run test:e2e` ✅ 3/3 passed (11.0s)
 

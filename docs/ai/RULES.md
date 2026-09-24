@@ -25,6 +25,7 @@ Ghi kết quả (pass/fail) vào snapshot. Lệnh nào không chạy được �
 3. Có quyết định kỹ thuật mới → thêm 1 dòng vào `DECISIONS.md`.
 4. Thêm/đổi file quan trọng → sửa 1 dòng trong `CODEMAP.md`.
 5. Commit: `SNAP-<số>: <tóm tắt>`.
+6. Mã commit của snapshot: ghi vào STATUS/snapshot ở lần commit KẾ TIẾP (kiểm tra bằng git log), không dùng git commit --amend để tự ghi mã.
 
 ## 5. Giữ tài liệu gọn (tiết kiệm token)
 - Chỉ đường, không chép: ghi `file:dòng`, không dán code.
