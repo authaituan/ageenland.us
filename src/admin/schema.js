@@ -62,6 +62,20 @@ export const SETTINGS_SECTIONS = [
     ],
   },
   {
+    key: 'about', title: 'Khu Về chúng tôi', desc: 'Khu giới thiệu doanh nghiệp, nằm sau banner đầu trang. Nhãn menu "Về chúng tôi" sửa ở mục Menu.',
+    fields: [
+      { key: 'badge', label: 'Nhãn nhỏ', type: 'text' },
+      { key: 'title', label: 'Tiêu đề', type: 'text' },
+      { key: 'title_highlight', label: 'Tiêu đề – phần tô màu', type: 'text' },
+      { key: 'paragraph1', label: 'Đoạn giới thiệu 1', type: 'textarea' },
+      { key: 'paragraph2', label: 'Đoạn giới thiệu 2', type: 'textarea' },
+      { key: 'highlights', label: 'Các điểm nổi bật (dấu tích)', type: 'list' },
+      { key: 'stats', label: 'Số liệu (3 ô)', type: 'stats' },
+      { key: 'image', label: 'Ảnh', type: 'image' },
+      { key: 'image_alt', label: 'Mô tả ảnh (alt)', type: 'text' },
+    ],
+  },
+  {
     key: 'services_section', title: 'Khu Dịch vụ – tiêu đề', desc: 'Phần tiêu đề của khu Dịch vụ. Nội dung từng dịch vụ sửa ở mục "Dịch vụ & bảng giá".',
     fields: [
       { key: 'badge', label: 'Nhãn nhỏ', type: 'text' },

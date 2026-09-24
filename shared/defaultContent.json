@@ -50,6 +50,21 @@
       "trust_left": "Bảo mật thông tin 100%",
       "trust_right": "Tư vấn 24/7"
     },
+    "about": {
+      "badge": "Về Chúng Tôi",
+      "title": "Đối Tác Cảnh Quan",
+      "title_highlight": "Đáng Tin Cậy Của Bạn",
+      "paragraph1": "GreenLand là đơn vị chuyên thiết kế, thi công và chăm sóc cảnh quan sân vườn cho biệt thự, khu đô thị và không gian thương mại. Chúng tôi tin rằng một khu vườn đẹp là nơi gia đình bạn được nghỉ ngơi và tận hưởng mỗi ngày.",
+      "paragraph2": "Đội ngũ kỹ sư và nghệ nhân giàu kinh nghiệm của GreenLand đồng hành cùng bạn từ khâu khảo sát, lên phương án đến thi công và bảo hành, với báo giá minh bạch ngay từ đầu.",
+      "highlights": ["Đội ngũ kỹ sư & nghệ nhân giàu kinh nghiệm", "Báo giá minh bạch, không phát sinh", "Bảo hành cây và thảm cỏ sau thi công"],
+      "stats": [
+        { "value": "8+", "label": "Năm kinh nghiệm" },
+        { "value": "500+", "label": "Dự án hoàn thành" },
+        { "value": "24/7", "label": "Hỗ trợ khách hàng" }
+      ],
+      "image": "/images/landscape_design.png",
+      "image_alt": "Đội ngũ GreenLand thi công cảnh quan"
+    },
     "services_section": {
       "badge": "Dịch Vụ Cảnh Quan Chuyên Nghiệp",
       "title": "Giải Pháp Toàn Diện Cho",

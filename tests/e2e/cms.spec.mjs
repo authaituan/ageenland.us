@@ -62,6 +62,15 @@ test('Luồng quản trị đầy đủ', async ({ page, browser }) => {
     await expect(page.locator(`a[href="tel:${HOTLINE.replace(/\s/g, '')}"]`, { hasText: HOTLINE })).toBeVisible();
   });
 
+  await test.step('Mục Về chúng tôi: sửa trong CMS, bấm menu cuộn đúng mục', async () => {
+    const ABOUT_TITLE = 'E2E Về Chúng Tôi';
+    await saveSetting(page, 'about', { 'Tiêu đề': ABOUT_TITLE });
+    await page.goto('/');
+    await expect(page.locator('#about').getByText(ABOUT_TITLE)).toBeVisible();
+    await page.locator('nav a[href="#about"]').first().click();
+    await expect.poll(async () => Math.abs(await page.locator('#about').evaluate((el) => el.getBoundingClientRect().top))).toBeLessThan(150);
+  });
+
   await test.step('Thêm dịch vụ có ảnh upload → hiện ở Dịch vụ, Calculator, Hero, Footer', async () => {
     const up = await page.request.post('/api/admin/upload', {
       headers: { 'X-Requested-With': 'fetch' },

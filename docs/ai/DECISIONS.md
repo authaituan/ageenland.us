@@ -12,3 +12,4 @@
 | D9 | 2026-09-24 | Nội dung sửa được trong CMS (avatar đánh giá, SĐT hotline/Footer, chữ, ảnh, giá…) KHÔNG đưa vào "Vướng mắc / chờ PO quyết định"; chỉ hỏi PO việc bắt buộc phải đổi code | PO |
 | D10 | 2026-09-24 | Chỉ phát triển trên máy local, chưa deploy; hosting (Q1) hoãn. Chạy thật local: `npm run build` + `npm start`, admin tại `http://localhost:5454/admin` | PO |
 | D11 | 2026-09-24 | Tailwind v3 đóng gói qua PostCSS, bỏ CDN | PO request / STATUS việc #2 |
+| D12 | 2026-09-24 | Mục "Về chúng tôi" là section CMS `about`, dùng lại ảnh có sẵn (không thêm ảnh mới) | STATUS việc #1 |

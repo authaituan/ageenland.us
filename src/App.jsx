@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import Navbar from './components/Navbar';
 import Hero from './components/Hero';
+import AboutSection from './components/AboutSection';
 import ServicesSection from './components/ServicesSection';
 import CostCalculator from './components/CostCalculator';
 import Portfolio from './components/Portfolio';
@@ -36,6 +37,8 @@ export default function App() {
           onOpenCalculator={handleOpenCalculator}
           onSelectService={handleSelectServiceForCalculator}
         />
+
+        <AboutSection />
 
         <ServicesSection 
           onSelectServiceForCalculator={handleSelectServiceForCalculator}

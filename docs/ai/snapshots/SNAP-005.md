@@ -1,5 +1,5 @@
 # SNAP-005 — Xử lý tồn đọng §8 (nội dung mặc định + báo cáo)
-- Ngày: 2026-09-24 · Người làm: Claude Code (Sonnet 5) · Commit: sẽ ghi ở commit sau (RULES §4.6)
+- Ngày: 2026-09-24 · Người làm: Claude Code (Sonnet 5) · Commit: `587e587`
 - Lệnh RULES §3: lint ✅ 0 lỗi (8 cảnh báo) · build ✅ · check-cms-schema ✅ 143 trường + 4 danh sách · test:e2e ✅ 3/3
 
 ## Từng mục §8
