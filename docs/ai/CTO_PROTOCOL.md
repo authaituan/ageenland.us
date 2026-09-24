@@ -9,6 +9,7 @@ Tự hỏi và đưa kết quả vào báo cáo:
 - Snapshot hiện tại có bằng chứng thật (commit, kết quả kiểm tra) hay chỉ là "đã code"?
 - "Việc tiếp theo" trong STATUS có đúng ưu tiên không? Có rủi ro nào bị bỏ sót?
 - Model được chọn có quá đắt/quá yếu cho việc này không?
+- Quy tắc PO (DECISIONS D9): nội dung sửa được trong CMS thì KHÔNG đưa vào "Vướng mắc / chờ PO quyết định" và không hỏi PO; chỉ hỏi PO những việc bắt buộc phải thay đổi code.
 
 ## 3. Định dạng trả lời PO (đúng 3 phần, không thêm)
 Ngôn ngữ: như báo cáo cho quản lý không biết code. Không dùng thuật ngữ kỹ thuật; nếu bắt buộc thì giải thích trong ngoặc.

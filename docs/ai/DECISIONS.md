@@ -9,3 +9,5 @@
 | D6 | 2026-09-23 | Giá báo giá do server tính lại, không tin số từ trình duyệt | ADMIN_CMS_PLAN §3 |
 | D7 | 2026-09-23 | Bộ tài liệu AI: `README_AI.md` là cổng chào, `docs/ai/STATUS.md` là nguồn sự thật | Thiết lập workflow |
 | D8 | 2026-09-24 | Dùng Playwright cho kiểm thử E2E (`tests/e2e/`, DB tạm, chạy bản build) | SNAP-003 |
+| D9 | 2026-09-24 | Nội dung sửa được trong CMS (avatar đánh giá, SĐT hotline/Footer, chữ, ảnh, giá…) KHÔNG đưa vào "Vướng mắc / chờ PO quyết định"; chỉ hỏi PO việc bắt buộc phải đổi code | PO |
+| D10 | 2026-09-24 | Chỉ phát triển trên máy local, chưa deploy; hosting (Q1) hoãn. Chạy thật local: `npm run build` + `npm start`, admin tại `http://localhost:5454/admin` | PO |
