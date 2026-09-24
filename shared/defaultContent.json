@@ -1,340 +1,433 @@
 {
   "settings": {
     "site": {
-      "title": "GreenLand - Cảnh Quan & Chăm Sóc Sân Vườn Cao Cấp",
-      "meta_description": ""
+      "title": "GreenLand – Premium landscaping & garden care",
+      "meta_description": "Lawn care, tree planting, landscape design and irrigation for homes and commercial properties. Get an instant online estimate.",
+      "locale": "en-US",
+      "currency_code": "USD"
     },
     "brand": {
       "name_part1": "Green",
       "name_part2": "Land",
-      "tagline": "Cảnh Quan & Sân Vườn"
+      "tagline": "Landscaping & gardens"
     },
     "nav": {
-      "about": "Về Chúng Tôi",
-      "services": "Dịch Vụ",
-      "calculator": "Tính Phí Online",
-      "portfolio": "Dự Án",
-      "testimonials": "Đánh Giá",
-      "contact": "Liên Hệ",
-      "cta": "Nhận Báo Giá Ngay",
-      "mobile_about": "Về Chúng Tôi",
-      "mobile_services": "Dịch Vụ Cắt Cỏ & Cảnh Quan",
-      "mobile_calculator": "Tính Chi Phí Tự Động",
-      "mobile_portfolio": "Dự Án Thực Tế",
-      "mobile_testimonials": "Khách Hàng Đánh Giá",
-      "mobile_contact": "Liên Hệ",
-      "mobile_cta": "Báo Giá Nhanh"
+      "about": "About us",
+      "services": "Services",
+      "calculator": "Instant quote",
+      "portfolio": "Projects",
+      "testimonials": "Reviews",
+      "contact": "Contact",
+      "cta": "Get a free quote",
+      "mobile_about": "About us",
+      "mobile_services": "Lawn & landscaping services",
+      "mobile_calculator": "Instant cost estimate",
+      "mobile_portfolio": "Our projects",
+      "mobile_testimonials": "Customer reviews",
+      "mobile_contact": "Contact",
+      "mobile_cta": "Quick quote"
     },
     "hero": {
       "background_image": "/images/hero.png",
-      "badge": "Dịch Vụ Cảnh Quan & Chăm Sóc Sân Vườn Cao Cấp",
-      "title_line1": "Kiến Tạo Không Gian",
-      "title_highlight": "Xanh Sang Trọng",
-      "title_line2": "& Đẳng Cấp",
-      "description": "GreenLand mang đến giải pháp chăm sóc thảm cỏ, trồng cây nghệ thuật và thiết kế cảnh quan trọn gói. Đội ngũ kỹ sư & nghệ nhân kinh nghiệm giúp nâng tầm không gian sống của bạn.",
-      "value_props": ["Thi công chuẩn kỹ thuật", "Báo giá tự động 60s", "Bảo hành cây & thảm cỏ"],
-      "cta_primary": "Ước Tính Chi Phí Ngay",
-      "cta_secondary": "Xem Các Dịch Vụ",
-      "stats": [
-        { "value": "45,000+", "label": "m² Cảnh quan đã thi công" },
-        { "value": "99.4%", "label": "Khách hàng hài lòng" },
-        { "value": "15 Phút", "label": "Phản hồi khảo sát tận nơi" }
+      "badge": "Premium landscaping & garden care",
+      "title_line1": "Create a green space",
+      "title_highlight": "that feels luxurious",
+      "title_line2": "& timeless",
+      "description": "GreenLand delivers full-service lawn care, artistic tree planting and complete landscape design. Our experienced designers and crews elevate the way you live outdoors.",
+      "value_props": [
+        "Professional-grade workmanship",
+        "Instant quote in 60 seconds",
+        "Plant & lawn warranty"
       ],
-      "form_title": "Đăng Ký Khảo Sát Miễn Phí",
-      "form_subtitle": "Kỹ sư cảnh quan tới đo đạc & tư vấn tại nhà",
-      "form_service_label": "Dịch vụ bạn quan tâm",
-      "form_phone_label": "Số điện thoại nhận tư vấn",
-      "form_phone_placeholder": "Ví dụ: 0988 123 456",
-      "form_submit": "Gửi Yêu Cầu & Tính Giá Ngay",
-      "form_submitting": "Đang Chuyển Đến Công Cụ Báo Giá...",
-      "trust_left": "Bảo mật thông tin 100%",
-      "trust_right": "Tư vấn 24/7"
+      "cta_primary": "Estimate my cost",
+      "cta_secondary": "View services",
+      "stats": [
+        {
+          "value": "480,000+",
+          "label": "sq ft landscaped"
+        },
+        {
+          "value": "99.4%",
+          "label": "Customer satisfaction"
+        },
+        {
+          "value": "15 min",
+          "label": "Response time for site visits"
+        }
+      ],
+      "form_title": "Book a free site visit",
+      "form_subtitle": "A landscape specialist will measure and advise on site",
+      "form_service_label": "Service you're interested in",
+      "form_phone_label": "Your phone number",
+      "form_phone_placeholder": "e.g. (555) 123-4567",
+      "form_submit": "Send request & get my estimate",
+      "form_submitting": "Taking you to the estimator...",
+      "trust_left": "Your information is 100% secure",
+      "trust_right": "24/7 support"
     },
     "about": {
-      "badge": "Về Chúng Tôi",
-      "title": "Đối Tác Cảnh Quan",
-      "title_highlight": "Đáng Tin Cậy Của Bạn",
-      "paragraph1": "GreenLand là đơn vị chuyên thiết kế, thi công và chăm sóc cảnh quan sân vườn cho biệt thự, khu đô thị và không gian thương mại. Chúng tôi tin rằng một khu vườn đẹp là nơi gia đình bạn được nghỉ ngơi và tận hưởng mỗi ngày.",
-      "paragraph2": "Đội ngũ kỹ sư và nghệ nhân giàu kinh nghiệm của GreenLand đồng hành cùng bạn từ khâu khảo sát, lên phương án đến thi công và bảo hành, với báo giá minh bạch ngay từ đầu.",
-      "highlights": ["Đội ngũ kỹ sư & nghệ nhân giàu kinh nghiệm", "Báo giá minh bạch, không phát sinh", "Bảo hành cây và thảm cỏ sau thi công"],
+      "badge": "About us",
+      "title": "Your trusted",
+      "title_highlight": "landscaping partner",
+      "paragraph1": "GreenLand designs, builds and maintains gardens and landscapes for homes, communities and commercial properties. We believe a beautiful garden is where your family relaxes and enjoys every day.",
+      "paragraph2": "Our experienced designers and crews stay with you from the first site visit through design, installation and warranty – with transparent pricing from day one.",
+      "highlights": [
+        "Experienced designers & skilled crews",
+        "Transparent pricing, no surprises",
+        "Plant and lawn warranty after installation"
+      ],
       "stats": [
-        { "value": "8+", "label": "Năm kinh nghiệm" },
-        { "value": "500+", "label": "Dự án hoàn thành" },
-        { "value": "24/7", "label": "Hỗ trợ khách hàng" }
+        {
+          "value": "8+",
+          "label": "Years of experience"
+        },
+        {
+          "value": "500+",
+          "label": "Projects completed"
+        },
+        {
+          "value": "24/7",
+          "label": "Customer support"
+        }
       ],
       "image": "/images/landscape_design.png",
-      "image_alt": "Đội ngũ GreenLand thi công cảnh quan"
+      "image_alt": "GreenLand crew installing a landscape"
     },
     "services_section": {
-      "badge": "Dịch Vụ Cảnh Quan Chuyên Nghiệp",
-      "title": "Giải Pháp Toàn Diện Cho",
-      "title_highlight": "Sân Vườn Hoàn Hảo",
-      "description": "Từ việc bảo dưỡng cắt cỏ định kỳ đến quy hoạch tổng thể cảnh quan biệt thự, GreenLand đáp ứng mọi tiêu chuẩn khắt khe nhất.",
-      "price_format": "Từ {price}đ / m²",
-      "card_button": "Tính Phí Dịch Vụ Này"
+      "badge": "Professional landscaping services",
+      "title": "Complete solutions for a",
+      "title_highlight": "perfect garden",
+      "description": "From routine lawn maintenance to full landscape master plans, GreenLand meets the highest standards.",
+      "price_format": "From {price} / sq ft",
+      "card_button": "Estimate this service"
     },
     "calculator": {
-      "badge": "Công Cụ Báo Giá Tức Thì",
-      "title": "Ước Tính Chi Phí",
-      "title_highlight": "Chăm Sóc Sân Vườn",
-      "description": "Kéo chọn diện tích sân vườn (m²) và loại dịch vụ để nhận ước tính minh bạch ngay lập tức.",
-      "step1_title": "1. Chọn Dịch Vụ & Diện Tích",
-      "service_label": "Loại dịch vụ thực hiện:",
-      "area_label": "Diện tích khuôn viên:",
-      "area_unit": "m²",
-      "area_min": 20,
-      "area_max": 1500,
-      "area_step": 10,
-      "area_default": 150,
-      "area_hint_min": "20 m² (Sân nhỏ)",
-      "area_hint_mid": "500 m² (Biệt thự)",
-      "area_hint_max": "1,500 m² (Resort/KĐT)",
-      "frequency_label": "Tần suất chăm sóc:",
-      "summary_service": "Dịch vụ đã chọn:",
-      "summary_rate": "Đơn giá ước tính:",
-      "summary_rate_format": "{rate}đ / m²",
-      "summary_discount": "Ưu đãi tần suất:",
-      "summary_standard": "Áp dụng giá chuẩn",
-      "summary_discount_format": "Giảm {pct}%",
-      "total_label": "Chi Phí Ước Tính Trọn Gói:",
-      "total_note": "* Đã bao gồm máy móc & nhân công",
-      "currency": "VNĐ",
-      "step2_title": "2. Gửi Yêu Cầu Báo Giá Chính Thức",
-      "name_label": "Họ và tên *",
-      "name_placeholder": "Nguyễn Văn A",
-      "phone_label": "Số điện thoại *",
-      "phone_placeholder": "0988 123 456",
-      "email_label": "Email (Không bắt buộc)",
-      "email_placeholder": "khachhang@gmail.com",
-      "date_label": "Ngày khảo sát mong muốn",
-      "address_label": "Địa chỉ thi công sân vườn *",
-      "address_placeholder": "Ví dụ: Khu biệt thự Ecopark, Phụ Phụng, Hà Nội...",
-      "notes_label": "Ghi chú thêm yêu cầu đặc biệt",
-      "notes_placeholder": "Cần cắt bớt cây cổ thụ, loại cỏ mong muốn, độ dốc sân...",
-      "submit": "Gửi Yêu Cầu & Lưu Hệ Thống SQLite",
-      "submitting": "Đang Xử Lý Gửi Báo Giá...",
-      "success_message": "Yêu cầu báo giá #{id} đã được ghi nhận thành công! Đội ngũ GreenLand sẽ liên hệ lại với bạn ngay.",
-      "error_required": "Vui lòng điền đầy đủ Họ tên, Số điện thoại và Địa chỉ thi công!",
-      "error_failed": "Gửi báo giá thất bại, vui lòng thử lại.",
-      "error_network": "Không thể kết nối đến máy chủ Backend API. Vui lòng kiểm tra lại."
+      "badge": "Instant quote tool",
+      "title": "Estimate your",
+      "title_highlight": "garden care cost",
+      "description": "Choose your service and drag to set your yard size (sq ft) for a transparent estimate in seconds.",
+      "step1_title": "1. Choose service & area",
+      "service_label": "Service:",
+      "area_label": "Property size:",
+      "area_unit": "sq ft",
+      "area_min": 200,
+      "area_max": 15000,
+      "area_step": 100,
+      "area_default": 1500,
+      "area_hint_min": "200 sq ft (small yard)",
+      "area_hint_mid": "5,000 sq ft (large home)",
+      "area_hint_max": "15,000 sq ft (estate/commercial)",
+      "frequency_label": "Service frequency:",
+      "summary_service": "Selected service:",
+      "summary_rate": "Estimated rate:",
+      "summary_rate_format": "{rate} / sq ft",
+      "summary_discount": "Frequency discount:",
+      "summary_standard": "Standard price",
+      "summary_discount_format": "{pct}% off",
+      "total_label": "Estimated total:",
+      "total_note": "* Includes equipment & labor",
+      "currency": "",
+      "step2_title": "2. Request your official quote",
+      "name_label": "Full name *",
+      "name_placeholder": "John Smith",
+      "phone_label": "Phone number *",
+      "phone_placeholder": "(555) 123-4567",
+      "email_label": "Email (optional)",
+      "email_placeholder": "you@example.com",
+      "date_label": "Preferred site visit date",
+      "address_label": "Property address *",
+      "address_placeholder": "e.g. 123 Oak Street, Austin, TX",
+      "notes_label": "Additional notes",
+      "notes_placeholder": "Trees to trim, preferred grass type, slope of the yard...",
+      "submit": "Send my quote request",
+      "submitting": "Sending your request...",
+      "success_message": "Quote request #{id} received! The GreenLand team will contact you shortly.",
+      "error_required": "Please enter your full name, phone number and property address.",
+      "error_failed": "Your request could not be sent. Please try again.",
+      "error_network": "We couldn't reach the server. Please check your connection and try again."
     },
     "portfolio": {
-      "badge": "Dự Án Đã Thi Công",
-      "title": "Hình Ảnh",
-      "title_highlight": "Trước & Sau Cải Tạo",
-      "description": "Kéo thanh trượt bên dưới để chứng kiến sự lột xác ấn tượng của không gian sân vườn thực tế.",
-      "legend_before": "Trước khi làm (Hiệu ứng hoang sơ)",
-      "legend_after": "Sau khi hoán đổi cảnh quan GreenLand",
+      "badge": "Completed projects",
+      "title": "See the",
+      "title_highlight": "before & after",
+      "description": "Drag the slider to see how a real garden was transformed.",
+      "legend_before": "Before (overgrown)",
+      "legend_after": "After the GreenLand makeover",
       "before_image": "/images/before_garden.png",
-      "before_alt": "Trước khi làm cảnh quan",
-      "before_badge": "TRƯỚC KHI THI CÔNG",
+      "before_alt": "Garden before landscaping",
+      "before_badge": "BEFORE",
       "after_image": "/images/after_garden.png",
-      "after_alt": "Sau khi thiết kế cảnh quan",
-      "after_badge": "TRẢI NGHIỆM SAU THI CÔNG",
-      "hint": "💡 Di chuyển chuột hoặc chạm tay trên hình ảnh để so sánh kết quả."
+      "after_alt": "Garden after landscaping",
+      "after_badge": "AFTER",
+      "hint": "💡 Move your mouse or swipe across the image to compare."
     },
     "testimonials_section": {
-      "badge": "Phản Hồi Từ Khách Hàng",
-      "title": "Khách Hàng Nói Gì Về",
+      "badge": "Customer reviews",
+      "title": "What our clients say about",
       "title_highlight": "GreenLand",
-      "description": "Sự hài lòng của chủ nhà và đối tác dự án là niềm tự hào lớn nhất của chúng tôi."
+      "description": "The satisfaction of our homeowners and project partners is our proudest achievement."
     },
     "contact": {
-      "badge": "Liên Hệ Với Chúng Tôi",
-      "title": "Tư Vấn & Khảo Sát",
-      "title_highlight": "Cảnh Quan Miễn Phí",
-      "description": "Đội ngũ kỹ sư GreenLand sẵn sàng đến tận nơi khảo sát, đo đạc diện tích sân vườn và tư vấn phương án chăm sóc tối ưu.",
-      "office_title": "Thông Tin Văn Phòng & Trụ Sở",
-      "address_label": "Địa chỉ trụ sở chính:",
-      "address": "Khu Đô Thị Ecopark, Phường Phụng Công, Văn Giang, Hà Nội / TP.HCM",
-      "hotline_label": "Hotline & Zalo tư vấn 24/7:",
-      "hotline_text": "0988 123 456 / (024) 6688 9900",
-      "hotline_tel": "0988123456",
-      "email_label": "Email liên hệ báo giá:",
-      "email": "contact@agreenland.vn",
-      "hours_label": "Thời gian làm việc:",
-      "hours": "Thứ 2 - Chủ Nhật (7:30 - 18:30)",
-      "form_title": "Gửi Lời Nhắn Nhanh",
-      "name_label": "Họ và tên *",
-      "name_placeholder": "Nguyễn Văn A",
-      "phone_label": "Số điện thoại *",
-      "phone_placeholder": "0988 123 456",
+      "badge": "Contact us",
+      "title": "Free landscape",
+      "title_highlight": "consultation & site visit",
+      "description": "Our specialists will visit your property, measure your yard and recommend the best care plan.",
+      "office_title": "Office & headquarters",
+      "address_label": "Headquarters:",
+      "address": "123 Greenway Blvd, Austin, TX 78701",
+      "hotline_label": "24/7 hotline:",
+      "hotline_text": "(555) 123-4567",
+      "hotline_tel": "5551234567",
+      "email_label": "Email for quotes:",
+      "email": "contact@ageenland.us",
+      "hours_label": "Business hours:",
+      "hours": "Mon – Sun, 7:30 AM – 6:30 PM",
+      "form_title": "Send us a quick message",
+      "name_label": "Full name *",
+      "name_placeholder": "John Smith",
+      "phone_label": "Phone number *",
+      "phone_placeholder": "(555) 123-4567",
       "email_field_label": "Email",
-      "email_placeholder": "name@example.com",
-      "message_label": "Lời nhắn / Nhu cầu sân vườn *",
-      "message_placeholder": "Mô tả qua hiện trạng sân vườn và nhu cầu bảo dưỡng, cắt cỏ hoặc trồng cây...",
-      "submit": "Gửi Tin Nhắn Cho GreenLand",
-      "submitting": "Đang Gửi...",
-      "success_message": "Gửi lời nhắn thành công! GreenLand sẽ phản hồi sớm nhất.",
-      "error_required": "Vui lòng nhập Họ tên, Số điện thoại và Lời nhắn.",
-      "error_network": "Không thể kết nối Backend API!"
+      "email_placeholder": "you@example.com",
+      "message_label": "Message / garden needs *",
+      "message_placeholder": "Tell us about your yard and whether you need maintenance, mowing or planting...",
+      "submit": "Send message to GreenLand",
+      "submitting": "Sending...",
+      "success_message": "Message sent! GreenLand will get back to you as soon as possible.",
+      "error_required": "Please enter your name, phone number and message.",
+      "error_network": "We couldn't reach the server. Please try again."
     },
     "footer": {
-      "about": "Đơn vị hàng đầu về giải pháp chăm sóc thảm cỏ biệt thự, trồng cây bóng mát, xử lý & quy hoạch cảnh quan sân vườn chuyên nghiệp tại Việt Nam.",
+      "about": "A leading provider of lawn care, shade tree planting and professional landscape design for homes and businesses.",
       "copyright": "© 2026 GreenLand Inc. All rights reserved.",
-      "services_title": "Dịch Vụ Chính",
-      "links_title": "Liên Kết Nhanh",
+      "services_title": "Main services",
+      "links_title": "Quick links",
       "links": [
-        { "label": "Về GreenLand", "href": "#about" },
-        { "label": "Tính Chi Phí Trực Tuyến", "href": "#calculator" },
-        { "label": "Dự Án Trước / Sau", "href": "#portfolio" },
-        { "label": "Đánh Giá Khách Hàng", "href": "#testimonials" },
-        { "label": "Đăng Ký Khảo Sát", "href": "#contact" }
+        {
+          "label": "About GreenLand",
+          "href": "#about"
+        },
+        {
+          "label": "Online cost estimate",
+          "href": "#calculator"
+        },
+        {
+          "label": "Before & after projects",
+          "href": "#portfolio"
+        },
+        {
+          "label": "Customer reviews",
+          "href": "#testimonials"
+        },
+        {
+          "label": "Book a site visit",
+          "href": "#contact"
+        }
       ],
-      "support_title": "Hỗ Trợ Khách Hàng",
-      "phone": "0988 123 456",
-      "email": "contact@agreenland.vn",
-      "address": "Ecopark / Thảo Điền / Hà Nội & TP.HCM",
-      "bottom_note": "Thiết kế mẫu giao diện độc quyền cho dịch vụ Cắt cỏ, Trồng cây & Cảnh quan sân vườn.",
-      "back_to_top": "Về Đầu Trang"
+      "support_title": "Customer support",
+      "phone": "(555) 123-4567",
+      "email": "contact@ageenland.us",
+      "address": "Austin, TX · Serving Central Texas",
+      "bottom_note": "Landscaping, lawn care & garden design services.",
+      "back_to_top": "Back to top"
     }
   },
   "services": [
     {
       "id": "lawn-mowing",
-      "title": "Cắt cỏ & Chăm sóc thảm cỏ",
-      "subtitle": "Lawn Mowing & Turf Care",
-      "description": "Dịch vụ cắt cỏ chuyên nghiệp, xén viền thảm cỏ sắc nét, xử lý cỏ dại và bảo dưỡng thảm cỏ định kỳ cho biệt thự, resort và sân vườn.",
-      "pricePerM2": 8000,
-      "basePrice": 200000,
+      "title": "Lawn mowing & turf care",
+      "subtitle": "Lawn mowing & turf care",
+      "description": "Professional mowing, crisp edging, weed control and scheduled turf maintenance for homes, resorts and gardens.",
+      "pricePerM2": 0.02,
+      "basePrice": 45,
       "icon": "Scissors",
       "image": "/images/lawn_care.png",
-      "features": ["Cắt cỏ chiều cao chuẩn kỹ thuật", "Xén viền lối đi & bồn hoa", "Thổi sạch cỏ vụn & vệ sinh", "Bón phân dưỡng cỏ theo mùa"],
-      "calcName": "Cắt cỏ & Bảo dưỡng thảm cỏ",
+      "features": [
+        "Mowing at the right height",
+        "Edging along paths & beds",
+        "Clippings blown & cleaned up",
+        "Seasonal lawn fertilizing"
+      ],
+      "calcName": "Lawn mowing & turf care",
       "heroEmoji": "🌿",
-      "heroLabel": "Cắt cỏ & Bảo dưỡng thảm cỏ",
-      "footerLabel": "Cắt Cỏ & Bảo Dưỡng Thảm Cỏ"
+      "heroLabel": "Lawn mowing & turf care",
+      "footerLabel": "Lawn mowing & turf care"
     },
     {
       "id": "tree-planting",
-      "title": "Trồng cây & Cắt tỉa tạo hình",
-      "subtitle": "Tree Planting & Topiary",
-      "description": "Cung cấp và trồng các loại cây bóng mát, cây phong thủy, tỉa cành an toàn, tạo dáng bonsai và cắt tỉa cây hàng rào nghệ thuật.",
-      "pricePerM2": 15000,
-      "basePrice": 500000,
+      "title": "Tree planting & topiary",
+      "subtitle": "Tree planting & topiary",
+      "description": "Supply and planting of shade and ornamental trees, safe pruning, bonsai shaping and artistic hedge trimming.",
+      "pricePerM2": 0.15,
+      "basePrice": 150,
       "icon": "Trees",
       "image": "/images/tree_planting.png",
-      "features": ["Cung cấp cây giống khỏe mạnh", "Thi công đào hố & cải tạo đất", "Tỉa cành hạ độ cao an toàn", "Định hình dáng cây thẩm mỹ"],
-      "calcName": "Trồng cây & Cắt tỉa tạo hình",
+      "features": [
+        "Healthy, nursery-grown trees",
+        "Digging & soil preparation",
+        "Safe height reduction pruning",
+        "Aesthetic shaping"
+      ],
+      "calcName": "Tree planting & topiary",
       "heroEmoji": "🌳",
-      "heroLabel": "Trồng cây & Cắt tỉa tạo hình",
-      "footerLabel": "Trồng Cây & Tỉa Dáng Bonsai"
+      "heroLabel": "Tree planting & topiary",
+      "footerLabel": "Tree planting & bonsai shaping"
     },
     {
       "id": "landscape-design",
-      "title": "Xử lý & Thiết kế cảnh quan sân vườn",
-      "subtitle": "Landscape Design & Transformation",
-      "description": "Cải tạo toàn bộ sân vườn cũ, phối kết đá cảnh quan, lối đi dạo, đồi cỏ, tiểu cảnh nước và hệ thống cây tầm trung sang trọng.",
-      "pricePerM2": 45000,
-      "basePrice": 1500000,
+      "title": "Landscape design & makeover",
+      "subtitle": "Landscape design & transformation",
+      "description": "Complete garden renovation with stone features, walkways, lawn mounds, water features and elegant mid-size plantings.",
+      "pricePerM2": 4.5,
+      "basePrice": 1500,
       "icon": "Sparkles",
       "image": "/images/landscape_design.png",
-      "features": ["Bản vẽ phối cảnh 3D miễn phí", "Thi công tiểu cảnh & lối đi đá", "Trồng cỏ nhung & phối kết hoa", "Đèn LED âm sân vườn sang trọng"],
-      "calcName": "Thiết kế & Xử lý cảnh quan sân vườn",
+      "features": [
+        "Free 3D design rendering",
+        "Hardscape & stone pathways",
+        "Premium sod & flower beds",
+        "In-ground LED garden lighting"
+      ],
+      "calcName": "Landscape design & makeover",
       "heroEmoji": "✨",
-      "heroLabel": "Thiết kế & Xử lý sân vườn trọn gói",
-      "footerLabel": "Thiết Kế Cảnh Quan Sân Vườn"
+      "heroLabel": "Full landscape design & makeover",
+      "footerLabel": "Landscape design"
     },
     {
       "id": "leaf-cleanup",
-      "title": "Dọn dẹp & Vệ sinh sân vườn theo mùa",
-      "subtitle": "Seasonal Cleanup & Leaf Removal",
-      "description": "Thu dọn cành lá khô, phát quang bụi rậm, vệ sinh bùn đất sau mưa bão và thu gom rác thải sân vườn trọn gói.",
-      "pricePerM2": 5000,
-      "basePrice": 300000,
+      "title": "Seasonal cleanup & leaf removal",
+      "subtitle": "Seasonal cleanup & leaf removal",
+      "description": "Leaf and branch removal, brush clearing, post-storm mud cleanup and complete yard waste hauling.",
+      "pricePerM2": 0.03,
+      "basePrice": 95,
       "icon": "Wind",
       "image": "/images/hero.png",
-      "features": ["Thổi & gom lá khô tận gốc", "Chặt tỉa bụi rậm rậm rạp", "Phát quang diện tích lớn", "Thu gom vận chuyển sạch sẽ"],
-      "calcName": "Thu dọn lá & Vệ sinh mùa",
+      "features": [
+        "Thorough leaf blowing & collection",
+        "Overgrown brush cutting",
+        "Large-area clearing",
+        "Full haul-away & cleanup"
+      ],
+      "calcName": "Leaf cleanup & seasonal care",
       "heroEmoji": "🧹",
-      "heroLabel": "Thu dọn lá & Vệ sinh mùa",
-      "footerLabel": "Thu Dọn Lá & Vệ Sinh Mùa"
+      "heroLabel": "Leaf cleanup & seasonal care",
+      "footerLabel": "Leaf cleanup & seasonal care"
     },
     {
       "id": "mulching-soil",
-      "title": "Phủ mùn & Cải tạo dinh dưỡng đất",
-      "subtitle": "Mulching & Soil Enrichment",
-      "description": "Bổ sung lớp mùn vỏ cây bảo vệ gốc, bón phân vi sinh hữu cơ cải tạo độ tơi xốp cho đất giúp cây phát triển bền vững.",
-      "pricePerM2": 12000,
-      "basePrice": 350000,
+      "title": "Mulching & soil enrichment",
+      "subtitle": "Mulching & soil enrichment",
+      "description": "Protective bark mulch, organic microbial fertilizer and soil conditioning for healthy, sustainable plant growth.",
+      "pricePerM2": 0.35,
+      "basePrice": 120,
       "icon": "Shovel",
       "image": "/images/tree_planting.png",
-      "features": ["Mùn dăm gỗ nhập khẩu chuẩn", "Giữ ẩm & ngăn cỏ dại mọc", "Bổ sung vi sinh cải tạo đất", "Tăng tính thẩm mỹ bồn cây"],
-      "calcName": "Phủ mùn & Cải tạo dinh dưỡng đất",
+      "features": [
+        "Premium wood chip mulch",
+        "Retains moisture & blocks weeds",
+        "Microbial soil improvement",
+        "Cleaner, tidier planting beds"
+      ],
+      "calcName": "Mulching & soil enrichment",
       "heroEmoji": "🌱",
-      "heroLabel": "Phủ mùn & Cải tạo đất",
-      "footerLabel": "Phủ Mùn & Cải Tạo Đất"
+      "heroLabel": "Mulching & soil enrichment",
+      "footerLabel": "Mulching & soil enrichment"
     },
     {
       "id": "irrigation-system",
-      "title": "Hệ thống tưới tự động thông minh",
-      "subtitle": "Smart Garden Irrigation",
-      "description": "Lắp đặt & sửa chữa hệ thống tưới phun mưa, tưới nhỏ giọt hẹn giờ tự động, tiết kiệm 50% nước và công sức chăm sóc.",
-      "pricePerM2": 25000,
-      "basePrice": 800000,
+      "title": "Smart irrigation systems",
+      "subtitle": "Smart garden irrigation",
+      "description": "Installation and repair of sprinkler and drip systems with smart timers – saving up to 50% of water and effort.",
+      "pricePerM2": 1.2,
+      "basePrice": 600,
       "icon": "Droplets",
       "image": "/images/landscape_design.png",
-      "features": ["Bơm & bộ hẹn giờ thông minh", "Vòi tưới xoay 360 độ góc ẩn", "Cảm biến mưa tự ngắt", "Bảo hành hệ thống 24 tháng"],
-      "calcName": "Hệ thống tưới tự động thông minh",
+      "features": [
+        "Pump & smart controller",
+        "Hidden 360° rotating sprinklers",
+        "Automatic rain sensor shut-off",
+        "24-month system warranty"
+      ],
+      "calcName": "Smart irrigation system",
       "heroEmoji": "💧",
-      "heroLabel": "Hệ thống tưới tự động thông minh",
-      "footerLabel": "Tưới Tự Động Thông Minh"
+      "heroLabel": "Smart irrigation system",
+      "footerLabel": "Smart irrigation"
     }
   ],
   "frequencyOptions": [
-    { "id": 1, "label": "Lần đầu", "discountPct": 0, "hint": "" },
-    { "id": 2, "label": "Hàng tuần", "discountPct": 15, "hint": "Giảm 5-15%" },
-    { "id": 3, "label": "2 tuần/lần", "discountPct": 10, "hint": "Giảm 5-15%" },
-    { "id": 4, "label": "Hàng tháng", "discountPct": 5, "hint": "Giảm 5-15%" }
+    {
+      "id": 1,
+      "label": "One-time",
+      "discountPct": 0,
+      "hint": ""
+    },
+    {
+      "id": 2,
+      "label": "Weekly",
+      "discountPct": 15,
+      "hint": "Save 5–15%"
+    },
+    {
+      "id": 3,
+      "label": "Every 2 weeks",
+      "discountPct": 10,
+      "hint": "Save 5–15%"
+    },
+    {
+      "id": 4,
+      "label": "Monthly",
+      "discountPct": 5,
+      "hint": "Save 5–15%"
+    }
   ],
   "projects": [
     {
       "id": 1,
-      "category": "Biệt Thự Ecopark",
-      "title": "Thiết Kế Sân Vườn Đồi Cỏ & Hồ Cá",
-      "description": "Diện tích 450 m² • Đèn LED nghệ thuật & Thảm cỏ nhung Nhật",
+      "category": "Lakeside villa",
+      "title": "Rolling lawn & koi pond landscape",
+      "description": "4,800 sq ft • Artistic LED lighting & premium Zoysia sod",
       "image": "/images/landscape_design.png",
-      "imageAlt": "Dự án biệt thự"
+      "imageAlt": "Villa project"
     },
     {
       "id": 2,
-      "category": "Villa Thảo Điền",
-      "title": "Chăm Sóc & Định Kỳ Cắt Cỏ Biệt Thự",
-      "description": "Diện tích 620 m² • Cắt tỉa cây bonsai & Xén viền chuẩn",
+      "category": "Riverside estate",
+      "title": "Scheduled mowing & villa lawn care",
+      "description": "6,700 sq ft • Bonsai pruning & crisp edging",
       "image": "/images/lawn_care.png",
-      "imageAlt": "Dự án Thảo Điền"
+      "imageAlt": "Riverside estate project"
     },
     {
       "id": 3,
-      "category": "Resort Nghỉ Dưỡng",
-      "title": "Trồng Cây Bóng Mát & Hệ Thống Tưới Tự Động",
-      "description": "Diện tích 1,200 m² • Trồng cây thân gỗ lớn & Hệ thống tưới xoay",
+      "category": "Resort retreat",
+      "title": "Shade trees & automatic irrigation",
+      "description": "13,000 sq ft • Mature tree planting & rotating sprinklers",
       "image": "/images/tree_planting.png",
-      "imageAlt": "Dự án Resort"
+      "imageAlt": "Resort project"
     }
   ],
   "testimonials": [
     {
       "id": 1,
-      "name": "Anh Trần Minh Tuấn",
-      "role": "Chủ sở hữu Biệt thự Ecopark",
-      "content": "Đội ngũ GreenLand cắt cỏ rất đúng kỹ thuật, thảm cỏ mịn và viền lối đi cực kỳ sắc nét. Hệ thống báo giá online chuẩn xác 100% không phát sinh chi phí.",
+      "name": "Michael Turner",
+      "role": "Homeowner, Lakeside villa",
+      "content": "The GreenLand crew mows with real precision – the lawn is smooth and the edging is razor sharp. The online quote was 100% accurate with no hidden costs.",
       "stars": 5,
       "avatar": "https://images.unsplash.com/photo-1534528741775-53994a69daeb?w=150&auto=format&fit=crop&q=80"
     },
     {
       "id": 2,
-      "name": "Chị Lê Hoàng Anh",
-      "role": "Quản lý Khu Đô Thị Ciputra",
-      "content": "Dịch vụ dọn dẹp lá khô và tỉa cành cây mùa mưa bão rất nhanh nhẹn. Kỹ sư tới khảo sát chỉ sau 15 phút từ lúc tôi ấn đăng ký trên web.",
+      "name": "Sarah Collins",
+      "role": "Property manager, Oak Ridge community",
+      "content": "Their storm-season leaf cleanup and pruning was fast and thorough. A specialist came out just 15 minutes after I booked online.",
       "stars": 5,
       "avatar": "https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=150&auto=format&fit=crop&q=80"
     },
     {
       "id": 3,
-      "name": "Ông David Miller",
-      "role": "Giám đốc Resort Cảnh Quan",
-      "content": "GreenLand đã biến khu vườn hoang sơ thành thảm cỏ xanh mướt với hệ thống tưới tự động thông minh. Rất ấn tượng với quy trình làm việc chuyên nghiệp.",
+      "name": "David Miller",
+      "role": "Director, Resort landscape",
+      "content": "GreenLand turned an overgrown garden into lush green lawn with a smart irrigation system. Very impressed with their professional process.",
       "stars": 5,
       "avatar": "https://images.unsplash.com/photo-1500648767791-00dcc994a43e?w=150&auto=format&fit=crop&q=80"
     }

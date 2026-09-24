@@ -24,16 +24,16 @@ const field = (page, label) => page.locator(`xpath=//label[normalize-space()="${
 
 async function login(page, username, password) {
   await page.goto('/admin');
-  await page.getByPlaceholder('Tên đăng nhập').fill(username);
-  await page.getByPlaceholder('Mật khẩu').fill(password);
-  await page.getByRole('button', { name: 'Đăng nhập' }).click();
+  await page.getByPlaceholder('Username').fill(username);
+  await page.getByPlaceholder('Password').fill(password);
+  await page.getByRole('button', { name: 'Sign in' }).click();
 }
 
 async function saveSetting(page, section, values) {
   await page.goto(`/admin/content/${section}`);
   for (const [label, value] of Object.entries(values)) await field(page, label).fill(value);
-  await page.getByRole('button', { name: 'Lưu thay đổi' }).first().click();
-  await expect(page.getByText('Đã lưu.')).toBeVisible();
+  await page.getByRole('button', { name: 'Save changes' }).first().click();
+  await expect(page.getByText('Saved.')).toBeVisible();
 }
 
 test('API quản trị trả 401 khi chưa đăng nhập', async ({ request }) => {
@@ -46,17 +46,17 @@ test('API quản trị trả 401 khi chưa đăng nhập', async ({ request }) =
 test('Luồng quản trị đầy đủ', async ({ page, browser }) => {
   await test.step('Đăng nhập sai bị chặn', async () => {
     await login(page, 'admin1', 'sai-mat-khau');
-    await expect(page.getByText('Sai tên đăng nhập hoặc mật khẩu')).toBeVisible();
+    await expect(page.getByText('Incorrect username or password')).toBeVisible();
   });
 
   await test.step('Đăng nhập đúng (admin1)', async () => {
     await login(page, 'admin1', PASSWORD);
-    await expect(page.getByRole('button', { name: 'Đăng xuất' })).toBeVisible();
+    await expect(page.getByRole('button', { name: 'Sign out' })).toBeVisible();
   });
 
   await test.step('Sửa tiêu đề Hero và hotline → trang chủ hiện đúng', async () => {
-    await saveSetting(page, 'hero', { 'Tiêu đề – dòng 1': HERO_TITLE });
-    await saveSetting(page, 'contact', { 'Hotline (chữ hiển thị)': HOTLINE, 'Hotline (số để bấm gọi)': HOTLINE.replace(/\s/g, '') });
+    await saveSetting(page, 'hero', { 'Title – line 1': HERO_TITLE });
+    await saveSetting(page, 'contact', { 'Hotline (displayed text)': HOTLINE, 'Hotline (number to dial)': HOTLINE.replace(/\s/g, '') });
     await page.goto('/');
     await expect(page.getByText(HERO_TITLE)).toBeVisible();
     await expect(page.locator(`a[href="tel:${HOTLINE.replace(/\s/g, '')}"]`, { hasText: HOTLINE })).toBeVisible();
@@ -64,7 +64,7 @@ test('Luồng quản trị đầy đủ', async ({ page, browser }) => {
 
   await test.step('Mục Về chúng tôi: sửa trong CMS, bấm menu cuộn đúng mục', async () => {
     const ABOUT_TITLE = 'E2E Về Chúng Tôi';
-    await saveSetting(page, 'about', { 'Tiêu đề': ABOUT_TITLE });
+    await saveSetting(page, 'about', { 'Title': ABOUT_TITLE });
     await page.goto('/');
     await expect(page.locator('#about').getByText(ABOUT_TITLE)).toBeVisible();
     await page.locator('nav a[href="#about"]').first().click();
@@ -106,7 +106,7 @@ test('Luồng quản trị đầy đủ', async ({ page, browser }) => {
     const site = (await (await page.request.get('/api/site')).json()).data;
     const freq = site.frequencyOptions.find((f) => f.discountPct > 0);
     const area = 100;
-    const expected = Math.round((SVC.basePrice + area * SVC.pricePerM2) * ((100 - freq.discountPct) / 100));
+    const expected = Math.round((SVC.basePrice + area * SVC.pricePerM2) * (100 - freq.discountPct)) / 100;
     const r = await page.request.post('/api/quotes', {
       data: { fullName: 'Khách E2E', phone: '0900000000', address: 'Địa chỉ E2E', serviceId: SVC.slug, gardenArea: area, frequencyId: freq.id, estimatedCost: 1 },
     });
@@ -131,8 +131,8 @@ test('Luồng quản trị đầy đủ', async ({ page, browser }) => {
 
   await test.step('Đăng xuất', async () => {
     await page.goto('/admin');
-    await page.getByRole('button', { name: 'Đăng xuất' }).click();
-    await expect(page.getByPlaceholder('Tên đăng nhập')).toBeVisible();
+    await page.getByRole('button', { name: 'Sign out' }).click();
+    await expect(page.getByPlaceholder('Username')).toBeVisible();
     expect((await page.request.get('/api/admin/me')).status()).toBe(401);
   });
 
@@ -140,7 +140,7 @@ test('Luồng quản trị đầy đủ', async ({ page, browser }) => {
     const ctx = await browser.newContext();
     const p2 = await ctx.newPage();
     await login(p2, 'admin2', PASSWORD);
-    await expect(p2.getByRole('button', { name: 'Đăng xuất' })).toBeVisible();
+    await expect(p2.getByRole('button', { name: 'Sign out' })).toBeVisible();
     await ctx.close();
   });
 });

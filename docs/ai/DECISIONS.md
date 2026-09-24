@@ -13,3 +13,7 @@
 | D10 | 2026-09-24 | Chỉ phát triển trên máy local, chưa deploy; hosting (Q1) hoãn. Chạy thật local: `npm run build` + `npm start`, admin tại `http://localhost:5454/admin` | PO |
 | D11 | 2026-09-24 | Tailwind v3 đóng gói qua PostCSS, bỏ CDN | PO request / STATUS việc #2 |
 | D12 | 2026-09-24 | Mục "Về chúng tôi" là section CMS `about`, dùng lại ảnh có sẵn (không thêm ảnh mới) | STATUS việc #1 |
+| D13 | 2026-09-24 | Website + CMS chỉ tiếng Anh (không song ngữ); giá USD theo sq ft; định dạng tiền theo `site.locale` + `site.currency_code` trong CMS | PO · SNAP-008 |
+| D14 | 2026-09-24 | Giữ tên trường `pricePerM2`/`price_per_m2` (nay là giá/đơn vị diện tích bất kỳ, hiện là sq ft) để không phải migrate DB; giá cho phép số lẻ, làm tròn đến cent | SNAP-008 |
+| D15 | 2026-09-24 | Font: DM Sans (chữ thường) + DM Serif Display (tiêu đề, chỉ 1 độ đậm, tắt đậm giả) | PO · SNAP-008 |
+| D16 | 2026-09-24 | Menu, footer, nút dùng kiểu chữ sentence case (chỉ viết hoa chữ đầu) | PO · SNAP-008 |

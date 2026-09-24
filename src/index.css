@@ -26,8 +26,8 @@
   --text-light: #F8FAFC;
   --text-emerald: #10B981;
 
-  --font-sans: 'Plus Jakarta Sans', sans-serif;
-  --font-serif: 'Playfair Display', Georgia, serif;
+  --font-sans: 'DM Sans', system-ui, sans-serif;
+  --font-serif: 'DM Serif Display', Georgia, serif;
 
   --radius-sm: 8px;
   --radius-md: 16px;
@@ -60,6 +60,9 @@ body {
 /* Typography & Headings */
 h1, h2, h3, .font-serif {
   font-family: var(--font-serif);
+  /* DM Serif Display has a single (regular) weight: don't fake bold, keep letterforms crisp */
+  font-synthesis: none;
+  font-weight: 400;
 }
 
 a {

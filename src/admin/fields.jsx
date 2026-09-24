@@ -15,13 +15,13 @@ export function Field({ field, value, onChange, disabled }) {
   else if (type === 'bool') control = (
     <label className="inline-flex items-center gap-2 text-sm text-slate-200 cursor-pointer">
       <input type="checkbox" className="w-4 h-4 accent-[#20E070]" checked={!!value} onChange={(e) => onChange(e.target.checked)} disabled={disabled} />
-      {value ? 'Đang hiển thị' : 'Đang ẩn'}
+      {value ? 'Visible' : 'Hidden'}
     </label>
   );
   else if (type === 'image') control = <ImageField value={value} onChange={onChange} />;
   else if (type === 'list') control = <StringList value={value || []} onChange={onChange} />;
-  else if (type === 'stats') control = <ObjectList value={value || []} onChange={onChange} columns={[['value', 'Số liệu'], ['label', 'Chú thích']]} />;
-  else if (type === 'links') control = <ObjectList value={value || []} onChange={onChange} columns={[['label', 'Nhãn'], ['href', 'Liên kết (VD: #contact)']]} />;
+  else if (type === 'stats') control = <ObjectList value={value || []} onChange={onChange} columns={[['value', 'Value'], ['label', 'Label']]} />;
+  else if (type === 'links') control = <ObjectList value={value || []} onChange={onChange} columns={[['label', 'Label'], ['href', 'Link (e.g. #contact)']]} />;
   else if (type === 'icon') control = <IconPicker value={value} onChange={onChange} />;
   else control = <input type="text" className={inputCls} value={value ?? ''} onChange={(e) => onChange(e.target.value)} disabled={disabled} />;
 
@@ -48,12 +48,12 @@ function StringList({ value, onChange }) {
       {value.map((item, i) => (
         <div key={i} className="flex gap-2">
           <input className={inputCls} value={item} onChange={(e) => onChange(value.map((v, k) => (k === i ? e.target.value : v)))} />
-          <button type="button" className={smallBtn} onClick={() => onChange(move(value, i, -1))} disabled={i === 0} title="Lên"><ArrowUp className="w-4 h-4" /></button>
-          <button type="button" className={smallBtn} onClick={() => onChange(move(value, i, 1))} disabled={i === value.length - 1} title="Xuống"><ArrowDown className="w-4 h-4" /></button>
-          <button type="button" className={smallBtn} onClick={() => onChange(value.filter((_, k) => k !== i))} title="Xóa"><Trash2 className="w-4 h-4" /></button>
+          <button type="button" className={smallBtn} onClick={() => onChange(move(value, i, -1))} disabled={i === 0} title="Up"><ArrowUp className="w-4 h-4" /></button>
+          <button type="button" className={smallBtn} onClick={() => onChange(move(value, i, 1))} disabled={i === value.length - 1} title="Down"><ArrowDown className="w-4 h-4" /></button>
+          <button type="button" className={smallBtn} onClick={() => onChange(value.filter((_, k) => k !== i))} title="Delete"><Trash2 className="w-4 h-4" /></button>
         </div>
       ))}
-      <button type="button" onClick={() => onChange([...value, ''])} className="text-xs text-[#20E070] inline-flex items-center gap-1 hover:underline"><Plus className="w-3.5 h-3.5" />Thêm dòng</button>
+      <button type="button" onClick={() => onChange([...value, ''])} className="text-xs text-[#20E070] inline-flex items-center gap-1 hover:underline"><Plus className="w-3.5 h-3.5" />Add row</button>
     </div>
   );
 }
@@ -67,12 +67,12 @@ function ObjectList({ value, onChange, columns }) {
           {columns.map(([key, ph]) => (
             <input key={key} className={inputCls} placeholder={ph} value={row[key] ?? ''} onChange={(e) => set(i, key, e.target.value)} />
           ))}
-          <button type="button" className={smallBtn} onClick={() => onChange(move(value, i, -1))} disabled={i === 0} title="Lên"><ArrowUp className="w-4 h-4" /></button>
-          <button type="button" className={smallBtn} onClick={() => onChange(move(value, i, 1))} disabled={i === value.length - 1} title="Xuống"><ArrowDown className="w-4 h-4" /></button>
-          <button type="button" className={smallBtn} onClick={() => onChange(value.filter((_, k) => k !== i))} title="Xóa"><Trash2 className="w-4 h-4" /></button>
+          <button type="button" className={smallBtn} onClick={() => onChange(move(value, i, -1))} disabled={i === 0} title="Up"><ArrowUp className="w-4 h-4" /></button>
+          <button type="button" className={smallBtn} onClick={() => onChange(move(value, i, 1))} disabled={i === value.length - 1} title="Down"><ArrowDown className="w-4 h-4" /></button>
+          <button type="button" className={smallBtn} onClick={() => onChange(value.filter((_, k) => k !== i))} title="Delete"><Trash2 className="w-4 h-4" /></button>
         </div>
       ))}
-      <button type="button" onClick={() => onChange([...value, Object.fromEntries(columns.map(([k]) => [k, '']))])} className="text-xs text-[#20E070] inline-flex items-center gap-1 hover:underline"><Plus className="w-3.5 h-3.5" />Thêm dòng</button>
+      <button type="button" onClick={() => onChange([...value, Object.fromEntries(columns.map(([k]) => [k, '']))])} className="text-xs text-[#20E070] inline-flex items-center gap-1 hover:underline"><Plus className="w-3.5 h-3.5" />Add row</button>
     </div>
   );
 }
@@ -102,15 +102,15 @@ function ImageField({ value, onChange }) {
   return (
     <div className="flex gap-3 items-start">
       <div className="w-24 h-16 rounded-md border border-white/15 bg-black/30 overflow-hidden shrink-0 flex items-center justify-center">
-        {value ? <img src={value} alt="" className="w-full h-full object-cover" /> : <span className="text-[10px] text-slate-500">Chưa có ảnh</span>}
+        {value ? <img src={value} alt="" className="w-full h-full object-cover" /> : <span className="text-[10px] text-slate-500">No image</span>}
       </div>
       <div className="flex-1 space-y-2">
-        <input className={inputCls} value={value ?? ''} onChange={(e) => onChange(e.target.value)} placeholder="/uploads/... hoặc https://..." />
+        <input className={inputCls} value={value ?? ''} onChange={(e) => onChange(e.target.value)} placeholder="/uploads/... or https://..." />
         <div className="flex items-center gap-3">
           <button type="button" onClick={() => fileRef.current?.click()} disabled={busy} className="text-xs px-3 py-1.5 rounded-md bg-white/10 hover:bg-white/20 text-white inline-flex items-center gap-1.5">
-            <Upload className="w-3.5 h-3.5" />{busy ? 'Đang tải lên...' : 'Tải ảnh lên'}
+            <Upload className="w-3.5 h-3.5" />{busy ? 'Uploading...' : 'Upload image'}
           </button>
-          <span className="text-[11px] text-slate-500">JPG, PNG, WEBP, GIF · tối đa 5MB</span>
+          <span className="text-[11px] text-slate-500">JPG, PNG, WEBP, GIF · max 5 MB</span>
         </div>
         <input ref={fileRef} type="file" accept="image/jpeg,image/png,image/webp,image/gif" className="hidden" onChange={(e) => upload(e.target.files?.[0])} />
         {error && <p className="text-xs text-rose-400">{error}</p>}

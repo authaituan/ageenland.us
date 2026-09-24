@@ -18,13 +18,13 @@ router.use(auth.requireSafeWrite);
 router.post('/login', async (req, res, next) => {
   try {
     const ip = req.ip;
-    if (auth.loginThrottled(ip)) return res.status(429).json({ success: false, message: 'Đăng nhập sai quá nhiều lần. Thử lại sau 15 phút.' });
+    if (auth.loginThrottled(ip)) return res.status(429).json({ success: false, message: 'Too many failed sign-in attempts. Try again in 15 minutes.' });
     const username = String(req.body?.username || '').trim();
     const password = String(req.body?.password || '');
     const user = username ? await get('SELECT * FROM admin_users WHERE username = ?', [username]) : null;
     if (!user || !auth.verifyPassword(password, user.password_hash)) {
       auth.recordFailure(ip);
-      return res.status(401).json({ success: false, message: 'Sai tên đăng nhập hoặc mật khẩu' });
+      return res.status(401).json({ success: false, message: 'Incorrect username or password' });
     }
     auth.clearFailures(ip);
     await auth.createSession(res, user.id);
@@ -43,11 +43,11 @@ router.get('/me', (req, res) => res.json({ success: true, data: req.admin }));
 router.post('/password', async (req, res, next) => {
   try {
     const { currentPassword, newPassword } = req.body || {};
-    if (!newPassword || String(newPassword).length < 8) return res.status(400).json({ success: false, message: 'Mật khẩu mới tối thiểu 8 ký tự' });
+    if (!newPassword || String(newPassword).length < 8) return res.status(400).json({ success: false, message: 'New password must be at least 8 characters' });
     const user = await get('SELECT * FROM admin_users WHERE id = ?', [req.admin.id]);
-    if (!auth.verifyPassword(String(currentPassword || ''), user.password_hash)) return res.status(400).json({ success: false, message: 'Mật khẩu hiện tại không đúng' });
+    if (!auth.verifyPassword(String(currentPassword || ''), user.password_hash)) return res.status(400).json({ success: false, message: 'Current password is incorrect' });
     await run('UPDATE admin_users SET password_hash = ? WHERE id = ?', [auth.hashPassword(String(newPassword)), user.id]);
-    res.json({ success: true, message: 'Đã đổi mật khẩu' });
+    res.json({ success: true, message: 'Password changed' });
   } catch (e) { next(e); }
 });
 
@@ -70,9 +70,9 @@ router.get('/quotes', async (req, res, next) => {
 router.patch('/quotes/:id', async (req, res, next) => {
   try {
     const status = req.body?.status;
-    if (!QUOTE_STATUSES.includes(status)) return res.status(400).json({ success: false, message: 'Trạng thái không hợp lệ' });
+    if (!QUOTE_STATUSES.includes(status)) return res.status(400).json({ success: false, message: 'Invalid status' });
     const r = await run('UPDATE quotes SET status = ? WHERE id = ?', [status, req.params.id]);
-    if (!r.changes) return res.status(404).json({ success: false, message: 'Không tìm thấy' });
+    if (!r.changes) return res.status(404).json({ success: false, message: 'Not found' });
     res.json({ success: true });
   } catch (e) { next(e); }
 });
@@ -85,9 +85,9 @@ router.get('/contacts', async (req, res, next) => {
 router.patch('/contacts/:id', async (req, res, next) => {
   try {
     const status = req.body?.status;
-    if (!CONTACT_STATUSES.includes(status)) return res.status(400).json({ success: false, message: 'Trạng thái không hợp lệ' });
+    if (!CONTACT_STATUSES.includes(status)) return res.status(400).json({ success: false, message: 'Invalid status' });
     const r = await run('UPDATE contacts SET status = ? WHERE id = ?', [status, req.params.id]);
-    if (!r.changes) return res.status(404).json({ success: false, message: 'Không tìm thấy' });
+    if (!r.changes) return res.status(404).json({ success: false, message: 'Not found' });
     res.json({ success: true });
   } catch (e) { next(e); }
 });
@@ -108,7 +108,7 @@ router.put('/settings/:section', async (req, res, next) => {
 router.get('/meta', (req, res) => res.json({ success: true, data: { icons: ICONS, quoteStatuses: QUOTE_STATUSES, contactStatuses: CONTACT_STATUSES } }));
 
 router.param('collection', (req, res, next, name) => {
-  if (!COLLECTIONS[name]) return res.status(404).json({ success: false, message: 'Không tồn tại' });
+  if (!COLLECTIONS[name]) return res.status(404).json({ success: false, message: 'Not found' });
   req.def = COLLECTIONS[name];
   next();
 });
@@ -127,7 +127,7 @@ router.post('/content/:collection', async (req, res, next) => {
     const r = await run(`INSERT INTO ${req.def.table} (${cols.join(',')}) VALUES (${cols.map(() => '?').join(',')})`, Object.values(values));
     res.json({ success: true, data: { id: r.lastID } });
   } catch (e) {
-    if (String(e.message).includes('UNIQUE')) return res.status(400).json({ success: false, message: 'Mã (slug) đã tồn tại' });
+    if (String(e.message).includes('UNIQUE')) return res.status(400).json({ success: false, message: 'This code (slug) already exists' });
     next(e);
   }
 });
@@ -135,7 +135,7 @@ router.post('/content/:collection', async (req, res, next) => {
 router.put('/content/:collection/reorder', async (req, res, next) => {
   try {
     const ids = req.body?.ids;
-    if (!Array.isArray(ids)) return res.status(400).json({ success: false, message: 'ids phải là danh sách' });
+    if (!Array.isArray(ids)) return res.status(400).json({ success: false, message: 'ids must be a list' });
     for (let i = 0; i < ids.length; i++) await run(`UPDATE ${req.def.table} SET sort_order = ? WHERE id = ?`, [i, ids[i]]);
     res.json({ success: true });
   } catch (e) { next(e); }
@@ -146,15 +146,15 @@ router.put('/content/:collection/:id', async (req, res, next) => {
     const { values, error } = coerce(req.def, req.body || {}, { partial: true });
     if (error) return res.status(400).json({ success: false, message: error });
     const cols = Object.keys(values);
-    if (!cols.length) return res.status(400).json({ success: false, message: 'Không có dữ liệu cập nhật' });
+    if (!cols.length) return res.status(400).json({ success: false, message: 'Nothing to update' });
     const r = await run(
       `UPDATE ${req.def.table} SET ${cols.map((c) => `${c} = ?`).join(', ')}, updated_at = CURRENT_TIMESTAMP WHERE id = ?`,
       [...Object.values(values), req.params.id]
     );
-    if (!r.changes) return res.status(404).json({ success: false, message: 'Không tìm thấy' });
+    if (!r.changes) return res.status(404).json({ success: false, message: 'Not found' });
     res.json({ success: true });
   } catch (e) {
-    if (String(e.message).includes('UNIQUE')) return res.status(400).json({ success: false, message: 'Mã (slug) đã tồn tại' });
+    if (String(e.message).includes('UNIQUE')) return res.status(400).json({ success: false, message: 'This code (slug) already exists' });
     next(e);
   }
 });
@@ -162,7 +162,7 @@ router.put('/content/:collection/:id', async (req, res, next) => {
 router.delete('/content/:collection/:id', async (req, res, next) => {
   try {
     const r = await run(`DELETE FROM ${req.def.table} WHERE id = ?`, [req.params.id]);
-    if (!r.changes) return res.status(404).json({ success: false, message: 'Không tìm thấy' });
+    if (!r.changes) return res.status(404).json({ success: false, message: 'Not found' });
     res.json({ success: true });
   } catch (e) { next(e); }
 });
@@ -180,8 +180,8 @@ const upload = multer({
 
 router.post('/upload', (req, res) => {
   upload.single('file')(req, res, (err) => {
-    if (err) return res.status(400).json({ success: false, message: err.code === 'LIMIT_FILE_SIZE' ? 'Ảnh tối đa 5MB' : err.message });
-    if (!req.file) return res.status(400).json({ success: false, message: 'Chỉ chấp nhận ảnh JPG, PNG, WEBP, GIF' });
+    if (err) return res.status(400).json({ success: false, message: err.code === 'LIMIT_FILE_SIZE' ? 'Images must be 5 MB or smaller' : err.message });
+    if (!req.file) return res.status(400).json({ success: false, message: 'Only JPG, PNG, WEBP or GIF images are allowed' });
     res.json({ success: true, data: { url: `/uploads/${req.file.filename}` } });
   });
 });

@@ -33,7 +33,7 @@ function Login({ onLogin }) {
       const r = await api('/admin/login', { method: 'POST', body: { username, password } });
       onLogin(r.data);
     } catch (err) {
-      setError(err.status ? err.message : 'Không kết nối được máy chủ');
+      setError(err.status ? err.message : 'Could not reach the server');
     } finally { setBusy(false); }
   };
   return (
@@ -42,24 +42,24 @@ function Login({ onLogin }) {
         <div className="flex items-center gap-3">
           <div className="w-10 h-10 rounded-xl bg-gradient-to-tr from-emerald-600 to-emerald-400 flex items-center justify-center text-[#07150E]"><Leaf className="w-5 h-5" /></div>
           <div>
-            <div className="font-serif text-xl font-bold text-white">Quản trị website</div>
-            <div className="text-xs text-slate-400">Đăng nhập để tiếp tục</div>
+            <div className="font-serif text-xl font-bold text-white">Website admin</div>
+            <div className="text-xs text-slate-400">Sign in to continue</div>
           </div>
         </div>
         {error && <div className="text-sm text-rose-300 bg-rose-500/10 border border-rose-500/30 rounded-lg px-3 py-2">{error}</div>}
-        <input className={inputCls} placeholder="Tên đăng nhập" value={username} onChange={(e) => setUsername(e.target.value)} autoComplete="username" autoFocus required />
-        <input className={inputCls} type="password" placeholder="Mật khẩu" value={password} onChange={(e) => setPassword(e.target.value)} autoComplete="current-password" required />
-        <button className="w-full py-2.5 rounded-lg bg-[#20E070] text-[#07150E] font-bold disabled:opacity-50" disabled={busy}>{busy ? 'Đang đăng nhập...' : 'Đăng nhập'}</button>
+        <input className={inputCls} placeholder="Username" value={username} onChange={(e) => setUsername(e.target.value)} autoComplete="username" autoFocus required />
+        <input className={inputCls} type="password" placeholder="Password" value={password} onChange={(e) => setPassword(e.target.value)} autoComplete="current-password" required />
+        <button className="w-full py-2.5 rounded-lg bg-[#20E070] text-[#07150E] font-bold disabled:opacity-50" disabled={busy}>{busy ? 'Signing in...' : 'Sign in'}</button>
       </form>
     </div>
   );
 }
 
 const NAV = [
-  { group: null, items: [{ to: '/admin', label: 'Tổng quan', icon: LayoutDashboard }] },
-  { group: 'Khách hàng', items: [{ to: '/admin/quotes', label: 'Yêu cầu báo giá', icon: Inbox }, { to: '/admin/contacts', label: 'Liên hệ', icon: MessageSquare }] },
-  { group: 'Nội dung trang', items: SETTINGS_SECTIONS.map((s) => ({ to: `/admin/content/${s.key}`, label: s.title, icon: FileText })) },
-  { group: 'Danh sách', items: Object.entries(COLLECTIONS).map(([k, c]) => ({ to: `/admin/${k}`, label: c.title, icon: ListChecks })) },
+  { group: null, items: [{ to: '/admin', label: 'Dashboard', icon: LayoutDashboard }] },
+  { group: 'Customers', items: [{ to: '/admin/quotes', label: 'Quote requests', icon: Inbox }, { to: '/admin/contacts', label: 'Contacts', icon: MessageSquare }] },
+  { group: 'Page content', items: SETTINGS_SECTIONS.map((s) => ({ to: `/admin/content/${s.key}`, label: s.title, icon: FileText })) },
+  { group: 'Lists', items: Object.entries(COLLECTIONS).map(([k, c]) => ({ to: `/admin/${k}`, label: c.title, icon: ListChecks })) },
 ];
 
 export default function AdminApp() {
@@ -70,7 +70,7 @@ export default function AdminApp() {
   const [menuOpen, setMenuOpen] = useState(false);
 
   useEffect(() => {
-    document.title = 'Quản trị website';
+    document.title = 'Website admin';
     api('/admin/me').then((r) => setMe(r.data)).catch(() => setMe(null));
   }, []);
 
@@ -87,7 +87,7 @@ export default function AdminApp() {
   }, []);
 
   const navigate = useCallback((to) => {
-    if (dirty && !window.confirm('Bạn có thay đổi chưa lưu. Rời trang này?')) return;
+    if (dirty && !window.confirm('You have unsaved changes. Leave this page?')) return;
     setDirty(false);
     setMenuOpen(false);
     rawNavigate(to);
@@ -110,7 +110,7 @@ export default function AdminApp() {
   else if (path === '/admin/account') page = <AccountPage me={me} toast={toast} />;
   else if (m) page = <SettingsPage key={m[1]} section={m[1]} toast={toast} setDirty={setDirty} />;
   else if (c && COLLECTIONS[c[1]]) page = <CollectionPage key={c[1]} name={c[1]} toast={toast} setDirty={setDirty} />;
-  else page = <p className="text-slate-400">Không tìm thấy trang.</p>;
+  else page = <p className="text-slate-400">Page not found.</p>;
 
   const sidebar = (
     <nav className="space-y-5 text-sm">
@@ -138,14 +138,14 @@ export default function AdminApp() {
         <div className="flex items-center gap-3">
           <button className="lg:hidden p-2 rounded-lg hover:bg-white/10" onClick={() => setMenuOpen(!menuOpen)}>{menuOpen ? <X className="w-5 h-5" /> : <Menu className="w-5 h-5" />}</button>
           <div className="w-8 h-8 rounded-lg bg-gradient-to-tr from-emerald-600 to-emerald-400 flex items-center justify-center text-[#07150E]"><Leaf className="w-4 h-4" /></div>
-          <span className="font-serif font-bold text-white">Quản trị website</span>
-          <a href="/" target="_blank" rel="noreferrer" className="hidden sm:inline text-xs text-slate-400 hover:text-[#20E070] ml-2">Xem website ↗</a>
+          <span className="font-serif font-bold text-white">Website admin</span>
+          <a href="/" target="_blank" rel="noreferrer" className="hidden sm:inline text-xs text-slate-400 hover:text-[#20E070] ml-2">View website ↗</a>
         </div>
         <div className="flex items-center gap-1">
           <a href="/admin/account" onClick={(e) => { e.preventDefault(); navigate('/admin/account'); }} className="flex items-center gap-1.5 text-sm text-slate-300 hover:text-white px-3 py-1.5 rounded-lg hover:bg-white/5">
             <User className="w-4 h-4" /><span className="hidden sm:inline">{me.displayName || me.username}</span>
           </a>
-          <button onClick={logout} className="flex items-center gap-1.5 text-sm text-slate-300 hover:text-white px-3 py-1.5 rounded-lg hover:bg-white/5"><LogOut className="w-4 h-4" /><span className="hidden sm:inline">Đăng xuất</span></button>
+          <button onClick={logout} className="flex items-center gap-1.5 text-sm text-slate-300 hover:text-white px-3 py-1.5 rounded-lg hover:bg-white/5"><LogOut className="w-4 h-4" /><span className="hidden sm:inline">Sign out</span></button>
         </div>
       </header>
       <div className="flex">

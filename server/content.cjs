@@ -13,8 +13,9 @@ const COLLECTIONS = {
       ['title', 'title', 'string'],
       ['subtitle', 'subtitle', 'string'],
       ['description', 'description', 'string'],
-      ['pricePerM2', 'price_per_m2', 'int'],
-      ['basePrice', 'base_price', 'int'],
+      // Unit price per area unit (sq ft in the current content) and base fee, in site currency.
+      ['pricePerM2', 'price_per_m2', 'number'],
+      ['basePrice', 'base_price', 'number'],
       ['icon', 'icon', 'string'],
       ['image', 'image', 'string'],
       ['features', 'features', 'json'],
@@ -26,10 +27,10 @@ const COLLECTIONS = {
     ],
     required: ['slug', 'title'],
     validate(item) {
-      if (item.slug !== undefined && !/^[a-z0-9-]{2,60}$/.test(item.slug)) return 'Mã dịch vụ (slug) chỉ gồm a-z, 0-9, dấu gạch ngang.';
-      if (item.icon !== undefined && !ICONS.includes(item.icon)) return 'Icon không hợp lệ.';
-      if (item.features !== undefined && (!Array.isArray(item.features) || item.features.some((f) => typeof f !== 'string'))) return 'Danh sách đặc điểm không hợp lệ.';
-      for (const k of ['pricePerM2', 'basePrice']) if (item[k] !== undefined && (!Number.isFinite(item[k]) || item[k] < 0)) return 'Giá phải là số ≥ 0.';
+      if (item.slug !== undefined && !/^[a-z0-9-]{2,60}$/.test(item.slug)) return 'Service code (slug) may only contain a-z, 0-9 and hyphens.';
+      if (item.icon !== undefined && !ICONS.includes(item.icon)) return 'Invalid icon.';
+      if (item.features !== undefined && (!Array.isArray(item.features) || item.features.some((f) => typeof f !== 'string'))) return 'Invalid feature list.';
+      for (const k of ['pricePerM2', 'basePrice']) if (item[k] !== undefined && (!Number.isFinite(item[k]) || item[k] < 0)) return 'Prices must be numbers ≥ 0.';
       return null;
     },
     // Public shape = shape the frontend components consume (id = slug)
@@ -50,7 +51,7 @@ const COLLECTIONS = {
     ],
     required: ['label'],
     validate(item) {
-      if (item.discountPct !== undefined && (!Number.isFinite(item.discountPct) || item.discountPct < 0 || item.discountPct > 100)) return '% giảm phải từ 0 đến 100.';
+      if (item.discountPct !== undefined && (!Number.isFinite(item.discountPct) || item.discountPct < 0 || item.discountPct > 100)) return 'Discount must be between 0 and 100%.';
       return null;
     },
     toPublic: (r) => ({ id: r.id, label: r.label, discountPct: r.discount_pct, hint: r.hint }),
@@ -81,7 +82,7 @@ const COLLECTIONS = {
     ],
     required: ['name'],
     validate(item) {
-      if (item.stars !== undefined && (!Number.isInteger(item.stars) || item.stars < 1 || item.stars > 5)) return 'Số sao phải từ 1 đến 5.';
+      if (item.stars !== undefined && (!Number.isInteger(item.stars) || item.stars < 1 || item.stars > 5)) return 'Stars must be between 1 and 5.';
       return null;
     },
     toPublic: (r) => ({ id: r.id, name: r.name, role: r.role, content: r.content, stars: r.stars, avatar: r.avatar }),
@@ -107,9 +108,9 @@ function coerce(def, body, { partial }) {
     values[col] = type === 'json' ? JSON.stringify(v) : v;
   }
   if (!partial) {
-    for (const r of def.required) if (!apiItem[r] || String(apiItem[r]).trim() === '') return { error: `Thiếu trường bắt buộc: ${r}` };
+    for (const r of def.required) if (!apiItem[r] || String(apiItem[r]).trim() === '') return { error: `Missing required field: ${r}` };
   } else {
-    for (const r of def.required) if (r in apiItem && String(apiItem[r]).trim() === '') return { error: `Trường ${r} không được để trống` };
+    for (const r of def.required) if (r in apiItem && String(apiItem[r]).trim() === '') return { error: `Field ${r} cannot be empty` };
   }
   const error = def.validate(apiItem);
   return error ? { error } : { values };
@@ -142,8 +143,8 @@ async function getSettings() {
 
 function validateSection(section, data) {
   const def = DEFAULTS.settings[section];
-  if (!def) return { error: 'Section không tồn tại' };
-  if (!data || typeof data !== 'object' || Array.isArray(data)) return { error: 'Dữ liệu không hợp lệ' };
+  if (!def) return { error: 'Unknown section' };
+  if (!data || typeof data !== 'object' || Array.isArray(data)) return { error: 'Invalid data' };
   const clean = {};
   for (const [key, defVal] of Object.entries(def)) {
     if (!(key in data)) continue;
@@ -151,10 +152,10 @@ function validateSection(section, data) {
     if (typeof defVal === 'string') clean[key] = String(v ?? '').slice(0, 5000);
     else if (typeof defVal === 'number') {
       const n = Number(v);
-      if (!Number.isFinite(n)) return { error: `${key} phải là số` };
+      if (!Number.isFinite(n)) return { error: `${key} must be a number` };
       clean[key] = n;
     } else if (Array.isArray(defVal)) {
-      if (!Array.isArray(v)) return { error: `${key} phải là danh sách` };
+      if (!Array.isArray(v)) return { error: `${key} must be a list` };
       const sample = defVal[0];
       if (typeof sample === 'string') clean[key] = v.map((x) => String(x ?? ''));
       else clean[key] = v.map((x) => Object.fromEntries(Object.keys(sample).map((k) => [k, String(x?.[k] ?? '')])));
@@ -188,14 +189,14 @@ async function getSite() {
 }
 
 // ---------- Pricing (server is the source of truth) ----------
-// Same formula as the calculator UI: round((base + area * rate) * (100 - discount%) / 100)
+// Same formula as the calculator UI, rounded to cents: (base + area * rate) * (100 - discount%) / 100
 function computeCost(service, area, discountPct) {
-  return Math.round((service.basePrice + area * service.pricePerM2) * ((100 - discountPct) / 100));
+  return Math.round((service.basePrice + area * service.pricePerM2) * (100 - discountPct)) / 100;
 }
 
 async function priceQuote({ serviceId, gardenArea, frequencyId, frequency }) {
   const row = await get('SELECT * FROM services WHERE slug = ? AND is_active = 1', [serviceId]);
-  if (!row) return { error: 'Dịch vụ không hợp lệ.' };
+  if (!row) return { error: 'Invalid service.' };
   const service = COLLECTIONS.services.toPublic(row);
   let freq = null;
   if (frequencyId != null) freq = await get('SELECT * FROM frequency_options WHERE id = ? AND is_active = 1', [frequencyId]);

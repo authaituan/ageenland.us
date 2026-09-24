@@ -36,7 +36,7 @@ export function SiteProvider({ children }) {
     api('/site')
       .then((r) => finish(r.data))
       .catch((err) => {
-        console.warn('CMS API không phản hồi, dùng nội dung mặc định:', err.message);
+        console.warn('CMS API unavailable, using default content:', err.message);
         finish(null);
       })
       .finally(() => clearTimeout(timer));

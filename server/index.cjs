@@ -17,7 +17,7 @@ app.use(express.json({ limit: '1mb' }));
 
 app.use('/api', publicRoutes);
 app.use('/api/admin', adminRoutes);
-app.use('/api', (req, res) => res.status(404).json({ success: false, message: 'API không tồn tại' }));
+app.use('/api', (req, res) => res.status(404).json({ success: false, message: 'API not found' }));
 
 app.use('/uploads', express.static(UPLOAD_DIR, { maxAge: '7d', fallthrough: false }));
 
@@ -32,10 +32,10 @@ if (IS_PROD) {
 
 // JSON error handler
 app.use((err, req, res, _next) => {
-  if (err.type === 'entity.parse.failed') return res.status(400).json({ success: false, message: 'JSON không hợp lệ' });
+  if (err.type === 'entity.parse.failed') return res.status(400).json({ success: false, message: 'Invalid JSON' });
   if (err.status === 404 && req.path.startsWith('/uploads')) return res.status(404).end();
   console.error(err);
-  res.status(500).json({ success: false, message: 'Lỗi máy chủ' });
+  res.status(500).json({ success: false, message: 'Server error' });
 });
 
 init()

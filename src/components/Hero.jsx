@@ -17,7 +17,7 @@ export default function Hero({ onOpenCalculator, onSelectService }) {
     // Lưu lại số điện thoại khách đăng ký (trước đây bị bỏ qua)
     const svc = services.find((s) => s.id === quickServiceId) || services[0];
     api('/leads', { method: 'POST', body: { phone: quickPhone, serviceLabel: svc ? svc.heroLabel : '' } })
-      .catch((err) => console.warn('Không lưu được đăng ký nhanh:', err.message));
+      .catch((err) => console.warn('Could not save quick request:', err.message));
     setTimeout(() => {
       onOpenCalculator();
       setSubmitted(false);

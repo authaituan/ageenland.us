@@ -11,6 +11,7 @@
     "start": "node server/index.cjs --production",
     "admin:create": "node server/scripts/create-admin.cjs",
     "admin:check": "node server/scripts/check-admin.cjs",
+    "content:reset": "node server/scripts/reset-content.cjs",
     "lint": "oxlint",
     "preview": "vite preview",
     "test:e2e": "npm run build && playwright test -c tests/e2e",

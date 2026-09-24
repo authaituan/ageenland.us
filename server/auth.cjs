@@ -54,13 +54,13 @@ async function destroySession(req, res) {
 async function requireAdmin(req, res, next) {
   try {
     const token = parseCookies(req.headers.cookie)[COOKIE_NAME];
-    if (!token) return res.status(401).json({ success: false, message: 'Chưa đăng nhập' });
+    if (!token) return res.status(401).json({ success: false, message: 'Not signed in' });
     const row = await get(
       `SELECT u.id, u.username, u.display_name FROM admin_sessions s JOIN admin_users u ON u.id = s.user_id
        WHERE s.token_hash = ? AND s.expires_at > ?`,
       [sha256(token), Date.now()]
     );
-    if (!row) return res.status(401).json({ success: false, message: 'Phiên đăng nhập đã hết hạn' });
+    if (!row) return res.status(401).json({ success: false, message: 'Your session has expired' });
     req.admin = { id: row.id, username: row.username, displayName: row.display_name };
     next();
   } catch (e) {
@@ -75,7 +75,7 @@ function requireSafeWrite(req, res, next) {
   const ct = String(req.headers['content-type'] || '');
   const ok = ct.startsWith('application/json') || (ct.startsWith('multipart/form-data') && req.headers['x-requested-with'] === 'fetch');
   if (!ok && req.headers['content-length'] !== '0' && req.headers['content-length'] !== undefined) {
-    return res.status(415).json({ success: false, message: 'Content-Type không hợp lệ' });
+    return res.status(415).json({ success: false, message: 'Invalid Content-Type' });
   }
   next();
 }

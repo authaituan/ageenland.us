@@ -2,6 +2,7 @@ import React, { useState, useEffect } from 'react';
 import { Calculator, CheckCircle, AlertCircle, Calendar, MapPin, Phone, User, Mail, FileText, Send, Sparkles } from 'lucide-react';
 import { useSite } from '../site/SiteContext';
 import { api, fmt } from '../lib/api';
+import { formatMoney } from '../lib/format';
 
 export default function CostCalculator({ selectedServiceId }) {
   const { settings, services, frequencyOptions } = useSite();
@@ -34,7 +35,7 @@ export default function CostCalculator({ selectedServiceId }) {
   const discountPct = currentFrequency.discountPct || 0;
 
   // Ước tính hiển thị; giá chính thức do server tính lại khi lưu (cùng công thức)
-  const estimatedCost = Math.round((currentService.basePrice + (area * currentService.pricePerM2)) * ((100 - discountPct) / 100));
+  const estimatedCost = Math.round((currentService.basePrice + (area * currentService.pricePerM2)) * (100 - discountPct)) / 100;
 
   const handleSubmitQuote = async (e) => {
     e.preventDefault();
@@ -142,7 +143,7 @@ export default function CostCalculator({ selectedServiceId }) {
                   {t.area_label}
                 </label>
                 <div className="text-xl font-bold font-serif text-[#20E070] bg-[#07150E] px-4 py-1 rounded-lg border border-white/10">
-                  {area} <span className="text-xs text-slate-400 font-sans">{t.area_unit}</span>
+                  {area.toLocaleString(settings.site.locale || 'en-US')} <span className="text-xs text-slate-400 font-sans">{t.area_unit}</span>
                 </div>
               </div>
               <input 
@@ -193,7 +194,7 @@ export default function CostCalculator({ selectedServiceId }) {
               </div>
               <div className="flex justify-between items-center text-xs text-slate-300">
                 <span>{t.summary_rate}</span>
-                <span>{fmt(t.summary_rate_format, { rate: currentService.pricePerM2.toLocaleString('vi-VN') })}</span>
+                <span>{fmt(t.summary_rate_format, { rate: formatMoney(currentService.pricePerM2, settings.site) })}</span>
               </div>
               <div className="flex justify-between items-center text-xs text-slate-300">
                 <span>{t.summary_discount}</span>
@@ -208,7 +209,7 @@ export default function CostCalculator({ selectedServiceId }) {
                   <span className="text-xs text-slate-400 italic">{t.total_note}</span>
                 </div>
                 <div className="text-2xl sm:text-3xl font-bold font-serif text-[#20E070]">
-                  {estimatedCost.toLocaleString('vi-VN')} <span className="text-sm font-sans font-normal text-slate-300">{t.currency}</span>
+                  {formatMoney(estimatedCost, settings.site)}{t.currency && <> <span className="text-sm font-sans font-normal text-slate-300">{t.currency}</span></>}
                 </div>
               </div>
             </div>

@@ -23,7 +23,7 @@ Express  server/index.cjs ─┬─ server/routes/public.cjs  (/api/site, /api/q
 | API công khai (báo giá, liên hệ) | `server/routes/public.cjs`, `server/content.cjs` | curl / form trên trang |
 | API quản trị | `server/routes/admin.cjs`, `server/auth.cjs` | Chưa đăng nhập phải trả 401 |
 | Đăng nhập, bảo mật | `server/auth.cjs`, `server/scripts/*` | `npm run admin:check` |
-| Database, seed | `server/db.cjs`, `shared/defaultContent.json` | Xóa DB local, chạy lại server |
+| Database, seed | `server/db.cjs`, `shared/defaultContent.json`, `server/scripts/reset-content.cjs` | `npm run content:reset` (tự sao lưu DB vào `server/backups/`) |
 | Tính giá | `server/content.cjs`, `src/components/CostCalculator.jsx` | Giá lưu DB = giá server tính |
 | Cổng, chạy, build, deploy | `package.json`, `vite.config.js`, `scripts/dev-all.cjs`, `server/index.cjs`, `README.md` | `npm run build && npm start` |
 | Kiểm thử E2E (toàn luồng CMS) | `tests/e2e/cms.spec.mjs`, `tests/e2e/server.cjs` | `npm run test:e2e` (máy mới: `npm run test:e2e:install` trước) |

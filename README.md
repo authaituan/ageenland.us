@@ -59,6 +59,15 @@ npm start        # website + CMS + API cùng cổng 5454 → http://localhost:54
 
 **Sao lưu:** cần sao lưu định kỳ 2 thứ: file `DB_PATH` và thư mục `UPLOAD_DIR`.
 
+## Đặt lại nội dung website về mặc định
+
+```bash
+npm run content:reset                    # thay toàn bộ nội dung CMS bằng shared/defaultContent.json, giữ báo giá + liên hệ
+npm run content:reset -- --with-requests # xóa luôn báo giá + liên hệ (dữ liệu thử)
+```
+
+Lệnh luôn sao lưu database vào `server/backups/` trước khi làm. Tài khoản admin được giữ nguyên.
+
 ## Quên mật khẩu
 
 Chạy lại lệnh `npm run admin:create -- <username>` để đặt mật khẩu mới. Mọi phiên đăng nhập cũ của tài khoản đó sẽ bị đăng xuất.

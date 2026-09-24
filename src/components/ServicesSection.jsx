@@ -2,6 +2,7 @@ import React from 'react';
 import { Scissors, Trees, Sparkles, Wind, Shovel, Droplets, ArrowRight, Check, Calculator } from 'lucide-react';
 import { useSite } from '../site/SiteContext';
 import { fmt } from '../lib/api';
+import { formatMoney } from '../lib/format';
 
 const ICON_MAP = {
   Scissors: Scissors,
@@ -62,7 +63,7 @@ export default function ServicesSection({ onSelectServiceForCalculator }) {
                     </div>
 
                     <div className="absolute bottom-3 right-4 bg-[#081C15]/90 px-3 py-1 rounded-full border border-emerald-500/30 text-xs font-semibold text-[#20E070]">
-                      {fmt(t.price_format, { price: item.pricePerM2.toLocaleString('vi-VN') })}
+                      {fmt(t.price_format, { price: formatMoney(item.pricePerM2, settings.site) })}
                     </div>
                   </div>
 
