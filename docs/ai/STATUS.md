@@ -3,14 +3,14 @@
 
 | Mục | Giá trị |
 |---|---|
-| **Snapshot hiện tại** | `SNAP-006` — Thêm mục "Về chúng tôi" (CMS sửa được) · 2026-09-24 |
+| **Snapshot hiện tại** | `SNAP-007` — Nén 6 ảnh `public/images` (−81,1%) · 2026-09-24 |
 | **Phase** | Phase 1 – Admin CMS ([kế hoạch](../ADMIN_CMS_PLAN.md)) — code + nghiệm thu đạt; PO đã xác nhận đăng nhập OK (bản chạy thật local, `http://localhost:5454/admin`). Deploy **hoãn** (chỉ chạy local) |
 | **Sức khỏe** | 🟢 Checklist §9 đạt 7/7 · E2E đạt 3/3 · check-cms-schema 152 trường |
 
 ## Việc tiếp theo (theo thứ tự ưu tiên)
 | # | Việc | Giao cho | Tiêu chí xong |
 |---|---|---|---|
-| 1 | Tối ưu 6 ảnh `public/images` (JPEG đặt đuôi .png, ~1MB/ảnh → WebP, xem SNAP-005) | Antigravity · Gemini 3.6 Flash | Ảnh nhẹ hơn ≥ 80%, giao diện không đổi, E2E đạt |
+| 1 | ~~Tối ưu 6 ảnh~~ ✅ đã xong (SNAP-007: 6,94MB → 1,31MB, giữ JPEG đuôi .png) | — | — |
 | 2 | Deploy lên hosting — **hoãn** đến khi PO quyết định (Q1) | Claude Code · Sonnet 5 | Website chạy HTTPS, có sao lưu DB + ảnh |
 
 ## Vướng mắc / chờ PO quyết định
