@@ -8,3 +8,4 @@
 | D5 | 2026-09-23 | Cổng cố định 5454 (API) / 5455 (web), báo lỗi khi trùng thay vì tự đổi | README |
 | D6 | 2026-09-23 | Giá báo giá do server tính lại, không tin số từ trình duyệt | ADMIN_CMS_PLAN §3 |
 | D7 | 2026-09-23 | Bộ tài liệu AI: `README_AI.md` là cổng chào, `docs/ai/STATUS.md` là nguồn sự thật | Thiết lập workflow |
+| D8 | 2026-09-24 | Dùng Playwright cho kiểm thử E2E (`tests/e2e/`, DB tạm, chạy bản build) | SNAP-003 |

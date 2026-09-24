@@ -4,7 +4,7 @@
 
 ## 1. Dự án là gì
 Website giới thiệu dịch vụ cảnh quan **GreenLand** + trang quản trị **CMS** (`/admin`) để chủ doanh nghiệp tự sửa chữ, ảnh, giá, xem báo giá/liên hệ của khách.
-Stack: React 19 + Vite + Tailwind 4 · Express 5 + SQLite · Node. Repo: `authaituan/ageenland.us`, nhánh `main`.
+Stack: React 19 + Vite · Tailwind qua CDN (`<script>` trong `index.html`, chưa đóng gói vào build) · Express 5 + SQLite · Node · Playwright (E2E). Repo: `authaituan/ageenland.us`, nhánh `main`.
 
 ## 2. Đang ở đâu → xem [STATUS](https://raw.githubusercontent.com/authaituan/ageenland.us/main/docs/ai/STATUS.md)
 STATUS là **nguồn sự thật duy nhất** về: Snapshot hiện tại, việc đang làm, việc tiếp theo, vướng mắc.
