@@ -1,26 +1,54 @@
 /* Theme "light": chỉ áp dụng khi <body data-theme="light"> (App.jsx đặt), không ảnh hưởng theme classic. */
 body[data-theme="light"] {
-  --lt-bg: #F7F6F1;
-  --lt-soft: #EDF1E6;
+  --lt-bg: #FFFFFF;
+  --lt-soft: #F4F6F0;
   --lt-surface: #FFFFFF;
   --lt-ink: #16241B;
   --lt-muted: #5B6B60;
-  --lt-line: #E3E4DA;
+  --lt-line: #E6E8E0;
   --lt-green: #2E6A45;
   --lt-green-dark: #183B29;
-  --lt-lime: #DCEFB0;
+  --lt-amber: #E5A93B;
+  --lt-amber-hover: #D39527;
   background-color: var(--lt-bg);
   color: var(--lt-ink);
 }
 
-body[data-theme="light"] ::-webkit-scrollbar-track { background: var(--lt-bg); }
-body[data-theme="light"] ::-webkit-scrollbar-thumb { background: #B9C7B5; }
+/* Headings spec: DM Sans 800, letter-spacing: -0.02em, line-height: 1.05 */
+body[data-theme="light"] h1,
+body[data-theme="light"] h2,
+body[data-theme="light"] h3 {
+  font-family: 'DM Sans', sans-serif;
+  font-weight: 800;
+  letter-spacing: -0.02em;
+  line-height: 1.05;
+}
+
+/* Section scroll-margin to prevent navbar overlay when clicking nav links */
+body[data-theme="light"] section {
+  scroll-margin-top: 5rem;
+}
+
+body[data-theme="light"] ::-webkit-scrollbar-track { background: var(--lt-soft); }
+body[data-theme="light"] ::-webkit-scrollbar-thumb { background: #C2C8BC; border-radius: 4px; }
 body[data-theme="light"] ::-webkit-scrollbar-thumb:hover { background: var(--lt-green); }
 
-body[data-theme="light"] input[type=range]::-webkit-slider-runnable-track { background: #D6DDD0; }
-body[data-theme="light"] input[type=range]::-webkit-slider-thumb { background: var(--lt-green); box-shadow: 0 0 0 4px rgba(46, 106, 69, 0.18); }
-body[data-theme="light"] input[type=range]::-moz-range-track { background: #D6DDD0; }
-body[data-theme="light"] input[type=range]::-moz-range-thumb { background: var(--lt-green); }
+/* Range slider styling */
+body[data-theme="light"] input[type=range]::-webkit-slider-runnable-track { background: #D8DFD2; height: 8px; border-radius: 9999px; }
+body[data-theme="light"] input[type=range]::-webkit-slider-thumb {
+  -webkit-appearance: none;
+  background: var(--lt-amber);
+  width: 24px;
+  height: 24px;
+  border-radius: 50%;
+  margin-top: -8px;
+  box-shadow: 0 4px 12px rgba(229, 169, 59, 0.4);
+  cursor: pointer;
+  transition: transform 0.15s ease;
+}
+body[data-theme="light"] input[type=range]::-webkit-slider-thumb:hover { transform: scale(1.15); }
+body[data-theme="light"] input[type=range]::-moz-range-track { background: #D8DFD2; height: 8px; border-radius: 9999px; }
+body[data-theme="light"] input[type=range]::-moz-range-thumb { background: var(--lt-amber); width: 24px; height: 24px; border: none; border-radius: 50%; }
 
 .lt-btn {
   display: inline-flex;
@@ -29,36 +57,96 @@ body[data-theme="light"] input[type=range]::-moz-range-thumb { background: var(-
   gap: 0.5rem;
   padding: 0.85rem 1.6rem;
   border-radius: 9999px;
-  font-weight: 600;
+  font-weight: 700;
   font-size: 0.95rem;
-  transition: background-color 0.2s ease, color 0.2s ease, border-color 0.2s ease, transform 0.2s ease;
+  transition: background-color 0.25s ease, color 0.25s ease, border-color 0.25s ease, transform 0.25s ease, box-shadow 0.25s ease;
 }
-.lt-btn-primary { background: var(--lt-green-dark); color: #fff; }
-.lt-btn-primary:hover { background: var(--lt-green); transform: translateY(-1px); }
-.lt-btn-primary:disabled { opacity: 0.6; transform: none; }
-.lt-btn-outline { border: 1.5px solid var(--lt-ink); color: var(--lt-ink); background: transparent; }
-.lt-btn-outline:hover { background: var(--lt-ink); color: #fff; }
+.lt-btn-amber {
+  background: var(--lt-amber);
+  color: var(--lt-ink);
+  box-shadow: 0 8px 24px rgba(229, 169, 59, 0.25);
+}
+.lt-btn-amber:hover {
+  background: var(--lt-amber-hover);
+  transform: translateY(-2px);
+  box-shadow: 0 12px 28px rgba(229, 169, 59, 0.35);
+}
+.lt-btn-primary {
+  background: var(--lt-green-dark);
+  color: #ffffff;
+  box-shadow: 0 8px 24px rgba(24, 59, 41, 0.18);
+}
+.lt-btn-primary:hover {
+  background: var(--lt-green);
+  transform: translateY(-2px);
+  box-shadow: 0 12px 28px rgba(24, 59, 41, 0.28);
+}
+.lt-btn-primary:disabled, .lt-btn-amber:disabled { opacity: 0.6; transform: none; box-shadow: none; cursor: not-allowed; }
+
+.lt-btn-outline {
+  border: 1.5px solid var(--lt-ink);
+  color: var(--lt-ink);
+  background: transparent;
+}
+.lt-btn-outline:hover {
+  background: var(--lt-ink);
+  color: #ffffff;
+  transform: translateY(-2px);
+}
+.lt-btn-ghost-white {
+  border: 1.5px solid rgba(255, 255, 255, 0.7);
+  color: #ffffff;
+  background: rgba(255, 255, 255, 0.05);
+  backdrop-filter: blur(4px);
+}
+.lt-btn-ghost-white:hover {
+  background: #ffffff;
+  color: var(--lt-ink);
+  border-color: #ffffff;
+  transform: translateY(-2px);
+}
 
 .lt-input {
   width: 100%;
-  background: var(--lt-bg);
+  background: var(--lt-soft);
   border: 1px solid var(--lt-line);
-  border-radius: 0.75rem;
-  padding: 0.75rem 1rem;
-  font-size: 0.875rem;
+  border-radius: 0.85rem;
+  padding: 0.8rem 1.1rem;
+  font-size: 0.9rem;
   color: var(--lt-ink);
+  transition: border-color 0.2s ease, background-color 0.2s ease, box-shadow 0.2s ease;
 }
-.lt-input::placeholder { color: #93A096; }
-.lt-input:focus { outline: none; border-color: var(--lt-green); background: #fff; }
+.lt-input::placeholder { color: #8F9E94; }
+.lt-input:focus {
+  outline: none;
+  border-color: var(--lt-green);
+  background: #ffffff;
+  box-shadow: 0 0 0 3px rgba(46, 106, 69, 0.12);
+}
 
 .lt-label {
   display: block;
-  font-size: 0.8rem;
-  font-weight: 600;
+  font-size: 0.825rem;
+  font-weight: 700;
   color: var(--lt-ink);
-  margin-bottom: 0.4rem;
+  margin-bottom: 0.45rem;
 }
 
-/* Lưu ý: class .container (src/index.css) đặt padding: 0 1.5rem và thắng các class pt-/pb-/py- của Tailwind.
-   Đặt khoảng cách trên/dưới ở phần tử bao ngoài (section/footer), không đặt cùng .container. */
-/* .lt-btn đặt display: inline-flex và thắng class "hidden" của Tailwind — muốn ẩn/hiện theo màn hình thì bọc nút trong 1 thẻ khác. */
+/* Scroll reveal classes */
+.lt-reveal-init {
+  opacity: 0;
+  transform: translateY(24px);
+  transition: opacity 0.6s cubic-bezier(0.16, 1, 0.3, 1), transform 0.6s cubic-bezier(0.16, 1, 0.3, 1);
+}
+.lt-reveal-init.lt-revealed {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .lt-reveal-init {
+    opacity: 1 !important;
+    transform: none !important;
+    transition: none !important;
+  }
+}
