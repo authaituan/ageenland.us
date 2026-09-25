@@ -1,5 +1,5 @@
 # SNAP-010 — Đóng gói phát hành + hướng dẫn deploy
-- Ngày: 2026-09-25 · Người làm: Claude (Opus 5.5, phiên PO) · Commit: sẽ ghi ở commit sau (RULES §4.6)
+- Ngày: 2026-09-25 · Người làm: Claude (Opus 5.5, phiên PO) · Commit: `1d540ff`, `fb7edc9`
 - Kiểm tra: build ✅ · cài sạch từ gói (`npm ci --omit=dev`, không kéo dev deps) ✅ · chạy production với DB/ảnh tách thư mục ✅ (/, /admin, /api/site, /uploads, đăng nhập sai 401, form liên hệ) · `deploy/backup.sh` ✅ · PM2 config nạp được ✅
 
 ## Thêm

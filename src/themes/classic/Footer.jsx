@@ -1,6 +1,6 @@
 import React from 'react';
 import { Leaf, Phone, Mail, MapPin, ArrowUp } from 'lucide-react';
-import { useSite } from '../site/SiteContext';
+import { useSite } from '../../site/SiteContext';
 
 export default function Footer() {
   const { settings, services } = useSite();

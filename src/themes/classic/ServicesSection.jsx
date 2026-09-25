@@ -1,8 +1,8 @@
 import React from 'react';
 import { Scissors, Trees, Sparkles, Wind, Shovel, Droplets, ArrowRight, Check, Calculator } from 'lucide-react';
-import { useSite } from '../site/SiteContext';
-import { fmt } from '../lib/api';
-import { formatMoney } from '../lib/format';
+import { useSite } from '../../site/SiteContext';
+import { fmt } from '../../lib/api';
+import { formatMoney } from '../../lib/format';
 
 const ICON_MAP = {
   Scissors: Scissors,

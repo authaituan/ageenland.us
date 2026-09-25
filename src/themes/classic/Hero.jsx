@@ -1,28 +1,12 @@
-import React, { useState } from 'react';
+import React from 'react';
 import { ArrowRight, ShieldCheck, Sparkles, CheckCircle2, PhoneCall } from 'lucide-react';
-import { useSite } from '../site/SiteContext';
-import { api } from '../lib/api';
+import { useSite } from '../../site/SiteContext';
+import { useLeadForm } from '../../site/forms';
 
 export default function Hero({ onOpenCalculator, onSelectService }) {
   const { settings, services } = useSite();
   const h = settings.hero;
-  const [quickPhone, setQuickPhone] = useState('');
-  const [quickServiceId, setQuickServiceId] = useState('');
-  const [submitted, setSubmitted] = useState(false);
-
-  const handleQuickRequest = (e) => {
-    e.preventDefault();
-    if (!quickPhone) return;
-    setSubmitted(true);
-    // Lưu lại số điện thoại khách đăng ký (trước đây bị bỏ qua)
-    const svc = services.find((s) => s.id === quickServiceId) || services[0];
-    api('/leads', { method: 'POST', body: { phone: quickPhone, serviceLabel: svc ? svc.heroLabel : '' } })
-      .catch((err) => console.warn('Could not save quick request:', err.message));
-    setTimeout(() => {
-      onOpenCalculator();
-      setSubmitted(false);
-    }, 1000);
-  };
+  const { quickPhone, setQuickPhone, quickServiceId, setQuickServiceId, submitted, handleQuickRequest } = useLeadForm(onOpenCalculator);
 
   return (
     <section className="relative min-h-screen flex items-center pt-32 pb-20 overflow-hidden bg-[#07150E]">

@@ -1,49 +1,12 @@
-import React, { useState } from 'react';
+import React from 'react';
 import { MapPin, Phone, Mail, Clock, Send, CheckCircle2, AlertCircle } from 'lucide-react';
-import { useSite } from '../site/SiteContext';
-import { api } from '../lib/api';
+import { useSite } from '../../site/SiteContext';
+import { useContactForm } from '../../site/forms';
 
 export default function ContactSection() {
   const { settings } = useSite();
   const t = settings.contact;
-  const [name, setName] = useState('');
-  const [phone, setPhone] = useState('');
-  const [email, setEmail] = useState('');
-  const [message, setMessage] = useState('');
-
-  const [loading, setLoading] = useState(false);
-  const [success, setSuccess] = useState(null);
-  const [error, setError] = useState(null);
-
-  const handleSendContact = async (e) => {
-    e.preventDefault();
-    if (!name || !phone || !message) {
-      setError(t.error_required);
-      return;
-    }
-
-    setLoading(true);
-    setError(null);
-    setSuccess(null);
-
-    try {
-      const data = await api('/contact', { method: 'POST', body: { name, phone, email, message } });
-      setLoading(false);
-
-      if (data.success) {
-        setSuccess(data.message);
-        setName('');
-        setPhone('');
-        setEmail('');
-        setMessage('');
-      } else {
-        setError(data.message);
-      }
-    } catch (err) {
-      setLoading(false);
-      setError(err.status ? err.message : t.error_network);
-    }
-  };
+  const { name, setName, phone, setPhone, email, setEmail, message, setMessage, loading, success, error, handleSendContact } = useContactForm();
 
   return (
     <section id="contact" className="py-24 bg-[#07150E] relative overflow-hidden">

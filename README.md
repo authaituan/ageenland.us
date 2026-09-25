@@ -87,6 +87,11 @@ server/auth.cjs              Đăng nhập, phiên, chống CSRF
 server/routes/public.cjs     /api/site, /api/quotes, /api/contact, /api/leads
 server/routes/admin.cjs      /api/admin/* (bắt buộc đăng nhập)
 src/site/SiteContext.jsx     Nạp nội dung CMS cho website
+src/site/forms.js            Logic form Hero / báo giá / liên hệ (mọi theme dùng chung)
+src/App.jsx                  Chọn giao diện theo CMS → Theme (xem trước: /?theme=light)
+src/themes/classic/          Giao diện Classic (nền xanh đậm)
+src/themes/light/            Giao diện Light (nền sáng)
+shared/themes.json           Danh sách theme
 src/admin/                   Giao diện CMS
 scripts/check-cms-schema.mjs Kiểm tra mọi nội dung đều có ô sửa trong CMS
 ```

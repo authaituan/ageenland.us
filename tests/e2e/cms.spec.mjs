@@ -145,6 +145,60 @@ test('Luồng quản trị đầy đủ', async ({ page, browser }) => {
   });
 });
 
+test('Đổi giao diện (theme) trong CMS', async ({ page, browser }) => {
+  await login(page, 'admin1', PASSWORD);
+  await expect(page.getByRole('button', { name: 'Sign out' })).toBeVisible();
+
+  await test.step('Theme không có trong danh sách bị server từ chối', async () => {
+    const r = await page.request.put('/api/admin/settings/theme', { data: { active: 'khong-co' } });
+    expect(r.status()).toBe(400);
+  });
+
+  await test.step('Xem trước ?theme=light không đổi giao diện của khách', async () => {
+    const guest = await (await browser.newContext()).newPage();
+    await guest.goto('/?theme=light');
+    await expect(guest.locator('body')).toHaveAttribute('data-theme', 'light');
+    await expect(guest.getByText(HERO_TITLE)).toBeVisible();
+    await guest.goto('/');
+    await expect(guest.locator('body')).toHaveAttribute('data-theme', 'classic');
+    await guest.context().close();
+  });
+
+  await test.step('Chọn Light trong CMS → trang chủ đổi giao diện, nội dung giữ nguyên', async () => {
+    await page.goto('/admin/content/theme');
+    await page.getByRole('radio', { name: /Light/ }).check();
+    await page.getByRole('button', { name: 'Save changes' }).first().click();
+    await expect(page.getByText('Saved.')).toBeVisible();
+    await page.goto('/');
+    await expect(page.locator('body')).toHaveAttribute('data-theme', 'light');
+    await expect(page.getByText(HERO_TITLE)).toBeVisible();
+    await expect(page.locator(`a[href="tel:${HOTLINE.replace(/\s/g, '')}"]`, { hasText: HOTLINE })).toBeVisible();
+    for (const id of ['about', 'services', 'calculator', 'portfolio', 'testimonials', 'contact']) {
+      await expect(page.locator(`#${id}`)).toHaveCount(1);
+    }
+  });
+
+  await test.step('Theme Light: form Liên hệ lưu được', async () => {
+    const form = page.locator('#contact form');
+    const inputs = form.locator('input');
+    await inputs.nth(0).fill('Khách Light');
+    await inputs.nth(1).fill('0922333444');
+    await form.locator('textarea').fill('Tin nhắn từ theme light');
+    const saved = page.waitForResponse((res) => res.url().endsWith('/api/contact') && res.ok());
+    await form.locator('button[type="submit"]').click();
+    await saved;
+    const contacts = (await (await page.request.get('/api/admin/contacts')).json()).data;
+    expect(contacts.some((c) => c.phone === '0922333444')).toBeTruthy();
+  });
+
+  await test.step('Chọn lại Classic', async () => {
+    const r = await page.request.put('/api/admin/settings/theme', { data: { active: 'classic' } });
+    expect(r.ok()).toBeTruthy();
+    await page.goto('/');
+    await expect(page.locator('body')).toHaveAttribute('data-theme', 'classic');
+  });
+});
+
 test('Backend không phản hồi → trang chủ hiện nội dung mặc định', async ({ page }) => {
   // Mô phỏng API chết bằng cách chặn mọi request /api (ảnh + JS vẫn tải từ bản build).
   await page.route('**/api/**', (route) => route.abort());

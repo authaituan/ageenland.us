@@ -1,6 +1,7 @@
 // CMS content model: collection definitions (DB <-> API field mapping), settings and pricing.
 const { run, get, all } = require('./db.cjs');
 const DEFAULTS = require('../shared/defaultContent.json');
+const THEMES = require('../shared/themes.json');
 
 const ICONS = ['Scissors', 'Trees', 'Sparkles', 'Wind', 'Shovel', 'Droplets'];
 
@@ -166,6 +167,9 @@ function validateSection(section, data) {
       if (typeof sample === 'string') clean[key] = v.map((x) => String(x ?? ''));
       else clean[key] = v.map((x) => Object.fromEntries(Object.keys(sample).map((k) => [k, String(x?.[k] ?? '')])));
     }
+  }
+  if (section === 'theme' && 'active' in clean && !THEMES.some((t) => t.id === clean.active)) {
+    return { error: `Unknown theme "${clean.active}". Choose one of: ${THEMES.map((t) => t.id).join(', ')}` };
   }
   return { clean };
 }

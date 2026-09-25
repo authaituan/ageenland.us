@@ -3,23 +3,24 @@
 
 | Mục | Giá trị |
 |---|---|
-| **Snapshot hiện tại** | `SNAP-010` — Gói phát hành + hướng dẫn deploy VPS (`deploy/`) · 2026-09-25 |
-| **Phase** | Phase 1 – Admin CMS — xong. Đang chuẩn bị deploy demo (xem `deploy/DEPLOY.md`) |
-| **Sức khỏe** | 🟢 E2E 3/3 · check-cms-schema 154 trường + 4 danh sách · lint 0 lỗi |
+| **Snapshot hiện tại** | `SNAP-011` — 2 giao diện chọn trong CMS (Classic + Light) · 2026-09-25 |
+| **Phase** | Phase 2 – Theme thứ 2. Bước A (hạ tầng + bản Light chạy được) xong; Bước B (chỉnh thẩm mỹ Light) chờ giao |
+| **Sức khỏe** | 🟢 E2E 4/4 · check-cms-schema 157 trường + 4 danh sách · lint 0 lỗi (8 cảnh báo cũ) |
+| **Demo** | Render Free `greenland-demo.onrender.com` (nội dung từ `shared/defaultContent.json`, D20) |
 
 ## Việc tiếp theo (theo thứ tự ưu tiên)
 | # | Việc | Giao cho | Tiêu chí xong |
 |---|---|---|---|
-| 1 | PO chạy `npm run content:reset` trên máy để DB đang chạy chuyển sang nội dung tiếng Anh (tự sao lưu DB cũ), rồi `npm run build` + `npm start` | PO | Trang chủ + CMS hiện tiếng Anh, giá dạng $ |
-| 2 | PO tải ảnh nền Hero (6 ảnh Unsplash gợi ý, xem SNAP-009), chọn 1 ảnh trong CMS → Hero banner → Background image | PO | Hero dùng ảnh mới |
-| 2b | PO sửa giá mẫu (USD/sq ft), địa chỉ, SĐT, email thật trong CMS | PO | — (D9: nội dung CMS) |
-| 3 | Deploy lên hosting — **hoãn** đến khi PO quyết định (Q1) | Claude Code · Sonnet 5 | Website chạy HTTPS, có sao lưu DB + ảnh |
+| 1 | PO xem thử: CMS → Theme → Preview "Light" (hoặc `/?theme=light`) | PO | PO duyệt hướng thiết kế hoặc ghi góp ý |
+| 2 | Chỉnh thẩm mỹ theme Light theo `docs/ai/tasks/TASK-LIGHT-THEME.md` — CHỈ sửa `src/themes/light/` | Antigravity (Gemini) | Đạt tiêu chí trong file task; `git diff --stat` chỉ có `src/themes/light/` |
+| 3 | CTO/Claude review diff Bước B, chạy E2E, cập nhật STATUS + SNAP | Claude Code | E2E pass, không file ngoài phạm vi |
+| 4 | Muốn Render dùng theme Light: chọn trong CMS local → `npm run content:export` → push | PO | Render hiện Light |
 
 ## Vướng mắc / chờ PO quyết định
-- **Q1** (hoãn) Hosting thật — chỉ cần khi PO muốn deploy; hiện chỉ chạy local, không chặn việc #1.
+- (không có)
 
 ## Rủi ro đang theo dõi
-- Chưa có quy trình sao lưu DB + ảnh upload (cần trước deploy).
+- Antigravity từng sửa ngoài phạm vi (SNAP-005) → bắt buộc kiểm tra `git diff --stat` trước khi commit Bước B.
+- Render Free xóa dữ liệu khi ngủ/deploy; theme đang chọn trên Render = giá trị trong `shared/defaultContent.json` (hiện `classic`).
 - Lint còn 8 cảnh báo (không phải lỗi), chưa xử lý.
-- Giá dịch vụ, địa chỉ, SĐT (Austin, TX · (555) 123-4567), số liệu thống kê trong nội dung tiếng Anh là **mẫu** — PO sửa trong CMS (D9).
-- Báo giá cũ tạo trước SNAP-008 lưu số tiền VND nhưng CMS nay hiển thị theo USD — xóa bằng `npm run content:reset -- --with-requests` nếu chỉ là dữ liệu thử.
+- `npm audit` báo lỗ hổng ở công cụ cài đặt của sqlite3 (không chạy lúc website hoạt động).

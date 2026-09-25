@@ -1,6 +1,6 @@
 import React from 'react';
 import { Check } from 'lucide-react';
-import { useSite } from '../site/SiteContext';
+import { useSite } from '../../site/SiteContext';
 
 export default function AboutSection() {
   const { settings } = useSite();

@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { Leaf, Menu, X, Calculator } from 'lucide-react';
-import { useSite } from '../site/SiteContext';
+import { useSite } from '../../site/SiteContext';
 
 export default function Navbar({ onOpenCalculator }) {
   const { settings } = useSite();

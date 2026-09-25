@@ -1,6 +1,6 @@
 import React from 'react';
 import { Star, Quote } from 'lucide-react';
-import { useSite } from '../site/SiteContext';
+import { useSite } from '../../site/SiteContext';
 
 export default function Testimonials() {
   const { settings, testimonials } = useSite();

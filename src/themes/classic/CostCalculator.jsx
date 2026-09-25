@@ -1,88 +1,21 @@
-import React, { useState, useEffect } from 'react';
+import React from 'react';
 import { Calculator, CheckCircle, AlertCircle, Calendar, MapPin, Phone, User, Mail, FileText, Send, Sparkles } from 'lucide-react';
-import { useSite } from '../site/SiteContext';
-import { api, fmt } from '../lib/api';
-import { formatMoney } from '../lib/format';
+import { useSite } from '../../site/SiteContext';
+import { fmt } from '../../lib/api';
+import { useQuoteForm } from '../../site/forms';
+import { formatMoney } from '../../lib/format';
 
 export default function CostCalculator({ selectedServiceId }) {
   const { settings, services, frequencyOptions } = useSite();
   const t = settings.calculator;
-  const [serviceId, setServiceId] = useState(selectedServiceId || services[0]?.id);
-  const [area, setArea] = useState(t.area_default);
-  const [frequencyId, setFrequencyId] = useState(frequencyOptions[0]?.id);
-  
-  // Customer details
-  const [fullName, setFullName] = useState('');
-  const [phone, setPhone] = useState('');
-  const [email, setEmail] = useState('');
-  const [address, setAddress] = useState('');
-  const [preferredDate, setPreferredDate] = useState('');
-  const [notes, setNotes] = useState('');
-
-  const [loading, setLoading] = useState(false);
-  const [successMsg, setSuccessMsg] = useState(null);
-  const [errorMsg, setErrorMsg] = useState(null);
-
-  useEffect(() => {
-    if (selectedServiceId) {
-      setServiceId(selectedServiceId);
-    }
-  }, [selectedServiceId]);
-
-  // Calculate live estimate
-  const currentService = services.find(s => s.id === serviceId) || services[0] || { id: '', calcName: '', pricePerM2: 0, basePrice: 0 };
-  const currentFrequency = frequencyOptions.find(f => f.id === frequencyId) || frequencyOptions[0] || { id: null, label: '', discountPct: 0 };
-  const discountPct = currentFrequency.discountPct || 0;
-
-  // Ước tính hiển thị; giá chính thức do server tính lại khi lưu (cùng công thức)
-  const estimatedCost = Math.round((currentService.basePrice + (area * currentService.pricePerM2)) * (100 - discountPct)) / 100;
-
-  const handleSubmitQuote = async (e) => {
-    e.preventDefault();
-    if (!fullName || !phone || !address) {
-      setErrorMsg(t.error_required);
-      return;
-    }
-
-    setLoading(true);
-    setErrorMsg(null);
-    setSuccessMsg(null);
-
-    try {
-      const data = await api('/quotes', {
-        method: 'POST',
-        body: {
-          fullName,
-          phone,
-          email,
-          serviceId: currentService.id,
-          gardenArea: area,
-          frequencyId: currentFrequency.id,
-          frequency: currentFrequency.label,
-          address,
-          preferredDate,
-          notes
-        }
-      });
-      setLoading(false);
-
-      if (data.success) {
-        setSuccessMsg(fmt(t.success_message, { id: data.quoteId }));
-        // Reset form
-        setFullName('');
-        setPhone('');
-        setEmail('');
-        setAddress('');
-        setNotes('');
-      } else {
-        setErrorMsg(data.message || t.error_failed);
-      }
-    } catch (err) {
-      setLoading(false);
-      // Lỗi nghiệp vụ từ server (400) có message; lỗi mạng thì báo không kết nối được
-      setErrorMsg(err.status ? (err.message || t.error_failed) : t.error_network);
-    }
-  };
+  const {
+    serviceId, setServiceId, area, setArea, setFrequencyId,
+    fullName, setFullName, phone, setPhone, email, setEmail, address, setAddress,
+    preferredDate, setPreferredDate, notes, setNotes,
+    loading, successMsg, errorMsg,
+    currentService, currentFrequency, discountPct, estimatedCost,
+    handleSubmitQuote,
+  } = useQuoteForm(selectedServiceId);
 
   return (
     <section id="calculator" className="py-24 bg-[#081C15] relative overflow-hidden border-t border-b border-white/10">

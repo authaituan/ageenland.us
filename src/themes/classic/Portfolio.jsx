@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { ArrowRightLeft } from 'lucide-react';
-import { useSite } from '../site/SiteContext';
+import { useSite } from '../../site/SiteContext';
 
 export default function Portfolio() {
   const { settings, projects } = useSite();

@@ -22,3 +22,6 @@
 | D19 | 2026-09-25 | Deploy: code ở `/opt/greenland`, dữ liệu ở `/var/lib/greenland` (DB_PATH, UPLOAD_DIR), chạy bằng PM2 sau nginx, 1 tiến trình (SQLite) | SNAP-010 |
 | D20 | 2026-09-25 | Demo trên Render Free: nội dung lấy từ `shared/defaultContent.json` (cập nhật bằng `npm run content:export`), admin tạo từ biến môi trường; muốn giữ dữ liệu phải dùng gói trả phí + Disk | PO · SNAP-010 |
 | D21 | 2026-09-25 | Ghim `sqlite3` 5.1.7 (bản dựng sẵn tương thích glibc cũ của Render); cân nhắc nâng lại khi Render dùng hệ điều hành mới hơn | SNAP-010 |
+| D22 | 2026-09-25 | Nhiều giao diện (theme) trên cùng 1 website + 1 CMS: chọn ở CMS → Theme (`settings.theme.active`), danh sách ở `shared/themes.json`; mọi theme dùng chung nội dung và logic `src/site/forms.js` | PO · SNAP-011 |
+| D23 | 2026-09-25 | Theme Light chỉ dùng nội dung CMS đang có, KHÔNG thêm Team / Pricing / Blog | PO chọn phương án (a) · SNAP-011 |
+| D24 | 2026-09-25 | Không sao chép template trả phí (Landscape 128 – 128.digital): chỉ lấy cảm hứng bố cục chung, màu/chữ/ảnh là của GreenLand | Bản quyền · SNAP-011 |

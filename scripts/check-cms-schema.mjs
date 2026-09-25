@@ -5,7 +5,7 @@ import { SETTINGS_SECTIONS, COLLECTIONS } from '../src/admin/schema.js';
 const defaults = JSON.parse(readFileSync(new URL('../shared/defaultContent.json', import.meta.url), 'utf8'));
 const errors = [];
 const typeOf = (v) => Array.isArray(v) ? (typeof v[0] === 'string' ? 'list' : ('href' in v[0] ? 'links' : 'stats')) : typeof v === 'number' ? 'number' : 'string';
-const compatible = { string: ['text', 'textarea', 'image'], number: ['number'], list: ['list'], stats: ['stats'], links: ['links'] };
+const compatible = { string: ['text', 'textarea', 'image', 'theme'], number: ['number'], list: ['list'], stats: ['stats'], links: ['links'] };
 
 for (const [section, values] of Object.entries(defaults.settings)) {
   const def = SETTINGS_SECTIONS.find((s) => s.key === section);

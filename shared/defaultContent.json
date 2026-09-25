@@ -1,5 +1,8 @@
 {
   "settings": {
+    "theme": {
+      "active": "classic"
+    },
     "site": {
       "title": "GreenLand – Premium landscaping & garden care",
       "meta_description": "Lawn care, tree planting, landscape design and irrigation for homes and commercial properties. Get an instant online estimate.",

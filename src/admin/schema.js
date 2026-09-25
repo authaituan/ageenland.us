@@ -1,8 +1,14 @@
 // Form definitions for the CMS. Every key in shared/defaultContent.json → settings must appear here
 // (checked by scripts/check-cms-schema.mjs), so nothing shown on the website is left uneditable.
-// Field types: text | textarea | number | image | list (strings) | stats ({value,label}) | links ({label,href})
+// Field types: text | textarea | number | image | theme | list (strings) | stats ({value,label}) | links ({label,href})
 
 export const SETTINGS_SECTIONS = [
+  {
+    key: 'theme', title: 'Theme', desc: 'Choose which design visitors see. All themes show the same content, prices and forms from this CMS.',
+    fields: [
+      { key: 'active', label: 'Active theme', type: 'theme', help: 'Use "Preview" to open a theme in a new tab without changing it for visitors. Click "Save changes" to switch.' },
+    ],
+  },
   {
     key: 'site', title: 'General & SEO', desc: 'Browser tab title, Google description, and how prices are formatted.',
     fields: [

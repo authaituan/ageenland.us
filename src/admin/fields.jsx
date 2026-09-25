@@ -1,5 +1,6 @@
 import React, { useRef, useState } from 'react';
-import { ArrowUp, ArrowDown, Plus, Trash2, Upload, Scissors, Trees, Sparkles, Wind, Shovel, Droplets } from 'lucide-react';
+import { ArrowUp, ArrowDown, Plus, Trash2, Upload, Scissors, Trees, Sparkles, Wind, Shovel, Droplets, ExternalLink } from 'lucide-react';
+import THEMES from '../../shared/themes.json';
 import { api } from '../lib/api';
 
 export const inputCls = 'w-full bg-[#07150E] border border-white/15 rounded-lg px-3 py-2 text-sm text-white focus:border-[#20E070] focus:outline-none';
@@ -23,6 +24,7 @@ export function Field({ field, value, onChange, disabled }) {
   else if (type === 'stats') control = <ObjectList value={value || []} onChange={onChange} columns={[['value', 'Value'], ['label', 'Label']]} />;
   else if (type === 'links') control = <ObjectList value={value || []} onChange={onChange} columns={[['label', 'Label'], ['href', 'Link (e.g. #contact)']]} />;
   else if (type === 'icon') control = <IconPicker value={value} onChange={onChange} />;
+  else if (type === 'theme') control = <ThemePicker value={value} onChange={onChange} />;
   else control = <input type="text" className={inputCls} value={value ?? ''} onChange={(e) => onChange(e.target.value)} disabled={disabled} />;
 
   return (
@@ -127,6 +129,25 @@ function IconPicker({ value, onChange }) {
           className={`w-11 h-11 rounded-lg border flex items-center justify-center ${value === name ? 'border-[#20E070] bg-[#20E070]/15 text-[#20E070]' : 'border-white/15 text-slate-300 hover:border-white/40'}`}>
           <Icon className="w-5 h-5" />
         </button>
+      ))}
+    </div>
+  );
+}
+
+// Chọn giao diện: mỗi theme 1 dòng, có nút xem trước (mở tab mới với ?theme=<id>, không đổi cho khách).
+function ThemePicker({ value, onChange }) {
+  return (
+    <div className="space-y-2">
+      {THEMES.map((t) => (
+        <div key={t.id} className={`flex items-center justify-between gap-3 rounded-lg border px-3 py-2.5 ${value === t.id ? 'border-[#20E070] bg-[#20E070]/10' : 'border-white/15'}`}>
+          <label className="flex items-center gap-2.5 text-sm text-slate-200 cursor-pointer">
+            <input type="radio" name="theme-active" className="w-4 h-4 accent-[#20E070]" checked={value === t.id} onChange={() => onChange(t.id)} />
+            <span>{t.label}</span>
+          </label>
+          <a href={`/?theme=${t.id}`} target="_blank" rel="noreferrer" className="text-xs text-[#20E070] inline-flex items-center gap-1 hover:underline shrink-0">
+            Preview <ExternalLink className="w-3.5 h-3.5" />
+          </a>
+        </div>
       ))}
     </div>
   );

@@ -1,63 +1,34 @@
-import React, { useState } from 'react';
-import Navbar from './components/Navbar';
-import Hero from './components/Hero';
-import AboutSection from './components/AboutSection';
-import ServicesSection from './components/ServicesSection';
-import CostCalculator from './components/CostCalculator';
-import Portfolio from './components/Portfolio';
-import Testimonials from './components/Testimonials';
-import ContactSection from './components/ContactSection';
-import Footer from './components/Footer';
+import React, { Suspense, lazy, useEffect } from 'react';
+import THEMES from '../shared/themes.json';
+import { useSite } from './site/SiteContext';
+import ClassicApp from './themes/classic/ClassicApp';
+
+// Chọn giao diện (theme) theo CMS: General → Theme → "Active theme" (settings.theme.active).
+// Xem trước theme khác mà không đổi cho khách: thêm ?theme=<id> vào địa chỉ, ví dụ /?theme=light.
+// Theme mới chỉ tải khi được dùng, nên không làm nặng giao diện đang chạy.
+const LightApp = lazy(() => import('./themes/light/LightApp'));
+const APPS = { classic: ClassicApp, light: LightApp };
+
+function resolveTheme(active) {
+  const valid = (id) => THEMES.some((t) => t.id === id) && id in APPS;
+  let preview = null;
+  try { preview = new URLSearchParams(window.location.search).get('theme'); } catch { /* ignore */ }
+  if (valid(preview)) return preview;
+  return valid(active) ? active : 'classic';
+}
 
 export default function App() {
-  const [selectedServiceId, setSelectedServiceId] = useState(null);
+  const { settings } = useSite();
+  const theme = resolveTheme(settings.theme?.active);
+  const Theme = APPS[theme];
 
-  const handleOpenCalculator = () => {
-    const el = document.getElementById('calculator');
-    if (el) {
-      el.scrollIntoView({ behavior: 'smooth' });
-    }
-  };
-
-  const handleSelectServiceForCalculator = (serviceId) => {
-    setSelectedServiceId(serviceId);
-    handleOpenCalculator();
-  };
+  useEffect(() => {
+    document.body.dataset.theme = theme;
+  }, [theme]);
 
   return (
-    <div className="min-h-screen bg-[#07150E] text-slate-100 font-sans selection:bg-[#20E070] selection:text-[#07150E]">
-      {/* Top Navbar */}
-      <Navbar 
-        onOpenCalculator={handleOpenCalculator}
-      />
-
-      {/* Main Content Sections */}
-      <main>
-        <Hero 
-          onOpenCalculator={handleOpenCalculator}
-          onSelectService={handleSelectServiceForCalculator}
-        />
-
-        <AboutSection />
-
-        <ServicesSection 
-          onSelectServiceForCalculator={handleSelectServiceForCalculator}
-        />
-
-        <CostCalculator 
-          selectedServiceId={selectedServiceId}
-        />
-
-        <Portfolio />
-
-        <Testimonials />
-
-        <ContactSection />
-      </main>
-
-      {/* Footer */}
-      <Footer />
-
-    </div>
+    <Suspense fallback={null}>
+      <Theme />
+    </Suspense>
   );
 }
