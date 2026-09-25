@@ -3,8 +3,8 @@
 
 | Mục | Giá trị |
 |---|---|
-| **Snapshot hiện tại** | `SNAP-009` — Ảnh nền Hero kiểu ảnh thật + lớp phủ chỉnh được trong CMS · 2026-09-24 |
-| **Phase** | Phase 1 – Admin CMS — xong. Deploy **hoãn** (chỉ chạy local) |
+| **Snapshot hiện tại** | `SNAP-010` — Gói phát hành + hướng dẫn deploy VPS (`deploy/`) · 2026-09-25 |
+| **Phase** | Phase 1 – Admin CMS — xong. Đang chuẩn bị deploy demo (xem `deploy/DEPLOY.md`) |
 | **Sức khỏe** | 🟢 E2E 3/3 · check-cms-schema 154 trường + 4 danh sách · lint 0 lỗi |
 
 ## Việc tiếp theo (theo thứ tự ưu tiên)

@@ -28,9 +28,9 @@
       "mobile_cta": "Quick quote"
     },
     "hero": {
-      "background_image": "/images/hero.png",
+      "background_image": "/images/cms/1790250323091-31f046f29864.jpg",
       "background_position": "center",
-      "overlay_strength": 80,
+      "overlay_strength": 60,
       "badge": "Premium landscaping & garden care",
       "title_line1": "Create a green space",
       "title_highlight": "that feels luxurious",
@@ -176,10 +176,10 @@
       "description": "Our specialists will visit your property, measure your yard and recommend the best care plan.",
       "office_title": "Office & headquarters",
       "address_label": "Headquarters:",
-      "address": "123 Greenway Blvd, Austin, TX 78701",
+      "address": "Oxford, Worcester & Central MA",
       "hotline_label": "24/7 hotline:",
-      "hotline_text": "(555) 123-4567",
-      "hotline_tel": "5551234567",
+      "hotline_text": "508-589-9999, 443-331-9999",
+      "hotline_tel": "443-331-9999",
       "email_label": "Email for quotes:",
       "email": "contact@ageenland.us",
       "hours_label": "Business hours:",
@@ -227,9 +227,9 @@
         }
       ],
       "support_title": "Customer support",
-      "phone": "(555) 123-4567",
-      "email": "contact@ageenland.us",
-      "address": "Austin, TX · Serving Central Texas",
+      "phone": "508-589-9999",
+      "email": "agreenlandus@gmail.com",
+      "address": "Oxford, Worcester & Central MA",
       "bottom_note": "Landscaping, lawn care & garden design services.",
       "back_to_top": "Back to top"
     }
@@ -384,7 +384,7 @@
   ],
   "projects": [
     {
-      "id": 1,
+      "id": 4,
       "category": "Lakeside villa",
       "title": "Rolling lawn & koi pond landscape",
       "description": "4,800 sq ft • Artistic LED lighting & premium Zoysia sod",
@@ -392,7 +392,7 @@
       "imageAlt": "Villa project"
     },
     {
-      "id": 2,
+      "id": 5,
       "category": "Riverside estate",
       "title": "Scheduled mowing & villa lawn care",
       "description": "6,700 sq ft • Bonsai pruning & crisp edging",
@@ -400,7 +400,7 @@
       "imageAlt": "Riverside estate project"
     },
     {
-      "id": 3,
+      "id": 6,
       "category": "Resort retreat",
       "title": "Shade trees & automatic irrigation",
       "description": "13,000 sq ft • Mature tree planting & rotating sprinklers",
@@ -410,7 +410,7 @@
   ],
   "testimonials": [
     {
-      "id": 1,
+      "id": 4,
       "name": "Michael Turner",
       "role": "Homeowner, Lakeside villa",
       "content": "The GreenLand crew mows with real precision – the lawn is smooth and the edging is razor sharp. The online quote was 100% accurate with no hidden costs.",
@@ -418,7 +418,7 @@
       "avatar": "https://images.unsplash.com/photo-1534528741775-53994a69daeb?w=150&auto=format&fit=crop&q=80"
     },
     {
-      "id": 2,
+      "id": 5,
       "name": "Sarah Collins",
       "role": "Property manager, Oak Ridge community",
       "content": "Their storm-season leaf cleanup and pruning was fast and thorough. A specialist came out just 15 minutes after I booked online.",
@@ -426,7 +426,7 @@
       "avatar": "https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=150&auto=format&fit=crop&q=80"
     },
     {
-      "id": 3,
+      "id": 6,
       "name": "David Miller",
       "role": "Director, Resort landscape",
       "content": "GreenLand turned an overgrown garden into lush green lawn with a smart irrigation system. Very impressed with their professional process.",

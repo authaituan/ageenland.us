@@ -28,3 +28,4 @@ server/database.sqlite
 server/uploads/
 .env
 server/backups/
+release/

@@ -25,6 +25,6 @@ Express  server/index.cjs ─┬─ server/routes/public.cjs  (/api/site, /api/q
 | Đăng nhập, bảo mật | `server/auth.cjs`, `server/scripts/*` | `npm run admin:check` |
 | Database, seed | `server/db.cjs`, `shared/defaultContent.json`, `server/scripts/reset-content.cjs` | `npm run content:reset` (tự sao lưu DB vào `server/backups/`) |
 | Tính giá | `server/content.cjs`, `src/components/CostCalculator.jsx` | Giá lưu DB = giá server tính |
-| Cổng, chạy, build, deploy | `package.json`, `vite.config.js`, `scripts/dev-all.cjs`, `server/index.cjs`, `README.md` | `npm run build && npm start` |
+| Cổng, chạy, build, deploy | `package.json`, `vite.config.js`, `scripts/dev-all.cjs`, `server/index.cjs`, `README.md`, `deploy/` (DEPLOY.md, PM2, nginx, backup) | `npm run build && npm start` |
 | Kiểm thử E2E (toàn luồng CMS) | `tests/e2e/cms.spec.mjs`, `tests/e2e/server.cjs` | `npm run test:e2e` (máy mới: `npm run test:e2e:install` trước) |
 | Kế hoạch Phase CMS | `docs/ADMIN_CMS_PLAN.md` (chỉ mục được chỉ định) | — |

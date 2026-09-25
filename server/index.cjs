@@ -2,7 +2,8 @@
 const path = require('path');
 const fs = require('fs');
 const express = require('express');
-const { init, DB_PATH } = require('./db.cjs');
+const { init, DB_PATH, get, run } = require('./db.cjs');
+const { hashPassword } = require('./auth.cjs');
 const publicRoutes = require('./routes/public.cjs');
 const { router: adminRoutes, UPLOAD_DIR } = require('./routes/admin.cjs');
 
@@ -40,7 +41,20 @@ app.use((err, req, res, _next) => {
   res.status(500).json({ success: false, message: 'Server error' });
 });
 
+// Hosting không có shell (vd. Render free): tạo sẵn tài khoản admin từ biến môi trường nếu chưa có.
+// Không ghi đè mật khẩu của tài khoản đã tồn tại.
+async function bootstrapAdmin() {
+  const username = (process.env.GREENLAND_ADMIN_USER || '').trim();
+  const password = process.env.GREENLAND_ADMIN_PASSWORD || '';
+  if (!username || !password) return;
+  if (password.length < 8) return console.warn('[warn] GREENLAND_ADMIN_PASSWORD phải từ 8 ký tự — bỏ qua tạo admin.');
+  if (await get('SELECT id FROM admin_users WHERE username = ?', [username])) return;
+  await run('INSERT INTO admin_users (username, password_hash, display_name) VALUES (?, ?, ?)', [username, hashPassword(password), username]);
+  console.log(`Đã tạo tài khoản admin "${username}" từ biến môi trường.`);
+}
+
 init()
+  .then(bootstrapAdmin)
   .then(() => {
     const server = app.listen(PORT, () => {
       console.log(`GreenLand backend: http://localhost:${PORT} (${IS_PROD ? 'production' : 'development'})`);

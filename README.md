@@ -67,6 +67,11 @@ npm run content:reset -- --with-requests # xóa luôn báo giá + liên hệ (d�
 
 Lệnh luôn sao lưu database vào `server/backups/` trước khi làm. Tài khoản admin được giữ nguyên.
 
+## Đưa lên hosting
+
+- VPS Linux: `deploy/DEPLOY.md` · Render.com: `deploy/RENDER.md`
+- `npm run content:export` — xuất nội dung CMS hiện tại ra `shared/defaultContent.json` (+ ảnh sang `public/images/cms/`) để bản cài mới hiện đúng nội dung.
+
 ## Quên mật khẩu
 
 Chạy lại lệnh `npm run admin:create -- <username>` để đặt mật khẩu mới. Mọi phiên đăng nhập cũ của tài khoản đó sẽ bị đăng xuất.
