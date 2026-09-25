@@ -12,7 +12,7 @@
 | # | Việc | Giao cho | Tiêu chí xong |
 |---|---|---|---|
 | 1 | PO xem thử: CMS → Theme → Preview "Light" (hoặc `/?theme=light`) | PO | PO duyệt hướng thiết kế hoặc ghi góp ý |
-| 2 | Chỉnh thẩm mỹ theme Light theo `docs/ai/tasks/TASK-LIGHT-THEME.md` — CHỈ sửa `src/themes/light/` | Antigravity (Gemini) | Đạt tiêu chí trong file task; `git diff --stat` chỉ có `src/themes/light/` |
+| 2 | Nâng cấp theme Light theo spec v2 `docs/ai/tasks/TASK-LIGHT-THEME.md` (hero tràn màn hình, tiêu đề đậm, màu nhấn vàng, dải xanh đậm, hiệu ứng cuộn) — CHỈ sửa `src/themes/light/` | Antigravity (Gemini) | Đạt tiêu chí trong file task; `git diff --stat` chỉ có `src/themes/light/` |
 | 3 | CTO/Claude review diff Bước B, chạy E2E, cập nhật STATUS + SNAP | Claude Code | E2E pass, không file ngoài phạm vi |
 | 4 | Muốn Render dùng theme Light: chọn trong CMS local → `npm run content:export` → push | PO | Render hiện Light |
 

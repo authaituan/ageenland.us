@@ -1,5 +1,5 @@
 # SNAP-011 — 2 giao diện (theme) chọn trong CMS: Classic + Light
-- Ngày: 2026-09-25 · Người làm: Claude (Opus 5.5, phiên PO) · Commit: sẽ ghi ở commit sau (RULES §4.6)
+- Ngày: 2026-09-25 · Người làm: Claude (Opus 5.5, phiên PO) · Commit: `364d2fe`
 - Kiểm tra: E2E 4/4 (thêm bài đổi theme) · check-cms-schema 157 trường + 4 danh sách · lint 8 cảnh báo (như cũ) · ảnh chụp Classic trước/sau refactor trùng khớp từng pixel (desktop 1440 + mobile 390)
 
 ## Đã làm
