@@ -21,3 +21,4 @@
 | D18 | 2026-09-25 | Cổng backend đọc biến riêng `GREENLAND_PORT`, không đọc `PORT` chung (tránh bị biến môi trường của dự án khác ghi đè) | SNAP-009 |
 | D19 | 2026-09-25 | Deploy: code ở `/opt/greenland`, dữ liệu ở `/var/lib/greenland` (DB_PATH, UPLOAD_DIR), chạy bằng PM2 sau nginx, 1 tiến trình (SQLite) | SNAP-010 |
 | D20 | 2026-09-25 | Demo trên Render Free: nội dung lấy từ `shared/defaultContent.json` (cập nhật bằng `npm run content:export`), admin tạo từ biến môi trường; muốn giữ dữ liệu phải dùng gói trả phí + Disk | PO · SNAP-010 |
+| D21 | 2026-09-25 | Ghim `sqlite3` 5.1.7 (bản dựng sẵn tương thích glibc cũ của Render); cân nhắc nâng lại khi Render dùng hệ điều hành mới hơn | SNAP-010 |

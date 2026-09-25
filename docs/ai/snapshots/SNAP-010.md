@@ -11,3 +11,4 @@
 - `server/index.cjs`: tạo admin từ `GREENLAND_ADMIN_USER` / `GREENLAND_ADMIN_PASSWORD` nếu chưa có (hosting không có shell). Đã thử: build `npm ci && npm run build`, `npm start` cổng 10000, đăng nhập được, cookie Secure.
 - `npm run content:export` (`server/scripts/export-content.cjs`): xuất nội dung CMS trong DB ra `shared/defaultContent.json`, chép ảnh `/uploads` sang `public/images/cms/`.
 - `.node-version` = 22.
+- Render lỗi `GLIBC_2.38 not found` (sqlite3 6.0.1 dựng sẵn cho glibc mới hơn máy Render) → ghim `sqlite3@5.1.7` (bản dựng sẵn chỉ cần GLIBC 2.4, API giống hệt). E2E 3/3. `npm audit` báo lỗ hổng ở công cụ cài đặt (node-gyp/tar) của sqlite3, không chạy lúc website hoạt động.
