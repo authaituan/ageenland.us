@@ -56,7 +56,7 @@ export default function About() {
 
       {/* Highlights Grid below Dark Band */}
       {t.highlights?.length > 0 && (
-        <div className="container pt-16 lg:pt-24">
+        <div className="pt-16 lg:pt-24"><div className="container">
           <div ref={highlightsRef} className="grid sm:grid-cols-2 lg:grid-cols-3 gap-6">
             {t.highlights.map((item, idx) => (
               <div
@@ -72,7 +72,7 @@ export default function About() {
               </div>
             ))}
           </div>
-        </div>
+        </div></div>
       )}
     </section>
   );

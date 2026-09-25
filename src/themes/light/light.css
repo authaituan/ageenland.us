@@ -150,3 +150,6 @@ body[data-theme="light"] input[type=range]::-moz-range-thumb { background: var(-
     transition: none !important;
   }
 }
+
+/* LƯU Ý: .container (src/index.css) đặt margin: 0 auto và padding: 0 1.5rem → thắng mọi class m*-/p*- dọc đặt chung.
+   Luôn đặt khoảng cách dọc ở một thẻ bao ngoài .container. */

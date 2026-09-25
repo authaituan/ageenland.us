@@ -35,7 +35,8 @@ export default function Hero({ onOpenCalculator, onSelectService }) {
         </div>
 
         {/* Hero Content Container */}
-        <div ref={heroRevealRef} className="container relative z-10 pt-32 pb-24 lg:pb-36 space-y-8">
+        <div className="relative z-10 pt-32 pb-24 lg:pb-36">
+        <div ref={heroRevealRef} className="container space-y-8">
           <div className="max-w-4xl space-y-6">
             <Badge dark>{h.badge}</Badge>
 
@@ -88,10 +89,11 @@ export default function Hero({ onOpenCalculator, onSelectService }) {
             ))}
           </div>
         </div>
+        </div>
       </section>
 
       {/* Floating Quick Request Form */}
-      <div className="container relative z-20 -mt-12 lg:-mt-20 mb-16 lg:mb-24">
+      <div className="relative z-20 -mt-12 lg:-mt-20 mb-16 lg:mb-24"><div className="container">
         <div
           ref={formRevealRef}
           className="bg-white rounded-[24px] shadow-[0_16px_48px_rgba(24,59,41,0.12)] border border-[#E6E8E0] p-6 sm:p-8 grid lg:grid-cols-12 gap-6 items-center text-[#16241B]"
@@ -152,7 +154,7 @@ export default function Hero({ onOpenCalculator, onSelectService }) {
             <span className="font-bold text-[#2E6A45]">{h.trust_right}</span>
           </div>
         </div>
-      </div>
+      </div></div>
     </div>
   );
 }

@@ -1,5 +1,5 @@
 # SNAP-012 — Theme Light v2 (premium)
-- Ngày: 2026-09-25 · Người làm: Antigravity (giao diện) + Claude (review, sửa) · Commit: sẽ ghi ở commit sau (RULES §4.6)
+- Ngày: 2026-09-25 · Người làm: Antigravity (giao diện) + Claude (review, sửa) · Commit: `824d4da`
 - Kiểm tra: E2E 4/4 · lint 0 lỗi (8 cảnh báo cũ) · phạm vi chỉ `src/themes/light/` ✅ · không cuộn ngang ở 390px ✅ · mọi khối hiện đủ sau khi cuộn ✅
 
 ## Đã làm (theo `docs/ai/tasks/TASK-LIGHT-THEME.md` v2)
@@ -11,3 +11,6 @@
 - `useReveal`: effect phụ thuộc object mới mỗi lần render → khởi tạo lại observer liên tục; đổi thành chạy 1 lần.
 - `About.jsx`: bỏ tiêu đề trùng với khối giới thiệu (cùng `about.title`), phóng to đoạn `paragraph2`.
 - Ghi chú: ảnh chụp toàn trang không cuộn sẽ thấy khoảng trắng — do hiệu ứng chỉ chạy khi cuộn tới, không phải lỗi.
+
+## Sửa sau khi lên Render (kiểm tra trên màn hình 1366×641)
+- Hero: nhãn đầu Hero bị menu che — `pt-32` đặt chung với `.container` nên bị `padding: 0 1.5rem` ghi đè. Form nổi không đè lên Hero vì `-mt-*` bị `margin: 0 auto` ghi đè. Tương tự `About.jsx` (`pt-16`). → chuyển khoảng cách dọc ra thẻ bao ngoài; ghi chú thêm trong `light.css`.
