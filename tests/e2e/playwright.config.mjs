@@ -22,6 +22,6 @@ export default defineConfig({
     url: `http://localhost:${PORT}/api/site`,
     reuseExistingServer: false,
     timeout: 60_000,
-    env: { PORT: String(PORT), E2E_ADMIN_PASSWORD: process.env.E2E_ADMIN_PASSWORD },
+    env: { GREENLAND_PORT: String(PORT), E2E_ADMIN_PASSWORD: process.env.E2E_ADMIN_PASSWORD },
   },
 });

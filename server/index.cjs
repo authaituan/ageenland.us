@@ -6,7 +6,9 @@ const { init, DB_PATH } = require('./db.cjs');
 const publicRoutes = require('./routes/public.cjs');
 const { router: adminRoutes, UPLOAD_DIR } = require('./routes/admin.cjs');
 
-const PORT = process.env.PORT || 5454;
+// Dùng biến riêng GREENLAND_PORT, KHÔNG dùng PORT chung: máy có thể đang đặt sẵn PORT cho dự án khác
+// (từng làm server chạy nhầm sang cổng 4545 trong khi bản cũ vẫn chiếm 5454).
+const PORT = Number(process.env.GREENLAND_PORT) || 5454;
 const IS_PROD = process.env.NODE_ENV === 'production' || process.argv.includes('--production');
 const DIST_DIR = path.join(__dirname, '..', 'dist');
 

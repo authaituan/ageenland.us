@@ -26,13 +26,18 @@ export default function Hero({ onOpenCalculator, onSelectService }) {
 
   return (
     <section className="relative min-h-screen flex items-center pt-32 pb-20 overflow-hidden bg-[#07150E]">
-      {/* Background Image Overlay */}
+      {/* Ảnh nền giữ màu thật; lớp phủ xanh đậm dần sang trái để chữ luôn đọc rõ (độ đậm chỉnh trong CMS) */}
       <div 
-        className="absolute inset-0 bg-cover bg-center opacity-35 mix-blend-luminosity"
-        style={{ backgroundImage: `url('${h.background_image}')` }}
+        className="absolute inset-0 bg-cover bg-center"
+        style={{ backgroundImage: `url('${h.background_image}')`, backgroundPosition: h.background_position || 'center' }}
       />
-      <div className="absolute inset-0 bg-gradient-to-r from-[#07150E] via-[#081C15]/95 to-[#07150E]/80" />
-      <div className="absolute inset-0 bg-gradient-to-b from-transparent via-[#07150E]/50 to-[#07150E]" />
+      <div
+        className="absolute inset-0 bg-gradient-to-r from-[#07150E] via-[#0D2B1D]/80 to-[#0D2B1D]/20"
+        style={{ opacity: Math.min(100, Math.max(0, Number(h.overlay_strength ?? 80))) / 100 }}
+      />
+      {/* Màn hình hẹp: chữ trải hết chiều ngang nên phủ thêm đều toàn ảnh */}
+      <div className="absolute inset-0 bg-[#07150E]/45 lg:hidden" style={{ opacity: Math.min(100, Math.max(0, Number(h.overlay_strength ?? 80))) / 100 }} />
+      <div className="absolute inset-x-0 bottom-0 h-40 bg-gradient-to-b from-transparent to-[#07150E]" />
 
       {/* Decorative Glow Elements */}
       <div className="absolute top-1/4 left-10 w-96 h-96 bg-[#20E070]/10 rounded-full blur-3xl pointer-events-none" />

@@ -32,7 +32,7 @@ npm run dev      # website  → http://localhost:5455   ·   CMS → http://loca
 Dự án này dùng cổng **5454** (backend) và **5455** (website), nên không đụng dự án chạy ở 3000/5000/5173. Nếu vẫn bị trùng, đổi cổng khi chạy (PowerShell):
 
 ```powershell
-$env:API_PORT=6464; $env:PORT=6464; $env:WEB_PORT=6465; npm run dev:all
+$env:GREENLAND_PORT=6464; $env:WEB_PORT=6465; npm run dev:all
 ```
 
 Khi cổng đang bận, chương trình sẽ báo lỗi rõ ràng chứ không tự nhảy sang cổng khác. Nhờ vậy website không vô tình gọi nhầm API của dự án khác.
@@ -48,8 +48,7 @@ npm start        # website + CMS + API cùng cổng 5454 → http://localhost:54
 
 | Biến | Mặc định | Ý nghĩa |
 |---|---|---|
-| `PORT` | `5454` | Cổng backend |
-| `API_PORT` | `5454` | Cổng backend mà website dev (Vite) chuyển `/api` tới |
+| `GREENLAND_PORT` | `5454` | Cổng backend (cũng là cổng website khi `npm start`). Dự án **không** đọc biến `PORT` chung để tránh bị dự án khác trên máy ghi đè |
 | `WEB_PORT` | `5455` | Cổng website khi `npm run dev` |
 | `DB_PATH` | `server/database.sqlite` | File database |
 | `UPLOAD_DIR` | `server/uploads` | Thư mục lưu ảnh tải lên |

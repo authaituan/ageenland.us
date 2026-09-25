@@ -17,3 +17,5 @@
 | D14 | 2026-09-24 | Giữ tên trường `pricePerM2`/`price_per_m2` (nay là giá/đơn vị diện tích bất kỳ, hiện là sq ft) để không phải migrate DB; giá cho phép số lẻ, làm tròn đến cent | SNAP-008 |
 | D15 | 2026-09-24 | Font: DM Sans (chữ thường) + DM Serif Display (tiêu đề, chỉ 1 độ đậm, tắt đậm giả) | PO · SNAP-008 |
 | D16 | 2026-09-24 | Menu, footer, nút dùng kiểu chữ sentence case (chỉ viết hoa chữ đầu) | PO · SNAP-008 |
+| D17 | 2026-09-24 | Ảnh nền Hero giữ màu thật + 1 lớp phủ xanh đậm dần sang trái; độ đậm (`overlay_strength`) và điểm lấy nét (`background_position`) chỉnh trong CMS | PO · SNAP-009 |
+| D18 | 2026-09-25 | Cổng backend đọc biến riêng `GREENLAND_PORT`, không đọc `PORT` chung (tránh bị biến môi trường của dự án khác ghi đè) | SNAP-009 |

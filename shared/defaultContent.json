@@ -29,6 +29,8 @@
     },
     "hero": {
       "background_image": "/images/hero.png",
+      "background_position": "center",
+      "overlay_strength": 80,
       "badge": "Premium landscaping & garden care",
       "title_line1": "Create a green space",
       "title_highlight": "that feels luxurious",

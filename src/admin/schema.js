@@ -42,7 +42,9 @@ export const SETTINGS_SECTIONS = [
   {
     key: 'hero', title: 'Hero banner', desc: 'The first area visitors see, including the site visit booking card.',
     fields: [
-      { key: 'background_image', label: 'Background image', type: 'image' },
+      { key: 'background_image', label: 'Background image', type: 'image', help: 'Landscape photo, 1920–2560 px wide, ideally under 500 KB. Upload here or paste a URL.' },
+      { key: 'background_position', label: 'Background focus point', type: 'text', help: 'Which part of the photo stays visible on narrow screens: center, top, bottom, left, right, or e.g. "center 70%".' },
+      { key: 'overlay_strength', label: 'Overlay strength (0–100)', type: 'number', help: 'How dark the green overlay is. 0 = photo only; 80 = default; raise it if the text is hard to read.' },
       { key: 'badge', label: 'Small label above the title', type: 'text' },
       { key: 'title_line1', label: 'Title – line 1', type: 'text' },
       { key: 'title_highlight', label: 'Title – highlighted part', type: 'text' },

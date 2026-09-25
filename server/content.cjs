@@ -136,7 +136,9 @@ async function getSettings() {
   const out = {};
   for (const [section, defVal] of Object.entries(DEFAULTS.settings)) {
     const row = rows.find((r) => r.key === section);
-    out[section] = { ...defVal, ...(row ? safeJson(row.value, {}) : {}) };
+    const saved = row ? safeJson(row.value, {}) : {};
+    // Only keys the current code knows about (old/removed fields in the DB are ignored)
+    out[section] = { ...defVal, ...Object.fromEntries(Object.entries(saved).filter(([k]) => k in defVal)) };
   }
   return out;
 }
@@ -145,6 +147,10 @@ function validateSection(section, data) {
   const def = DEFAULTS.settings[section];
   if (!def) return { error: 'Unknown section' };
   if (!data || typeof data !== 'object' || Array.isArray(data)) return { error: 'Invalid data' };
+  // A field the server doesn't know usually means the code was updated but the server wasn't restarted:
+  // refuse instead of silently dropping the value.
+  const unknown = Object.keys(data).filter((k) => !(k in def));
+  if (unknown.length) return { error: `The server does not recognise: ${unknown.join(', ')}. Restart the server (npm start) and try again.` };
   const clean = {};
   for (const [key, defVal] of Object.entries(def)) {
     if (!(key in data)) continue;
