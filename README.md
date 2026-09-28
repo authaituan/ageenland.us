@@ -1,91 +1,76 @@
 # GreenLand – Website cảnh quan + CMS quản trị
 
 - **Website**: React 19 + Vite. Toàn bộ nội dung lấy từ CMS qua `GET /api/site`. Nếu API lỗi, website dùng nội dung mặc định trong `shared/defaultContent.json`.
-- **Backend**: Express 5 + SQLite, file chạy là `server/index.cjs`.
+- **Backend**: Cloudflare Worker (Hono) + D1 (database SQLite) + R2 (ảnh tải lên), mã nguồn trong `worker/`.
 - **CMS**: truy cập tại `/admin`. Đăng nhập bằng tài khoản admin, sửa được mọi chữ, ảnh, giá và danh sách hiển thị trên website.
+- **Chạy thật**: `https://truelander.us` — mỗi lần `git push` lên `main`, Cloudflare tự build và deploy.
 
 ## Chạy lần đầu (máy local)
 
+Cần Node ≥ 22.13.
+
 ```bash
 npm install
-npm run admin:create -- admin1 "Tên người quản trị 1"   # nhập mật khẩu khi được hỏi
-npm run admin:create -- admin2 "Tên người quản trị 2"
+npm run admin:create -- admin1 "Tên người quản trị 1"   # nhập mật khẩu (≥ 12 ký tự) khi được hỏi
 ```
 
 ## Chạy khi phát triển
 
-Cách gọn nhất là 1 cửa sổ terminal chạy cả backend lẫn website (Ctrl+C để tắt cả hai):
-
 ```bash
-npm run dev:all
+npm run dev      # website → http://localhost:5455   ·   CMS → http://localhost:5455/admin   ·   API → /api
 ```
 
-Hoặc tách ra 2 cửa sổ:
+- Một cổng duy nhất `5455` cho cả website, CMS và API. Code backend chạy trên bản giả lập Cloudflare (workerd), giống hệt khi chạy thật.
+- Trước khi chạy, lệnh tự áp migration và nạp nội dung mặc định còn thiếu vào database local.
+- Database + ảnh local nằm trong `.wrangler/state/` (không commit). Dữ liệu local và dữ liệu thật trên Cloudflare là **hai nơi riêng**.
+- Cổng bận → báo lỗi rõ ràng, không tự nhảy cổng. Đổi cổng (PowerShell): `$env:WEB_PORT=6465; npm run dev`.
 
-```bash
-npm run server   # backend  → http://localhost:5454
-npm run dev      # website  → http://localhost:5455   ·   CMS → http://localhost:5455/admin
-```
+## Các lệnh quản trị dữ liệu
 
-### Chạy song song với dự án khác
+Mặc định thao tác trên dữ liệu **local**. Thêm `--remote` để thao tác trên **Cloudflare (dữ liệu thật)**. Mọi lệnh `--remote` sẽ hỏi xác nhận.
 
-Dự án này dùng cổng **5454** (backend) và **5455** (website), nên không đụng dự án chạy ở 3000/5000/5173. Nếu vẫn bị trùng, đổi cổng khi chạy (PowerShell):
+| Lệnh | Việc |
+|---|---|
+| `npm run admin:create -- <user> ["Tên"] [--remote]` | Tạo tài khoản / đặt lại mật khẩu. Phiên đăng nhập cũ của tài khoản đó bị đăng xuất |
+| `npm run admin:check -- <user> [--remote]` | Kiểm tra đăng nhập trực tiếp với database |
+| `npm run content:reset [-- --remote] [--with-requests]` | Đặt lại nội dung về `shared/defaultContent.json` (tự sao lưu trước; `--with-requests` xoá luôn báo giá + liên hệ) |
+| `npm run db:backup` | Sao lưu database **thật** → `server/backups/remote-<ngày>.sql` (`-- --local` cho bản local) |
+| `npm run db:pull` | Chép database thật về local để thử (ghi đè local; không chép ảnh) |
+| `npm run db:setup` | Áp migration + nạp nội dung mặc định còn thiếu (tự chạy trước `npm run dev`) |
+| `npm run db:migrate:remote` | Áp migration lên database thật (bình thường Cloudflare tự chạy lúc deploy) |
 
-```powershell
-$env:GREENLAND_PORT=6464; $env:WEB_PORT=6465; npm run dev:all
-```
+**Sao lưu:** D1 tự giữ lịch sử 7 ngày (Time Travel). Muốn giữ lâu hơn: `npm run db:backup` định kỳ.
 
-Khi cổng đang bận, chương trình sẽ báo lỗi rõ ràng chứ không tự nhảy sang cổng khác. Nhờ vậy website không vô tình gọi nhầm API của dự án khác.
+## Đưa lên Cloudflare
 
-## Chạy như môi trường thật (production)
+Tự động: push lên `main` → Workers Builds chạy `npm run build`, rồi `npx wrangler d1 migrations apply greenland-db --remote && npx wrangler deploy`.
+Thủ công (máy đã `npx wrangler login`): `npm run deploy`.
 
-```bash
-npm run build
-npm start        # website + CMS + API cùng cổng 5454 → http://localhost:5454
-```
+Cấu hình ở `wrangler.jsonc`. Các bước thiết lập lần đầu và chuyển dữ liệu từ bản Express cũ: `docs/plans/PHASE_3_CLOUDFLARE.md` §7.
 
-## Biến môi trường (tùy chọn, dùng khi deploy Linux)
+## Đổi cấu trúc database
 
-| Biến | Mặc định | Ý nghĩa |
-|---|---|---|
-| `GREENLAND_PORT` | `5454` | Cổng backend (cũng là cổng website khi `npm start`). Dự án **không** đọc biến `PORT` chung để tránh bị dự án khác trên máy ghi đè |
-| `WEB_PORT` | `5455` | Cổng website khi `npm run dev` |
-| `DB_PATH` | `server/database.sqlite` | File database |
-| `UPLOAD_DIR` | `server/uploads` | Thư mục lưu ảnh tải lên |
-| `COOKIE_SECURE` | (trống) | Đặt `1` khi chạy HTTPS |
-| `TRUST_PROXY` | (trống) | Đặt `1` khi chạy sau nginx |
-| `ADMIN_PASSWORD` | (trống) | Chỉ dùng cho `admin:create` khi chạy bằng script |
-
-**Sao lưu:** cần sao lưu định kỳ 2 thứ: file `DB_PATH` và thư mục `UPLOAD_DIR`.
-
-## Đặt lại nội dung website về mặc định
-
-```bash
-npm run content:reset                    # thay toàn bộ nội dung CMS bằng shared/defaultContent.json, giữ báo giá + liên hệ
-npm run content:reset -- --with-requests # xóa luôn báo giá + liên hệ (dữ liệu thử)
-```
-
-Lệnh luôn sao lưu database vào `server/backups/` trước khi làm. Tài khoản admin được giữ nguyên.
-
-## Đưa lên hosting
-
-- VPS Linux: `deploy/DEPLOY.md` · Render.com: `deploy/RENDER.md`
-- `npm run content:export` — xuất nội dung CMS hiện tại ra `shared/defaultContent.json` (+ ảnh sang `public/images/cms/`) để bản cài mới hiện đúng nội dung.
+Thêm file mới `migrations/000N_ten.sql` (không sửa file đã chạy). `npm run dev` tự áp ở local; deploy tự áp lên Cloudflare.
+Lưu ý: Rollback trên dashboard chỉ lùi code, không lùi database — chỉ thêm bảng/cột, và chạy `npm run db:backup` trước thay đổi lớn.
 
 ## Quên mật khẩu
 
-Chạy lại lệnh `npm run admin:create -- <username>` để đặt mật khẩu mới. Mọi phiên đăng nhập cũ của tài khoản đó sẽ bị đăng xuất.
+`npm run admin:create -- <username> --remote` (trên máy đã `npx wrangler login`).
 
 ## Cấu trúc
 
 ```
-shared/defaultContent.json   Nội dung mặc định: dữ liệu seed ban đầu cho DB, đồng thời là nội dung dự phòng của website
-server/index.cjs             Khởi động server
-server/db.cjs                Schema, migration, seed
-server/content.cjs           Mô hình nội dung, tính giá phía server
-server/auth.cjs              Đăng nhập, phiên, chống CSRF
-server/routes/public.cjs     /api/site, /api/quotes, /api/contact, /api/leads
-server/routes/admin.cjs      /api/admin/* (bắt buộc đăng nhập)
+shared/defaultContent.json   Nội dung mặc định: dữ liệu seed cho DB, đồng thời là nội dung dự phòng của website
+wrangler.jsonc               Cấu hình Cloudflare: Worker, D1, R2, số vòng băm mật khẩu
+migrations/                  Schema database (D1)
+worker/index.js              Điểm vào Worker: /api/*, /uploads/*
+worker/db.js                 Kết nối D1 (run / get / all / batch)
+worker/content.js            Mô hình nội dung, tính giá phía server
+worker/auth.js               Đăng nhập, phiên, chống CSRF, giới hạn đăng nhập sai
+worker/password.js           Băm mật khẩu PBKDF2 (dùng chung cho Worker và script)
+worker/routes/public.js      /api/site, /api/quotes, /api/contact, /api/leads
+worker/routes/admin.js       /api/admin/* (bắt buộc đăng nhập), upload ảnh lên R2
+scripts/cf/                  Lệnh quản trị dữ liệu (admin, sao lưu, nạp dữ liệu)
 src/site/SiteContext.jsx     Nạp nội dung CMS cho website
 src/site/forms.js            Logic form Hero / báo giá / liên hệ (mọi theme dùng chung)
 src/App.jsx                  Chọn giao diện theo CMS → Theme (xem trước: /?theme=light)

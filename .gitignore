@@ -29,3 +29,7 @@ server/uploads/
 .env
 server/backups/
 release/
+
+# Cloudflare (Wrangler): dữ liệu local D1/R2 giả lập, bí mật local
+.wrangler/
+.dev.vars*

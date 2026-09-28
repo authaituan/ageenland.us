@@ -4,30 +4,32 @@
   "version": "0.0.0",
   "type": "module",
   "scripts": {
+    "predev": "node scripts/cf/db-setup.mjs",
     "dev": "vite",
-    "dev:all": "node scripts/dev-all.cjs",
-    "server": "node server/index.cjs",
     "build": "vite build",
-    "start": "node server/index.cjs --production",
-    "admin:create": "node server/scripts/create-admin.cjs",
-    "admin:check": "node server/scripts/check-admin.cjs",
-    "content:reset": "node server/scripts/reset-content.cjs",
-    "content:export": "node server/scripts/export-content.cjs",
+    "preview": "npm run build && vite preview",
+    "deploy": "npm run build && wrangler d1 migrations apply greenland-db --remote && wrangler deploy",
+    "db:setup": "node scripts/cf/db-setup.mjs",
+    "db:migrate:remote": "wrangler d1 migrations apply greenland-db --remote",
+    "db:backup": "node scripts/cf/db-backup.mjs",
+    "db:pull": "node scripts/cf/db-pull.mjs",
+    "admin:create": "node scripts/cf/admin-create.mjs",
+    "admin:check": "node scripts/cf/admin-check.mjs",
+    "content:reset": "node scripts/cf/content-reset.mjs",
+    "cf:export-sqlite": "node scripts/cf/export-sqlite.mjs",
+    "cf:import": "node scripts/cf/import.mjs",
     "lint": "oxlint",
-    "preview": "vite preview",
     "test:e2e": "npm run build && playwright test -c tests/e2e",
     "test:e2e:install": "playwright install chromium"
   },
   "dependencies": {
-    "cors": "^2.8.6",
-    "express": "^5.2.1",
+    "hono": "^4.13.9",
     "lucide-react": "^1.47.0",
-    "multer": "^2.4.0",
     "react": "^19.2.8",
-    "react-dom": "^19.2.8",
-    "sqlite3": "5.1.7"
+    "react-dom": "^19.2.8"
   },
   "devDependencies": {
+    "@cloudflare/vite-plugin": "^1.61.0",
     "@playwright/test": "^1.63.0",
     "@types/react": "^19.2.18",
     "@types/react-dom": "^19.2.7",
@@ -36,6 +38,7 @@
     "oxlint": "^1.81.0",
     "postcss": "^8.5.28",
     "tailwindcss": "^3.4.19",
-    "vite": "^8.3.0"
+    "vite": "^8.3.0",
+    "wrangler": "^4.142.0"
   }
 }

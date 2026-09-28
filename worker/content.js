@@ -1,7 +1,7 @@
-// CMS content model: collection definitions (DB <-> API field mapping), settings and pricing.
-const { run, get, all } = require('./db.cjs');
-const DEFAULTS = require('../shared/defaultContent.json');
-const THEMES = require('../shared/themes.json');
+// CMS content model (chuyển nguyên từ server/content.cjs sang Worker): collection definitions (DB <-> API field mapping), settings and pricing.
+import { run, get, all } from './db.js';
+import DEFAULTS from '../shared/defaultContent.json';
+import THEMES from '../shared/themes.json';
 
 const ICONS = ['Scissors', 'Trees', 'Sparkles', 'Wind', 'Shovel', 'Droplets'];
 
@@ -148,10 +148,10 @@ function validateSection(section, data) {
   const def = DEFAULTS.settings[section];
   if (!def) return { error: 'Unknown section' };
   if (!data || typeof data !== 'object' || Array.isArray(data)) return { error: 'Invalid data' };
-  // A field the server doesn't know usually means the code was updated but the server wasn't restarted:
+  // A field the server doesn't know usually means the admin page is older/newer than the deployed Worker:
   // refuse instead of silently dropping the value.
   const unknown = Object.keys(data).filter((k) => !(k in def));
-  if (unknown.length) return { error: `The server does not recognise: ${unknown.join(', ')}. Restart the server (npm start) and try again.` };
+  if (unknown.length) return { error: `The server does not recognise: ${unknown.join(', ')}. Reload the admin page and try again.` };
   const clean = {};
   for (const [key, defVal] of Object.entries(def)) {
     if (!(key in data)) continue;
@@ -221,4 +221,4 @@ async function priceQuote({ serviceId, gardenArea, frequencyId, frequency }) {
   };
 }
 
-module.exports = { COLLECTIONS, ICONS, coerce, listCollection, getSettings, saveSection, getSite, priceQuote, computeCost };
+export { COLLECTIONS, ICONS, coerce, listCollection, getSettings, saveSection, getSite, priceQuote, computeCost };

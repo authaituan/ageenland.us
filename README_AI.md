@@ -4,7 +4,7 @@
 
 ## 1. Dự án là gì
 Website giới thiệu dịch vụ cảnh quan **GreenLand** + trang quản trị **CMS** (`/admin`) để chủ doanh nghiệp tự sửa chữ, ảnh, giá, xem báo giá/liên hệ của khách.
-Stack: React 19 + Vite · 2 giao diện chọn trong CMS (Classic, Light — `src/themes/`) · Tailwind v3 (PostCSS, đóng gói trong build) · font DM Sans + DM Serif Display · giao diện tiếng Anh, giá USD/sq ft · Express 5 + SQLite · Node · Playwright (E2E). Repo: `authaituan/ageenland.us`, nhánh `main`.
+Stack: React 19 + Vite · 2 giao diện chọn trong CMS (Classic, Light — `src/themes/`) · Tailwind v3 (PostCSS, đóng gói trong build) · font DM Sans + DM Serif Display · giao diện tiếng Anh, giá USD/sq ft · Cloudflare Worker (Hono) + D1 + R2, chạy tại `truelander.us` · Playwright (E2E). Repo: `authaituan/ageenland.us`, nhánh `main`.
 
 ## 2. Đang ở đâu → xem [STATUS](https://raw.githubusercontent.com/authaituan/ageenland.us/main/docs/ai/STATUS.md)
 STATUS là **nguồn sự thật duy nhất** về: Snapshot hiện tại, việc đang làm, việc tiếp theo, vướng mắc.
@@ -26,7 +26,7 @@ STATUS là **nguồn sự thật duy nhất** về: Snapshot hiện tại, việ
 Mọi AI ──► README_AI ──► STATUS ─┬─► CTO ──────► CTO_PROTOCOL ──► (DECISIONS nếu cần) ──► Báo cáo PO
                                  └─► Developer ─► RULES ──► CODEMAP (chỉ 1 dòng đúng loại việc) ──► file code được chỉ định
 ```
-- Không mở: `node_modules/`, `dist/`, `package-lock.json`, `public/images/`, `*.sqlite`, `server/uploads/`.
+- Không mở: `node_modules/`, `dist/`, `package-lock.json`, `public/images/`, `*.sqlite`, `server/uploads/`, `server/backups/`, `.wrangler/`.
 - Không đọc lại file tài liệu đã đọc trong cùng phiên.
 
 ## 5. Vai trò (tóm tắt — chi tiết ở WORKFLOW)

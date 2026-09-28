@@ -378,7 +378,7 @@ export function AccountPage({ me, toast }) {
       <form onSubmit={submit} className={`${card} p-6 space-y-4`}>
         <h2 className="text-sm font-semibold text-white">Change password</h2>
         <input type="password" className={inputCls} placeholder="Current password" value={cur} onChange={(e) => setCur(e.target.value)} autoComplete="current-password" required />
-        <input type="password" className={inputCls} placeholder="New password (at least 8 characters)" value={next} onChange={(e) => setNext(e.target.value)} autoComplete="new-password" minLength={8} required />
+        <input type="password" className={inputCls} placeholder="New password (at least 12 characters)" value={next} onChange={(e) => setNext(e.target.value)} autoComplete="new-password" minLength={12} required />
         <input type="password" className={inputCls} placeholder="Confirm new password" value={again} onChange={(e) => setAgain(e.target.value)} autoComplete="new-password" required />
         <button className={btnPrimary} disabled={busy}>{busy ? 'Saving...' : 'Change password'}</button>
       </form>

@@ -1,0 +1,29 @@
+// Cấu hình Cloudflare Worker (Phase 3 — docs/plans/PHASE_3_CLOUDFLARE.md).
+// "name" phải trùng tên project trong Workers Builds.
+{
+  "$schema": "./node_modules/wrangler/config-schema.json",
+  "name": "ageenland-us",
+  "main": "./worker/index.js",
+  "compatibility_date": "2026-09-26",
+  "compatibility_flags": ["nodejs_compat"],
+  "assets": {
+    // Có file tĩnh trùng đường dẫn → trả file; không có → index.html (React tự xử lý /admin/...).
+    "not_found_handling": "single-page-application",
+    // API và ảnh upload luôn đi qua Worker.
+    "run_worker_first": ["/api/*", "/uploads/*"]
+  },
+  "d1_databases": [
+    {
+      "binding": "DB",
+      "database_name": "greenland-db",
+      "database_id": "6a565834-2e8b-4c78-a865-3c84f6a14130",
+      "migrations_dir": "migrations"
+    }
+  ],
+  "r2_buckets": [{ "binding": "UPLOADS", "bucket_name": "greenland-uploads" }],
+  "vars": {
+    // D31: số vòng băm mật khẩu (PBKDF2-SHA256). Tăng khi lên Workers Paid; mật khẩu cũ tự băm lại lúc đăng nhập.
+    "PBKDF2_ITERATIONS": "20000"
+  },
+  "observability": { "enabled": true }
+}
