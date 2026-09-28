@@ -5,7 +5,7 @@
 - Không đổi layout/CSS nếu việc không yêu cầu. Nội dung hiển thị phải sửa được từ CMS (không viết cứng chữ vào JSX).
 - Thêm trường nội dung → sửa đồng thời `shared/defaultContent.json` + `src/admin/schema.js`.
 - Giá luôn do server tính; `/api/admin/*` luôn cần đăng nhập.
-- Đổi schema DB: chỉ thêm file `migrations/000N_*.sql`, không sửa file đã chạy (D27).
+- Đổi schema DB: chỉ thêm file `migrations/000N_*.sql`, không sửa file đã chạy (D27); chạy `npm run db:migrate:remote` TRƯỚC khi push (deploy không tự chạy migration, D33).
 - Code trong `worker/` chạy trên Cloudflare Worker: không dùng `fs`, module native, biến trong RAM để giữ trạng thái; mỗi request ≤ 10 ms CPU, ≤ 50 truy vấn D1.
 - Không commit: `.wrangler/`, `server/backups/`, `server/database.sqlite`, `server/uploads/`, `.dev.vars`, mật khẩu, khóa bí mật.
 - Viết chú thích theo phong cách file đang sửa (tiếng Việt, ngắn).

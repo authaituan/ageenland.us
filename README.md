@@ -37,20 +37,20 @@ Mặc định thao tác trên dữ liệu **local**. Thêm `--remote` để thao
 | `npm run db:backup` | Sao lưu database **thật** → `server/backups/remote-<ngày>.sql` (`-- --local` cho bản local) |
 | `npm run db:pull` | Chép database thật về local để thử (ghi đè local; không chép ảnh) |
 | `npm run db:setup` | Áp migration + nạp nội dung mặc định còn thiếu (tự chạy trước `npm run dev`) |
-| `npm run db:migrate:remote` | Áp migration lên database thật (bình thường Cloudflare tự chạy lúc deploy) |
+| `npm run db:migrate:remote` | Áp migration lên database thật — chạy trước khi push code cần bảng/cột mới |
 
 **Sao lưu:** D1 tự giữ lịch sử 7 ngày (Time Travel). Muốn giữ lâu hơn: `npm run db:backup` định kỳ.
 
 ## Đưa lên Cloudflare
 
-Tự động: push lên `main` → Workers Builds chạy `npm run build`, rồi `npx wrangler d1 migrations apply greenland-db --remote && npx wrangler deploy`.
+Tự động: push lên `main` → Workers Builds chạy `npm run build`, rồi `npx wrangler deploy` (xem tiến trình: Workers & Pages → ageenland-us → Deployments).
 Thủ công (máy đã `npx wrangler login`): `npm run deploy`.
 
 Cấu hình ở `wrangler.jsonc`. Các bước thiết lập lần đầu và chuyển dữ liệu từ bản Express cũ: `docs/plans/PHASE_3_CLOUDFLARE.md` §7.
 
 ## Đổi cấu trúc database
 
-Thêm file mới `migrations/000N_ten.sql` (không sửa file đã chạy). `npm run dev` tự áp ở local; deploy tự áp lên Cloudflare.
+Thêm file mới `migrations/000N_ten.sql` (không sửa file đã chạy). `npm run dev` tự áp ở local. Lên Cloudflare: chạy `npm run db:migrate:remote` **trước** khi push code dùng bảng/cột mới (deploy tự động không chạy migration).
 Lưu ý: Rollback trên dashboard chỉ lùi code, không lùi database — chỉ thêm bảng/cột, và chạy `npm run db:backup` trước thay đổi lớn.
 
 ## Quên mật khẩu

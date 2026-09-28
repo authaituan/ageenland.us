@@ -1,6 +1,6 @@
 # PHASE 3 — Chuyển GreenLand lên Cloudflare (Worker + D1 + R2) · tên miền `truelander.us`
 
-> Người lập: Claude (Dev B) · 2026-09-28 · Trạng thái: **PO đã duyệt 2026-09-28** (Q1 = b, Q2 = có, Q3 = có) · C0 xong (D1 tạo; R2 chờ PO bật) · C1–C7 xong (SNAP-013) · còn C8
+> Người lập: Claude (Dev B) · 2026-09-28 · Trạng thái: **PO đã duyệt 2026-09-28** (Q1 = b, Q2 = có, Q3 = có) · C0–C7 xong (SNAP-013) · C8 xong 2026-09-28 (SNAP-014) · còn nghiệm thu §10
 > Bằng chứng: đã đọc `server/*.cjs`, `server/routes/*`, `server/scripts/*`, `src/lib/api.js`, `vite.config.js`, `tests/e2e/*`, `package.json`, `docs/ai/*`.
 > Thông số Cloudflare lấy từ tài liệu chính thức (09/2026), link ở §12.
 
@@ -119,14 +119,14 @@ npm run admin:create -- admin --remote
 |---|---|
 | Project name | `ageenland-us` (trùng `name` trong `wrangler.jsonc`) |
 | Build command | `npm run build` |
-| Deploy command | `npx wrangler d1 migrations apply greenland-db --remote && npx wrangler deploy` |
+| Deploy command | `npx wrangler deploy` (D33 — migration chạy tay `npm run db:migrate:remote`) |
 | Enable Preview builds | **Tắt** (xem §8 R3) |
 
-Sau khi tạo: **Settings → Build → API token** → thêm quyền **D1 Edit**. Token mặc định chỉ có Workers Scripts / KV / R2, thiếu D1, nên lệnh migration sẽ lỗi nếu không thêm.
+Không cần thêm quyền D1 cho token build (D33).
 
 ### 7.4 C8 — Gắn tên miền
-**Workers & Pages → ageenland-us → Settings → Domains & Routes → Add → Custom domain**: thêm `truelander.us` và `www.truelander.us`. Cloudflare tự tạo DNS và chứng chỉ HTTPS (vài phút).
-Sau đó: **truelander.us → Rules → Redirect Rules → Create rule → template "Redirect from WWW to root"** → Deploy (D32).
+**Workers & Pages → ageenland-us → Settings → Domains & Routes → Add → Custom domain**: thêm `truelander.us`. Cloudflare tự tạo DNS và chứng chỉ HTTPS (vài phút). `www` KHÔNG gắn vào Worker.
+Sau đó: **truelander.us → Rules → Redirect Rules → Create rule → template "Redirect from WWW to root"** → chọn "Create a new proxied DNS record" → Deploy rule (D32).
 
 ## 8. Rủi ro và cách xử lý
 | # | Rủi ro | Xử lý |

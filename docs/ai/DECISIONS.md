@@ -32,4 +32,5 @@
 | D29 | 2026-09-28 | Ảnh upload lưu R2 nhưng đường dẫn công khai giữ `/uploads/<tên file>` để dữ liệu CMS cũ không phải sửa | SNAP-013 |
 | D30 | 2026-09-28 | Bỏ `content:export` và bản demo Render; tắt Render sau khi nghiệm thu `truelander.us` | PO Q3 |
 | D31 | 2026-09-28 | Gói Workers Free: băm mật khẩu PBKDF2-SHA256 (`pbkdf2$<vòng>$salt$hash`, số vòng ở `wrangler.jsonc` → `PBKDF2_ITERATIONS`, tự băm lại khi đăng nhập), mật khẩu ≥ 12 ký tự; hash scrypt cũ bỏ, admin đặt lại mật khẩu | PO Q1 = b |
-| D32 | 2026-09-28 | Tên miền chính `truelander.us`; `www` chuyển 301 bằng Redirect Rule trên dashboard (Worker không chạy cho trang tĩnh nên không chuyển trong code) | PO Q2 |
+| D32 | 2026-09-28 | Tên miền chính `truelander.us` (Custom domain của Worker); `www` = bản ghi DNS proxied + Redirect Rule 301 về tên chính, không gắn vào Worker | PO Q2 · SNAP-014 |
+| D33 | 2026-09-28 | Deploy command của Workers Builds chỉ `npx wrangler deploy` (token build không cần quyền D1); migration lên Cloudflare chạy tay `npm run db:migrate:remote` trước khi push | SNAP-014 |
