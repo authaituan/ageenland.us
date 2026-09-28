@@ -1,4 +1,4 @@
-// Same-origin API helper (Vite proxies /api in dev; Express serves both in production).
+// Same-origin API helper: the Cloudflare Worker serves both the site and /api (also in dev via @cloudflare/vite-plugin).
 export async function api(path, { method = 'GET', body, form } = {}) {
   const opts = { method, credentials: 'same-origin', headers: {} };
   if (form) {

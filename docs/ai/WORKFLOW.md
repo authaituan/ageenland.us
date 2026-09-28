@@ -24,7 +24,7 @@ flowchart LR
 |---|---|---|
 | Giao diện, CSS/Tailwind, responsive, so sánh ảnh chụp | Antigravity | Có trình duyệt tích hợp, mạnh về đa phương thức (nhìn ảnh) |
 | Quét nhanh nhiều file, sửa chữ/chính tả hàng loạt | Antigravity (Flash) | Nhanh, rẻ |
-| Backend, API, SQLite, auth, bảo mật, tính giá | Claude Code | Mạnh về suy luận nhiều bước, sửa đa file an toàn |
+| Backend (Worker), API, D1/SQLite, auth, bảo mật, tính giá | Claude Code | Mạnh về suy luận nhiều bước, sửa đa file an toàn |
 | Refactor, review code, tìm lỗi, viết test | Claude Code | Đọc hiểu code sâu, có `/code-review` |
 | Cập nhật STATUS/snapshot/DECISIONS | Developer vừa làm việc đó | Người làm biết rõ nhất |
 | Kế hoạch phase mới, kiến trúc lớn | Claude Code (Opus/Fable) → CTO phản biện | Cần suy luận dài |

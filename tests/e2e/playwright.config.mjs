@@ -1,4 +1,4 @@
-// Kiểm thử E2E Phase CMS. Chạy: npm run test:e2e (lần đầu: npm run test:e2e:install)
+// Kiểm thử E2E (chạy trên Worker giả lập). Chạy: npm run test:e2e (lần đầu: npm run test:e2e:install)
 import os from 'os';
 import path from 'path';
 import { fileURLToPath } from 'url';
@@ -17,11 +17,11 @@ export default defineConfig({
   timeout: 60_000,
   use: { baseURL: `http://localhost:${PORT}` },
   webServer: {
-    command: 'node tests/e2e/server.cjs',
+    command: 'node tests/e2e/server.mjs',
     cwd: ROOT,
     url: `http://localhost:${PORT}/api/site`,
     reuseExistingServer: false,
-    timeout: 60_000,
-    env: { GREENLAND_PORT: String(PORT), E2E_ADMIN_PASSWORD: process.env.E2E_ADMIN_PASSWORD },
+    timeout: 120_000,
+    env: { WEB_PORT: String(PORT), E2E_ADMIN_PASSWORD: process.env.E2E_ADMIN_PASSWORD },
   },
 });
