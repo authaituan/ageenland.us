@@ -67,6 +67,10 @@ export function SectionHeader({ badge, title, highlight, description, align = 's
 }
 
 export function Logo({ brand, dark = false, scrolled = false }) {
+  // Logo ảnh đầy đủ (biểu tượng + tên) → không hiện thêm chữ tên / dòng phụ.
+  if (brand.logo_image) {
+    return <img src={brand.logo_image} alt={`${brand.name_part1}${brand.name_part2}`} className={dark ? 'h-14 w-auto' : 'h-10 sm:h-12 w-auto'} />;
+  }
   return (
     <span className="flex items-center gap-2.5">
       <span

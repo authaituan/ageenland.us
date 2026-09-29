@@ -16,12 +16,16 @@ export default function Footer() {
           {/* Col 1: Brand Info */}
           <div className="lg:col-span-2 space-y-4">
             <a href="#" className="flex items-center gap-3">
+              {brand.logo_image ? (
+                <img src={brand.logo_image} alt={`${brand.name_part1}${brand.name_part2}`} className="h-14 w-auto" />
+              ) : (<>
               <div className="w-10 h-10 rounded-xl bg-gradient-to-tr from-emerald-600 to-emerald-400 flex items-center justify-center text-[#07150E]">
                 <Leaf className="w-5 h-5" />
               </div>
               <span className="font-serif text-2xl font-bold tracking-tight text-white">
                 {brand.name_part1}<span className="text-[#20E070]">{brand.name_part2}</span>
               </span>
+              </>)}
             </a>
             <p className="text-sm text-slate-400 leading-relaxed max-w-sm">
               {t.about}

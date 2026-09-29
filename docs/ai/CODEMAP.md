@@ -18,6 +18,7 @@ Worker   worker/index.js ─┬─ worker/routes/public.js  (/api/site, /api/quo
 ## Bảng tra
 | Loại việc | Đọc | Kiểm tra bằng |
 |---|---|---|
+| Logo, favicon | `src/themes/classic/Navbar.jsx` + `Footer.jsx`, `src/themes/light/ui.jsx` (Logo), `public/images/brand/logo.png`, `public/favicon.png`, `index.html` | CMS → Brand |
 | Sửa giao diện 1 khu vực trang chủ | `src/themes/<theme>/<Khu>.jsx` (Light thêm `light.css`, `ui.jsx`), `src/index.css` (chung) | Trình duyệt `:5455` (theme khác: `:5455/?theme=light`) |
 | Thêm / đổi theme, logic form dùng chung | `shared/themes.json`, `src/App.jsx`, `src/site/forms.js`, `worker/content.js` (validateSection) | `npm run test:e2e` |
 | Thêm/sửa trường nội dung CMS | `shared/defaultContent.json`, `src/admin/schema.js`, component dùng trường đó | `node scripts/check-cms-schema.mjs` |

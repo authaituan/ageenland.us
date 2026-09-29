@@ -34,3 +34,5 @@
 | D31 | 2026-09-28 | Gói Workers Free: băm mật khẩu PBKDF2-SHA256 (`pbkdf2$<vòng>$salt$hash`, số vòng ở `wrangler.jsonc` → `PBKDF2_ITERATIONS`, tự băm lại khi đăng nhập), mật khẩu ≥ 12 ký tự; hash scrypt cũ bỏ, admin đặt lại mật khẩu | PO Q1 = b |
 | D32 | 2026-09-28 | Tên miền chính `truelander.us` (Custom domain của Worker); `www` = bản ghi DNS proxied + Redirect Rule 301 về tên chính, không gắn vào Worker | PO Q2 · SNAP-014 |
 | D33 | 2026-09-28 | Deploy command của Workers Builds chỉ `npx wrangler deploy` (token build không cần quyền D1); migration lên Cloudflare chạy tay `npm run db:migrate:remote` trước khi push | SNAP-014 |
+| D34 | 2026-09-29 | Logo = 1 ảnh ngang đầy đủ (biểu tượng chữ A + chữ GreenLand), CMS → Brand → Logo image (mặc định `public/images/brand/logo.png`); có ảnh thì ẩn tên chữ + dòng phụ, để trống thì quay về lá + chữ cũ; favicon = biểu tượng chữ A | PO · SNAP-015 |
+| D35 | 2026-09-29 | Tên miền chính chuyển sang `agreenland.us` (+ `www` chuyển 301); `truelander.us` chạy song song, sau này chuyển 301 về `agreenland.us` | PO · SNAP-015 |

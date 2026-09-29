@@ -10,6 +10,7 @@
       "currency_code": "USD"
     },
     "brand": {
+      "logo_image": "/images/brand/logo.png",
       "name_part1": "Green",
       "name_part2": "Land",
       "tagline": "Landscaping & gardens"

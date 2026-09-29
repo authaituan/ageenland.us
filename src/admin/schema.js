@@ -19,11 +19,12 @@ export const SETTINGS_SECTIONS = [
     ],
   },
   {
-    key: 'brand', title: 'Brand', desc: 'Name shown in the logo in the navigation bar and footer.',
+    key: 'brand', title: 'Brand', desc: 'Logo in the navigation bar and footer.',
     fields: [
+      { key: 'logo_image', label: 'Logo image (symbol + name)', type: 'image', help: 'Full horizontal logo, transparent PNG/SVG, at least 96 px tall. When set, the name and tagline below are not shown (the name is still used as alt text). Leave empty to use the leaf icon + text name.' },
       { key: 'name_part1', label: 'Name – part 1 (white)', type: 'text' },
       { key: 'name_part2', label: 'Name – part 2 (green)', type: 'text' },
-      { key: 'tagline', label: 'Tagline under the logo', type: 'text' },
+      { key: 'tagline', label: 'Tagline under the name (only when no logo image)', type: 'text' },
     ],
   },
   {

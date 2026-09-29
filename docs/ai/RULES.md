@@ -11,7 +11,7 @@
 - Viết chú thích theo phong cách file đang sửa (tiếng Việt, ngắn).
 
 ## 2. Chạy
-`npm run dev` → web + CMS + API cùng cổng `:5455` (Worker giả lập, dữ liệu local `.wrangler/state/`). Thật: push `main` → Cloudflare tự deploy (`truelander.us`). Lệnh dữ liệu: README.md mục "Các lệnh quản trị dữ liệu".
+`npm run dev` → web + CMS + API cùng cổng `:5455` (Worker giả lập, dữ liệu local `.wrangler/state/`). Thật: push `main` → Cloudflare tự deploy (`agreenland.us`). Lệnh dữ liệu: README.md mục "Các lệnh quản trị dữ liệu".
 
 ## 3. Kiểm tra trước khi báo xong
 ```

@@ -29,6 +29,10 @@ export default function Navbar({ onOpenCalculator }) {
       <div className="container max-w-[1240px] mx-auto px-4 flex items-center justify-between">
         {/* Brand Logo */}
         <a href="#" className="flex items-center gap-3 group shrink-0">
+          {brand.logo_image ? (
+            // Logo ảnh đầy đủ (biểu tượng + tên) → không hiện thêm chữ tên / dòng phụ.
+            <img src={brand.logo_image} alt={`${brand.name_part1}${brand.name_part2}`} className="h-10 sm:h-12 w-auto group-hover:scale-[1.03] transition-transform" />
+          ) : (<>
           <div className="w-10 h-10 rounded-xl bg-gradient-to-tr from-emerald-600 to-emerald-400 flex items-center justify-center shadow-lg shadow-emerald-500/20 group-hover:scale-105 transition-transform text-[#07150E]">
             <Leaf className="w-5 h-5" />
           </div>
@@ -40,6 +44,7 @@ export default function Navbar({ onOpenCalculator }) {
               {brand.tagline}
             </span>
           </div>
+          </>)}
         </a>
 
         {/* Desktop Navigation */}

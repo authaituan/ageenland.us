@@ -3,7 +3,7 @@
 - **Website**: React 19 + Vite. Toàn bộ nội dung lấy từ CMS qua `GET /api/site`. Nếu API lỗi, website dùng nội dung mặc định trong `shared/defaultContent.json`.
 - **Backend**: Cloudflare Worker (Hono) + D1 (database SQLite) + R2 (ảnh tải lên), mã nguồn trong `worker/`.
 - **CMS**: truy cập tại `/admin`. Đăng nhập bằng tài khoản admin, sửa được mọi chữ, ảnh, giá và danh sách hiển thị trên website.
-- **Chạy thật**: `https://truelander.us` — mỗi lần `git push` lên `main`, Cloudflare tự build và deploy.
+- **Chạy thật**: `https://agreenland.us` (tên miền chính; `truelander.us` chạy song song) — mỗi lần `git push` lên `main`, Cloudflare tự build và deploy.
 
 ## Chạy lần đầu (máy local)
 
